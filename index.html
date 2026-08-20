@@ -215,148 +215,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #dataToolbarCollapseBtn .tcb-arrow{font-size:10px;font-weight:900;line-height:1;}
 #heroEyeSvg{display:block;width:240px;height:144px;margin-bottom:36px;}
 #scrollEye{position:fixed;background:#F10F12;pointer-events:none;z-index:8997;will-change:transform,width,height,border-radius,top,left;opacity:0;border-radius:50%;}
-/* ═══════════════════════════════════════════════════════════════════
-   CLINICAL THEME OVERRIDE
-   Load this AFTER the original inline <style> block so these rules win.
-   Restyles the marketing/product look into a research-instrument look:
-   dark slate panels, a precision-blue accent, monospace data readouts.
-   Does not touch app logic — only visual rules.
-   ═══════════════════════════════════════════════════════════════════ */
-
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
-
-:root{
-  --bg-deep:#0D0F12;
-  --bg-panel:#15181D;
-  --bg-elevated:#1D2127;
-  --line:#262B33;
-  --ink:#E4E7EB;
-  --ink-dim:#8B92A0;
-  --accent:#4FA8FF;
-  --accent-dim:rgba(79,168,255,0.14);
-  --data-hot:#E91C1C;
-}
-
-/* ---- Base ---- */
-body{
-  background:var(--bg-deep) !important;
-  font-family:'IBM Plex Sans',sans-serif !important;
-}
-
-/* ---- Top nav: quiet instrument bar ---- */
-#mainNav{
-  background:var(--bg-panel) !important;
-  border-bottom:1px solid var(--line) !important;
-}
-.nav-va{
-  color:var(--ink) !important;
-  font-family:'IBM Plex Mono',monospace !important;
-  letter-spacing:0.02em !important;
-}
-.nav-link{
-  color:var(--ink-dim) !important;
-  letter-spacing:0.08em !important;
-}
-.nav-link:hover,.nav-link.active{ color:var(--accent) !important; }
-
-/* ---- Home screen: hide the marketing sections entirely ----
-   The compact launcher (injected by home-launcher.js) replaces this. */
-#homeHeroSection,#homeInfo{ display:none !important; }
-#homeScreen{ background:var(--bg-deep) !important; }
-#scrollEye,#eyeBall{ display:none !important; }
-
-/* ---- Buttons: precision blue instead of marketing red ---- */
-.va-btn-primary,#homeStartBtn,#homeStartBtn2{
-  background:var(--accent) !important;
-  border-color:var(--accent) !important;
-  color:#06121F !important;
-  font-family:'IBM Plex Mono',monospace !important;
-  letter-spacing:0.04em !important;
-  font-weight:600 !important;
-}
-.va-btn-primary:hover,#homeStartBtn:hover,#homeStartBtn2:hover{
-  background:#7CC0FF !important;
-  border-color:#7CC0FF !important;
-}
-.va-btn-secondary{
-  color:var(--accent) !important;
-  border-color:var(--accent) !important;
-  background:transparent !important;
-}
-
-/* ---- Calibration screen ---- */
-#calOverlay{ background:var(--bg-deep) !important; }
-
-/* ---- Library / screen shells ---- */
-.screen{ background:var(--bg-deep) !important; }
-.screen-title{ color:var(--ink-dim) !important; font-family:'IBM Plex Mono',monospace !important; }
-.lib-card{ border-color:var(--line) !important; }
-.lib-card.selected{ border-color:var(--accent) !important; }
-.lib-add{ border-color:var(--line) !important; }
-
-/* ---- Data screen toolbar / badges: already dark, tune the accent ---- */
-.layer-btn.active,.toggle-btn.active,.view-tab.active{
-  border-color:var(--accent) !important;
-  background:var(--accent-dim) !important;
-  color:var(--accent) !important;
-}
-#playBtn{ background:var(--accent) !important; color:#06121F !important; border-color:var(--accent) !important; }
-#playBtn:hover{ background:#7CC0FF !important; }
-
-/* Numeric readouts everywhere become monospace — the single biggest
-   "real instrument" signal in the whole interface. */
-.dsb-val,.dab-val,.dash-kpi-val,.dash-user-stat-val,.gallery-item-stats,
-.cp-stats,.cf-select,#dsb-samples,#dsb-duration{
-  font-family:'IBM Plex Mono',monospace !important;
-}
-
-/* ---- Gallery / Compare / Dashboard screens: dark workspace ---- */
-#galleryScreen,#compareGrid-wrap,#dashboardScreen,#dataScreen{
-  background:var(--bg-deep) !important;
-}
-#galleryHeader,#dashboardHeader,#compareFilters{
-  background:var(--bg-panel) !important;
-  border-color:var(--line) !important;
-}
-.gallery-user-name,#galleryHeader .gallery-title,#dashboardHeader .dash-title{
-  color:var(--ink) !important;
-}
-.gallery-user-meta,.cf-label{ color:var(--ink-dim) !important; }
-.gallery-item,.compare-panel,.dash-kpi,.dash-chart-area,.dash-user-card{
-  background:var(--bg-panel) !important;
-  border-color:var(--line) !important;
-}
-.gallery-item-name,.cp-user,.dash-user-card-name{ color:var(--ink) !important; }
-.gallery-item-stats,.cp-meta,.cp-time,.dash-kpi-sub,.dash-user-card-meta{ color:var(--ink-dim) !important; }
-.dash-section-title{ color:var(--ink-dim) !important; border-color:var(--line) !important; }
-.dash-kpi-label,.dash-user-stat-label{ color:var(--ink-dim) !important; }
-.dash-kpi-val{ color:var(--ink) !important; }
-.dash-kpi.accent .dash-kpi-val{ color:var(--accent) !important; }
-.dash-user-stat{ background:var(--bg-elevated) !important; }
-.dash-user-stat-val{ color:var(--accent) !important; }
-.cf-select{
-  background:var(--bg-elevated) !important;
-  color:var(--ink) !important;
-  border-color:var(--line) !important;
-}
-
-/* ---- Name / setup screen ---- */
-#nameScreen{ background:var(--bg-deep) !important; }
-.ns-title{ color:var(--ink-dim) !important; font-family:'IBM Plex Mono',monospace !important; }
-.ns-field label{ color:var(--ink) !important; }
-.ns-field input,.ns-field select{
-  color:var(--ink) !important;
-  border-bottom-color:var(--line) !important;
-}
-.ns-field input:focus,.ns-field select:focus{ border-bottom-color:var(--accent) !important; }
-
-/* Reduce the maximalist letter-spacing used throughout the original
-   marketing-style type system, closer to a technical UI's restraint. */
-.nav-link,.va-btn,.screen-title,.dsb-header-label,.dab-header-label,
-.dash-section-title,.dash-kpi-label{
-  letter-spacing:0.08em !important;
-}
-
 </style>
 </head>
 <body>
@@ -734,7 +592,7 @@ function paintHeatmapGradient(ctx,W,H,hm,hmW,hmH){
   const imgData=octx.createImageData(hmW,hmH);
   for(let i=0;i<hm.length;i++){
     const t=hm[i]/maxVal;
-    const a=Math.round(Math.min(1,t*1.3)*185); // alpha ramps with density
+    const a=Math.round(Math.min(1,t*1.3)*185);
     const [r,g,b]=jetColor(t);
     imgData.data[i*4]=r; imgData.data[i*4+1]=g; imgData.data[i*4+2]=b; imgData.data[i*4+3]=t<0.04?0:a;
   }
@@ -752,7 +610,7 @@ function staticScanPath(ctx,W,H,history,col='233,28,28'){ctx.clearRect(0,0,W,H);
 function staticHeatmap(ctx,W,H,log,col='233,28,28'){ctx.clearRect(0,0,W,H);const hmW=200,hmH=112;paintHeatmapGradient(ctx,W,H,buildHeatmapFromLog(log,hmW,hmH),hmW,hmH);}
 function staticFirstFix(ctx,W,H,fix,modeTs,col='233,28,28'){ctx.clearRect(0,0,W,H);if(!fix){ctx.fillStyle='rgba(150,150,150,0.7)';ctx.font='300 11px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2);return;}const cx=fix.x*W,cy=fix.y*H,offset=modeTs?((fix.startTs-modeTs)/1000):0;ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba('+col+',1)';ctx.fill();ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba('+col+',1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);}
 
-function buildModePreviews(){const modes=[{key:'GAZE',name:'GAZE',desc:'Sample-by-sample gaze positions.'},{key:'FIXATION',name:'FIXATION',desc:'Circles proportional to dwell time.'},{key:'SACCADE',name:'SACCADE',desc:'Rapid eye jumps between regions.'},{key:'SCANPATH',name:'SCAN PATH',desc:'Ordered sequence of fixated areas.'},{key:'HEATMAP',name:'HEATMAP',desc:'Contour density map of attention.'},{key:'FIRSTFIX',name:'FIRST FIXATION',desc:'First area captured after onset.'},];const gazeLog=[{x:0.22,y:0.32},{x:0.24,y:0.34},{x:0.52,y:0.25},{x:0.54,y:0.27},{x:0.70,y:0.50},{x:0.72,y:0.52},{x:0.36,y:0.65},{x:0.38,y:0.63},{x:0.50,y:0.42},{x:0.26,y:0.48},{x:0.66,y:0.22},{x:0.56,y:0.70}];const fixHist=[{x:0.22,y:0.32,duration:280},{x:0.52,y:0.25,duration:420},{x:0.70,y:0.50,duration:200},{x:0.36,y:0.65,duration:380}];const sacHist=[{fromX:0.22,fromY:0.32,toX:0.52,toY:0.25},{fromX:0.52,fromY:0.25,toX:0.70,toY:0.50},{fromX:0.70,fromY:0.50,toX:0.36,toY:0.65}];const firstFixPrev={x:0.22,y:0.32,startTs:80};const grid=document.getElementById('modesGrid');grid.innerHTML='';for(const m of modes){const card=document.createElement('div');card.className='mode-card';const wrap=document.createElement('div');wrap.className='mode-preview-wrap';const canvas=document.createElement('canvas');canvas.className='mode-preview';const dpr=window.devicePixelRatio||1;const CW=300,CH=120;canvas.width=CW*dpr;canvas.height=CH*dpr;canvas.style.width=CW+'px';canvas.style.height=CH+'px';wrap.appendChild(canvas);card.innerHTML='<div class="mode-card-name">'+m.name+'</div>';card.appendChild(wrap);const desc=document.createElement('div');desc.className='mode-card-desc';desc.textContent=m.desc;card.appendChild(desc);grid.appendChild(card);const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const W=CW,H=CH;ctx.clearRect(0,0,W,H);const M=10;const safeX=x=>Math.max(M,Math.min(W-M,x));const safeY=y=>Math.max(M,Math.min(H-M,y));const R='rgba(233,28,28,1)',LW=1;switch(m.key){case 'GAZE':for(const p of gazeLog){ctx.beginPath();ctx.arc(safeX(p.x*W),safeY(p.y*H),2,0,Math.PI*2);ctx.fillStyle=R;ctx.fill();}break;case 'FIXATION':for(const fix of fixHist){const cx=safeX(fix.x*W),cy=safeY(fix.y*H);const r=Math.min(6+fix.duration/130,H*0.3-M);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,2,0,Math.PI*2);ctx.fillStyle=R;ctx.fill();}break;case 'SACCADE':for(const sac of sacHist){const fx=safeX(sac.fromX*W),fy=safeY(sac.fromY*H),tx=safeX(sac.toX*W),ty=safeY(sac.toY*H);ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();const a=Math.atan2(ty-fy,tx-fx),l=7;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle=R;ctx.fill();}break;case 'SCANPATH':if(fixHist.length>=2){ctx.save();ctx.setLineDash([3,6]);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.beginPath();fixHist.forEach((p,j)=>j===0?ctx.moveTo(safeX(p.x*W),safeY(p.y*H)):ctx.lineTo(safeX(p.x*W),safeY(p.y*H)));ctx.stroke();ctx.setLineDash([]);ctx.restore();}for(let j=0;j<fixHist.length;j++){const cx=safeX(fixHist[j].x*W),cy=safeY(fixHist[j].y*H);ctx.beginPath();ctx.arc(cx,cy,9,0,Math.PI*2);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();ctx.fillStyle=R;ctx.font='bold 8px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);}break;case 'HEATMAP':{const hmW=50,hmH=20,hm=new Float32Array(hmW*hmH);const sigma=0.13*Math.max(hmW,hmH),hr=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);for(const p of gazeLog){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-hr)),x1=Math.min(hmW-1,Math.ceil(gx+hr)),y0=Math.max(0,Math.floor(gy-hr)),y1=Math.min(hmH-1,Math.ceil(gy+hr));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.22*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}let maxVal=0;for(let i=0;i<hm.length;i++)if(hm[i]>maxVal)maxVal=hm[i];if(maxVal>0.01){const levels=[0.2,0.4,0.6,0.8];const getMSS=(idx,T,R,B,L)=>{switch(idx){case 1:return[[L,B]];case 2:return[[R,B]];case 3:return[[L,R]];case 4:return[[T,R]];case 5:return[[T,R],[L,B]];case 6:return[[T,B]];case 7:return[[T,L]];case 8:return[[T,L]];case 9:return[[T,B]];case 10:return[[L,T],[R,B]];case 11:return[[T,R]];case 12:return[[L,R]];case 13:return[[R,B]];case 14:return[[L,B]];default:return[];}};for(const level of levels){ctx.strokeStyle='rgba(233,28,28,'+Math.min(1,(0.35+level*0.65)).toFixed(2)+')';ctx.lineWidth=LW;ctx.beginPath();for(let cy=0;cy<hmH-1;cy++)for(let cx2=0;cx2<hmW-1;cx2++){const vTL=hm[cy*hmW+cx2]/maxVal,vTR=hm[cy*hmW+(cx2+1)]/maxVal,vBR=hm[(cy+1)*hmW+(cx2+1)]/maxVal,vBL=hm[(cy+1)*hmW+cx2]/maxVal;const idx=(vTL>=level?8:0)+(vTR>=level?4:0)+(vBR>=level?2:0)+(vBL>=level?1:0);if(idx===0||idx===15)continue;const sx0=M+cx2*(W-2*M)/hmW,sx1=M+(cx2+1)*(W-2*M)/hmW,sy0=M+cy*(H-2*M)/hmH,sy1=M+(cy+1)*(H-2*M)/hmH;const lp=(v0,v1)=>Math.abs(v1-v0)<1e-10?0.5:Math.max(0,Math.min(1,(level-v0)/(v1-v0)));const T2=[sx0+lp(vTL,vTR)*(sx1-sx0),sy0],R2=[sx1,sy0+lp(vTR,vBR)*(sy1-sy0)],B2=[sx0+lp(vBL,vBR)*(sx1-sx0),sy1],L2=[sx0,sy0+lp(vTL,vBL)*(sy1-sy0)];for(const[p1,p2]of getMSS(idx,T2,R2,B2,L2)){ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);}}ctx.stroke();}}}break;case 'FIRSTFIX':{const cx=safeX(firstFixPrev.x*W),cy=safeY(firstFixPrev.y*H);[22,14].forEach(r=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();});ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle=R;ctx.fill();}break;}}}
+function buildModePreviews(){}
 
 function cancelAnimation(){if(currentAnimation){currentAnimation.cancel();currentAnimation=null;}}
 function getDataCanvas(){const dc=document.getElementById('dataCanvas'),area=document.getElementById('dataImgArea');dc.width=area.offsetWidth;dc.height=area.offsetHeight;return dc;}
@@ -785,7 +643,6 @@ async function boot(){
   window.addEventListener('resize',()=>{dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;});
   heatCanvas=document.createElement('canvas');heatCanvas.width=W_HEAT;heatCanvas.height=H_HEAT;heatCtx2=heatCanvas.getContext('2d');
 
-  // STEP 1: upload/select stimuli FIRST, before camera or calibration.
   showLib();
   await new Promise(resolve=>{
     document.getElementById('libBeginBtn').addEventListener('click', function onBegin(){
@@ -796,7 +653,6 @@ async function boot(){
     });
   });
 
-  // STEP 2: camera + calibration, once (not per image).
   const ok=await startEyeTracking();
   if(ok) await runCalibration();
   else { calOverlay.style.display='none'; enablePointerFallback(); }
@@ -805,21 +661,16 @@ async function boot(){
   startSessionInfoOverlay();
   requestAnimationFrame(mainLoop);
 
-  // STEP 3: show every uploaded stimulus in sequence, capturing a
-  // separate session per image. Each image gets fresh fixation/
-  // saccade/heatmap state so results are never mixed between stimuli.
   for(let i=0;i<imageLibrary.length;i++){
     currentImageIdx=i;
     await runStimulusView(imageLibrary[i]);
   }
 
-  // STEP 4: all stimuli done — go straight to the results.
   openGallery();
 }
 
 function runStimulusView(img){
   return new Promise(resolve=>{
-    // Reset per-stimulus tracking state so each image starts clean.
     fixationHistory=[];currentFixation=null;scanPathHistory=[];saccadeHistory=[];saccadeActive=false;saccadeStart=null;
     heatmap.fill(0);
     firstFix=null;firstFixDone=false;firstFixModeTs=performance.now();
@@ -856,10 +707,21 @@ document.getElementById('withoutImgBtn').addEventListener('click',()=>{showImg=f
 document.querySelectorAll('.layer-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.layer-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');dataActiveLayer=btn.dataset.layer;playLayer(dataActiveLayer);});});
 document.getElementById('playBtn').addEventListener('click',()=>{playLayer(dataActiveLayer||'GAZE');});
 
-async function startApp(){await showNameScreen();await boot();}
-bootHome();
-setTimeout(buildModePreviews,200);
-function bootHome(){initScrollEye();}
+async function startApp(){
+  // No marketing page, no name/age/gender form — go straight to image upload.
+  currentUser='Viewer';
+  currentAge='';
+  currentGender='';
+  await boot();
+}
+
+// Auto-start directly into the app: no marketing home page.
+document.getElementById('mainNav').style.display='flex';
+homeScreen.style.display='none';
+navHomeLink.style.display='none';
+document.getElementById('nameScreen').style.display='none';
+appStarted=true;
+startApp();
 
 const dataToolbarCollapseBtn=document.getElementById('dataToolbarCollapseBtn');
 const dataToolbar=document.getElementById('dataToolbar');
@@ -878,152 +740,5 @@ function makeRingChart(metrics){const wrap=document.createElement('div');wrap.st
 function makeBarChart(title,data,unit=''){const wrap=document.createElement('div');wrap.className='dash-chart-area';const dpr=window.devicePixelRatio||1;const PAD_L=100,PAD_R=60,PAD_T=28,PAD_B=8;const rowH=28,barH=12;const H_canvas=PAD_T+data.length*rowH+PAD_B;const canvas=document.createElement('canvas');canvas.style.width='100%';canvas.style.height=H_canvas+'px';canvas.style.display='block';wrap.appendChild(canvas);setTimeout(()=>{const W2=canvas.offsetWidth||600;canvas.width=W2*dpr;canvas.height=H_canvas*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const maxVal=Math.max(...data.map(d=>d.val),1);const barZone=W2-PAD_L-PAD_R;ctx.font='700 8px Heebo';ctx.fillStyle='rgba(0,0,0,0.25)';ctx.textAlign='left';ctx.fillText(title.toUpperCase(),PAD_L,14);for(let g=0;g<=4;g++){const x=PAD_L+barZone*g/4;ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,PAD_T);ctx.lineTo(x,H_canvas-PAD_B);ctx.stroke();}data.forEach((d,i)=>{const y=PAD_T+i*rowH;const barW=barZone*d.val/maxVal;ctx.font='300 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.45)';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(d.label,PAD_L-10,y+barH/2);ctx.fillStyle='#f0f0f0';ctx.beginPath();const r=barH/2;ctx.roundRect(PAD_L,y,barZone,barH,r);ctx.fill();if(barW>0){ctx.fillStyle='#E91C1C';ctx.beginPath();ctx.roundRect(PAD_L,y,barW,barH,r);ctx.fill();}ctx.font='700 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.4)';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(d.val+(unit?' '+unit:''),PAD_L+barW+8,y+barH/2);});},60);return wrap;}
 </script>
 
-<script>
-/* ═══════════════════════════════════════════════════════════════════
-   CLINICAL LAUNCHER
-   Replaces the marketing hero/scroll page with a compact, static
-   "instrument boot screen" — a single panel with a live status
-   checklist (camera / calibration / stimulus). Loads after the
-   original app script; does not modify any of its functions, only
-   reads/writes DOM it already exposes (button clicks, screen toggles).
-   ═══════════════════════════════════════════════════════════════════ */
-(function(){
-  'use strict';
-
-  function injectLauncher(){
-    const heroSection = document.getElementById('homeHeroSection');
-    if(!heroSection) return; // original markup not present yet
-
-    const launcher = document.createElement('div');
-    launcher.id = 'clinicalLauncher';
-    launcher.innerHTML = `
-      <style>
-        #clinicalLauncher{
-          position:fixed; inset:0; z-index:9;
-          display:flex; align-items:center; justify-content:center;
-          background:#0D0F12;
-          font-family:'IBM Plex Sans',sans-serif;
-        }
-        #clinicalLauncher .cl-panel{
-          width:380px; max-width:88vw;
-          background:#15181D;
-          border:1px solid #262B33;
-          border-radius:10px;
-          padding:28px 26px;
-        }
-        #clinicalLauncher .cl-kicker{
-          font-family:'IBM Plex Mono',monospace;
-          font-size:10px; letter-spacing:0.12em;
-          color:#8B92A0; text-transform:uppercase;
-          margin-bottom:6px;
-        }
-        #clinicalLauncher .cl-title{
-          font-size:18px; font-weight:600; color:#E4E7EB;
-          margin-bottom:22px;
-        }
-        #clinicalLauncher .cl-check-row{
-          display:flex; align-items:center; justify-content:space-between;
-          padding:9px 0; border-top:1px solid #262B33;
-          font-family:'IBM Plex Mono',monospace; font-size:12px;
-        }
-        #clinicalLauncher .cl-check-row:last-of-type{ border-bottom:1px solid #262B33; }
-        #clinicalLauncher .cl-check-label{ color:#E4E7EB; }
-        #clinicalLauncher .cl-check-status{
-          display:flex; align-items:center; gap:6px;
-          color:#8B92A0; font-size:10px; letter-spacing:0.06em;
-        }
-        #clinicalLauncher .cl-dot{
-          width:6px; height:6px; border-radius:50%;
-          background:#8B92A0; flex-shrink:0;
-        }
-        #clinicalLauncher .cl-dot.ready{ background:#4FA8FF; }
-        #clinicalLauncher .cl-check-status.ready{ color:#4FA8FF; }
-        #clinicalLauncher .cl-start{
-          width:100%; margin-top:22px;
-          background:#4FA8FF; border:1px solid #4FA8FF; color:#06121F;
-          font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600;
-          letter-spacing:0.06em; text-transform:uppercase;
-          padding:12px; border-radius:6px; cursor:pointer;
-        }
-        #clinicalLauncher .cl-start:hover{ background:#7CC0FF; border-color:#7CC0FF; }
-        #clinicalLauncher .cl-modes{
-          margin-top:18px; padding-top:16px; border-top:1px solid #262B33;
-          font-size:9px; letter-spacing:0.06em; color:#8B92A0;
-          font-family:'IBM Plex Mono',monospace; line-height:1.9;
-        }
-        #clinicalLauncher .cl-modes b{ color:#E4E7EB; font-weight:500; }
-      </style>
-      <div class="cl-panel">
-        <div class="cl-kicker">Gaze Lab &middot; Session Setup</div>
-        <div class="cl-title">Visual attention capture</div>
-
-        <div class="cl-check-row">
-          <span class="cl-check-label">Camera</span>
-          <span class="cl-check-status" id="clCamStatus"><span class="cl-dot"></span>pending</span>
-        </div>
-        <div class="cl-check-row">
-          <span class="cl-check-label">Calibration</span>
-          <span class="cl-check-status" id="clCalStatus"><span class="cl-dot"></span>pending</span>
-        </div>
-        <div class="cl-check-row">
-          <span class="cl-check-label">Stimulus</span>
-          <span class="cl-check-status" id="clStimStatus"><span class="cl-dot"></span>pending</span>
-        </div>
-
-        <button class="cl-start" id="clStartBtn">Start session</button>
-
-        <div class="cl-modes">
-          <b>Modes</b> &nbsp;gaze &middot; fixation &middot; saccade &middot; scan path &middot; heatmap &middot; first fixation
-        </div>
-      </div>
-    `;
-    document.body.appendChild(launcher);
-
-    // Wire the launcher's start button to the app's existing start button,
-    // so all original logic (name screen -> camera -> calibration -> library)
-    // runs completely unchanged.
-    const originalStartBtn = document.getElementById('homeStartBtn');
-    document.getElementById('clStartBtn').addEventListener('click', () => {
-      launcher.style.display = 'none';
-      if(originalStartBtn) originalStartBtn.click();
-    });
-
-    // Lightweight status polling — reflects the app's real state without
-    // modifying any of its functions. Purely additive/cosmetic.
-    setInterval(() => {
-      const camEl = document.getElementById('clCamStatus');
-      const calEl = document.getElementById('clCalStatus');
-      const stimEl = document.getElementById('clStimStatus');
-      if(!camEl) return;
-
-      const calOverlayVisible = document.getElementById('calOverlay')?.style.display !== 'none';
-      const imgWrapperVisible = document.getElementById('imgWrapper')?.style.display === 'block';
-
-      // Camera: consider "ready" once the calibration overlay has appeared
-      // (the app only reaches that step after getUserMedia succeeds).
-      if(calOverlayVisible || imgWrapperVisible){
-        setReady(camEl, 'ready');
-      }
-      if(imgWrapperVisible){
-        setReady(calEl, 'ready');
-        setReady(stimEl, 'ready');
-      }
-    }, 400);
-
-    function setReady(el, text){
-      if(el.classList.contains('ready')) return;
-      el.classList.add('ready');
-      el.innerHTML = '<span class="cl-dot ready"></span>' + text;
-    }
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', injectLauncher);
-  } else {
-    injectLauncher();
-  }
-})();
-
-</script>
 </body>
 </html>
