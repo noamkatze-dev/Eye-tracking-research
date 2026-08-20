@@ -93,12 +93,15 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #finishBtn:hover{background:rgba(255,255,255,0.95);color:#111;border-color:#fff;}
 #dataScreen{display:none;position:fixed;inset:0;z-index:1500;background:#fff;flex-direction:column;overflow:hidden;padding-top:52px;}
 #dataHeader{display:none;}
-#dataBody{display:flex;flex:1;overflow:hidden;position:relative;}
+#dataBody{display:flex;flex-direction:column;flex:1;overflow:hidden;position:relative;}
+#dataFooter{display:flex;align-items:stretch;justify-content:center;gap:12px;flex-wrap:wrap;padding:12px 20px;background:#fff;border-top:1px solid #eee;flex-shrink:0;}
+#downloadPngBtn{font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;color:#fff;background:#111;border:1.5px solid #111;padding:0 22px;cursor:pointer;border-radius:100px;transition:background 0.15s,border-color 0.15s;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+#downloadPngBtn:hover{background:#333;border-color:#333;}
 #dataCenter{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;}
 #dataImgArea{position:relative;flex:1;overflow:hidden;background:#eee;}
 #dataImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 #dataCanvas{position:absolute;inset:0;pointer-events:none;z-index:2;}
-#dataSessionBadge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:stretch;background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);border-radius:12px;z-index:8;pointer-events:all;min-width:380px;overflow:hidden;}
+#dataSessionBadge{position:relative;display:flex;flex-direction:column;align-items:stretch;background:rgba(0,0,0,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;min-width:340px;}
 .dsb-header{display:flex;align-items:center;justify-content:space-between;padding:7px 14px;cursor:pointer;user-select:none;}
 .dsb-header-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.35);text-transform:uppercase;}
 .dsb-toggle{font-size:13px;color:rgba(255,255,255,0.75);transition:transform 0.2s;line-height:1;font-weight:900;}
@@ -109,7 +112,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .dsb-item:last-child{border-right:none;}
 .dsb-label{font-size:7px;font-weight:700;letter-spacing:0.3em;color:rgba(255,255,255,0.25);text-transform:uppercase;}
 .dsb-val{font-size:11px;font-weight:700;color:#fff;}
-#dataAnalysisBadge{position:absolute;bottom:14px;right:14px;display:none;flex-direction:column;background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);border-radius:12px;z-index:8;pointer-events:all;min-width:170px;overflow:hidden;}
+#dataAnalysisBadge{position:relative;display:none;flex-direction:column;background:rgba(0,0,0,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;min-width:170px;overflow:hidden;}
 .dab-header{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;cursor:pointer;user-select:none;border-bottom:1px solid rgba(255,255,255,0.06);}
 .dab-header-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
 .dab-toggle{font-size:13px;color:rgba(255,255,255,0.75);transition:transform 0.2s;line-height:1;font-weight:900;}
@@ -120,7 +123,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .dab-name{font-size:9px;font-weight:300;color:rgba(255,255,255,0.4);}
 .dab-val{font-size:11px;font-weight:700;color:#fff;}
 .dab-unit{font-size:8px;font-weight:300;color:rgba(255,255,255,0.35);margin-left:2px;}
-#dataToolbar{position:absolute;top:14px;left:50%;transform:translateX(-50%);display:flex;flex-wrap:nowrap;align-items:center;gap:2px;background:rgba(0,0,0,0.72);backdrop-filter:blur(14px);padding:5px 10px;border:1px solid rgba(255,255,255,0.08);border-radius:100px;z-index:10;transition:opacity 0.2s;}
+#dataToolbar{position:relative;margin:10px auto;width:fit-content;max-width:96%;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px;background:rgba(0,0,0,0.85);padding:6px 12px;border:1px solid rgba(255,255,255,0.08);border-radius:100px;z-index:10;transition:opacity 0.2s;flex-shrink:0;}
 #dataToolbar.collapsed .toolbar-inner-content{display:none;}
 .toolbar-sep{width:1px;height:16px;background:rgba(255,255,255,0.22);flex-shrink:0;margin:0 8px;}
 .layer-btn{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.06em;color:#555;background:transparent;border:1.5px solid transparent;padding:5px 9px;cursor:pointer;transition:color 0.15s,border-color 0.15s;white-space:nowrap;border-radius:100px;position:relative;}
@@ -322,55 +325,58 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 <div id="dataScreen">
   <div id="dataHeader" style="display:none;"></div>
   <div id="dataBody" style="padding-top:0;">
+    <div id="dataToolbar">
+        <button class="view-tab active" id="sessionViewBtn">DATA</button>
+        <button class="view-tab" id="compareViewBtn">COMPARE</button>
+        <span class="toolbar-sep"></span>
+        <button class="layer-btn active" data-layer="GAZE" data-tooltip="Raw gaze sample positions">GAZE</button>
+        <button class="layer-btn" data-layer="FIXATION" data-tooltip="Fixations: sustained gaze on one area">FIXATION</button>
+        <button class="layer-btn" data-layer="SACCADE" data-tooltip="Saccades: rapid eye jumps between regions">SACCADE</button>
+        <button class="layer-btn" data-layer="SCANPATH" data-tooltip="Scan path: ordered sequence of fixations">SCAN PATH</button>
+        <button class="layer-btn" data-layer="HEATMAP" data-tooltip="Heatmap: density contours of visual attention">HEATMAP</button>
+        <button class="layer-btn" data-layer="FIRSTFIX" data-tooltip="First fixation: very first area noticed">FIRST FIXATION</button>
+        <span class="toolbar-sep"></span>
+        <button id="playBtn">REPLAY</button>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="animatedBtn">ANIMATED</button>
+          <button class="toggle-btn" id="staticBtn">STATIC</button>
+        </div>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="withImgBtn">IMAGE ON</button>
+          <button class="toggle-btn" id="withoutImgBtn">IMAGE OFF</button>
+        </div>
+        <span class="toolbar-sep"></span>
+        <button id="dataToolbarCollapseBtn" title="Hide toolbar"><span class="tcb-arrow">&#9660;</span></button>
+      </div>
     <div id="dataCenter">
       <div id="dataImgArea">
         <img id="dataImg" src="" alt=""/>
         <canvas id="dataCanvas"></canvas>
-        <div id="dataToolbar">
-            <button class="view-tab active" id="sessionViewBtn">DATA</button>
-            <button class="view-tab" id="compareViewBtn">COMPARE</button>
-            <span class="toolbar-sep"></span>
-            <button class="layer-btn active" data-layer="GAZE" data-tooltip="Raw gaze sample positions">GAZE</button>
-            <button class="layer-btn" data-layer="FIXATION" data-tooltip="Fixations: sustained gaze on one area">FIXATION</button>
-            <button class="layer-btn" data-layer="SACCADE" data-tooltip="Saccades: rapid eye jumps between regions">SACCADE</button>
-            <button class="layer-btn" data-layer="SCANPATH" data-tooltip="Scan path: ordered sequence of fixations">SCAN PATH</button>
-            <button class="layer-btn" data-layer="HEATMAP" data-tooltip="Heatmap: density contours of visual attention">HEATMAP</button>
-            <button class="layer-btn" data-layer="FIRSTFIX" data-tooltip="First fixation: very first area noticed">FIRST FIXATION</button>
-            <span class="toolbar-sep"></span>
-            <button id="playBtn">REPLAY</button>
-            <div class="toggle-group">
-              <button class="toggle-btn active" id="animatedBtn">ANIMATED</button>
-              <button class="toggle-btn" id="staticBtn">STATIC</button>
-            </div>
-            <div class="toggle-group">
-              <button class="toggle-btn active" id="withImgBtn">IMAGE ON</button>
-              <button class="toggle-btn" id="withoutImgBtn">IMAGE OFF</button>
-            </div>
-            <span class="toolbar-sep"></span>
-            <button id="dataToolbarCollapseBtn" title="Hide toolbar"><span class="tcb-arrow">&#9660;</span></button>
-          </div>
-        <div id="dataSessionBadge">
-          <div class="dsb-header" id="dsbHeader">
-            <span class="dsb-header-label">SESSION INFO</span>
-            <span class="dsb-toggle" id="dsbToggle">&#9650;</span>
-          </div>
-          <div class="dsb-content" id="dsbContent">
-            <div class="dsb-item"><span class="dsb-label">NAME</span><span class="dsb-val" id="dsb-name">&#8212;</span></div>
-            <div class="dsb-item"><span class="dsb-label">AGE</span><span class="dsb-val" id="dsb-age">&#8212;</span></div>
-            <div class="dsb-item"><span class="dsb-label">GENDER</span><span class="dsb-val" id="dsb-gender">&#8212;</span></div>
-            <div class="dsb-item"><span class="dsb-label">LOCATION</span><span class="dsb-val" id="dsb-location">&#8212;</span></div>
-            <div class="dsb-item"><span class="dsb-label">DURATION</span><span class="dsb-val" id="dsb-duration">&#8212;</span></div>
-            <div class="dsb-item"><span class="dsb-label">SAMPLES</span><span class="dsb-val" id="dsb-samples">&#8212;</span></div>
-          </div>
+      </div>
+    </div>
+    <div id="dataFooter">
+      <div id="dataSessionBadge">
+        <div class="dsb-header" id="dsbHeader">
+          <span class="dsb-header-label">SESSION INFO</span>
+          <span class="dsb-toggle" id="dsbToggle">&#9650;</span>
         </div>
-        <div id="dataAnalysisBadge">
-          <div class="dab-header" id="dabHeader">
-            <span class="dab-header-label" id="dabHeaderLabel">ANALYSIS</span>
-            <span class="dab-toggle" id="dabToggle">&#9650;</span>
-          </div>
-          <div class="dab-content" id="dabContent"></div>
+        <div class="dsb-content" id="dsbContent">
+          <div class="dsb-item"><span class="dsb-label">NAME</span><span class="dsb-val" id="dsb-name">&#8212;</span></div>
+          <div class="dsb-item"><span class="dsb-label">AGE</span><span class="dsb-val" id="dsb-age">&#8212;</span></div>
+          <div class="dsb-item"><span class="dsb-label">GENDER</span><span class="dsb-val" id="dsb-gender">&#8212;</span></div>
+          <div class="dsb-item"><span class="dsb-label">LOCATION</span><span class="dsb-val" id="dsb-location">&#8212;</span></div>
+          <div class="dsb-item"><span class="dsb-label">DURATION</span><span class="dsb-val" id="dsb-duration">&#8212;</span></div>
+          <div class="dsb-item"><span class="dsb-label">SAMPLES</span><span class="dsb-val" id="dsb-samples">&#8212;</span></div>
         </div>
       </div>
+      <div id="dataAnalysisBadge">
+        <div class="dab-header" id="dabHeader">
+          <span class="dab-header-label" id="dabHeaderLabel">ANALYSIS</span>
+          <span class="dab-toggle" id="dabToggle">&#9650;</span>
+        </div>
+        <div class="dab-content" id="dabContent"></div>
+      </div>
+      <button id="downloadPngBtn">&#11015; DOWNLOAD PNG</button>
     </div>
   </div>
   <div id="compareView">
@@ -706,6 +712,42 @@ document.getElementById('withImgBtn').addEventListener('click',()=>{showImg=true
 document.getElementById('withoutImgBtn').addEventListener('click',()=>{showImg=false;document.getElementById('withoutImgBtn').classList.add('active');document.getElementById('withImgBtn').classList.remove('active');document.getElementById('dataImg').style.opacity='0';});
 document.querySelectorAll('.layer-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.layer-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');dataActiveLayer=btn.dataset.layer;playLayer(dataActiveLayer);});});
 document.getElementById('playBtn').addEventListener('click',()=>{playLayer(dataActiveLayer||'GAZE');});
+
+function downloadDataPNG(){
+  const imgEl=document.getElementById('dataImg');
+  if(!imgEl||!imgEl.src)return;
+  const sess=viewSession||{gazeLog,fixationHistory,saccadeHistory,scanPathHistory,firstFix,firstFixModeTs,imageName:'session'};
+  const layer=dataActiveLayer||'GAZE';
+  const W=imgEl.naturalWidth||imgEl.offsetWidth||1280;
+  const H=imgEl.naturalHeight||imgEl.offsetHeight||720;
+  const canvas=document.createElement('canvas');
+  canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');
+  // Draw the data overlay first (functions below clear the canvas before drawing),
+  // then place the stimulus image BEHIND it so both end up in the final PNG.
+  switch(layer){
+    case 'GAZE':staticGaze(ctx,W,H,sess.gazeLog);break;
+    case 'FIXATION':staticFixation(ctx,W,H,sess.fixationHistory);break;
+    case 'SACCADE':staticSaccade(ctx,W,H,sess.saccadeHistory);break;
+    case 'SCANPATH':staticScanPath(ctx,W,H,sess.scanPathHistory);break;
+    case 'HEATMAP':staticHeatmap(ctx,W,H,sess.gazeLog);break;
+    case 'FIRSTFIX':staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;
+    default:staticGaze(ctx,W,H,sess.gazeLog);
+  }
+  if(showImg){
+    ctx.globalCompositeOperation='destination-over';
+    ctx.drawImage(imgEl,0,0,W,H);
+    ctx.globalCompositeOperation='source-over';
+  }
+  const link=document.createElement('a');
+  const safeName=(sess.imageName||'session').replace(/[^a-z0-9_\-]+/gi,'_');
+  link.download=safeName+'_'+layer.toLowerCase()+'.png';
+  link.href=canvas.toDataURL('image/png');
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+document.getElementById('downloadPngBtn').addEventListener('click',downloadDataPNG);
 
 async function startApp(){
   // No marketing page, no name/age/gender form — go straight to image upload.
