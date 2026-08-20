@@ -15,57 +15,11 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #navLinks{display:flex;gap:28px;align-items:center;}
 .nav-link{font-size:10px;font-weight:700;letter-spacing:0.22em;color:#999;cursor:pointer;user-select:none;transition:color 0.15s;}
 .nav-link:hover,.nav-link.active{color:#111;}
-
-/* HOME SCREEN */
 #homeScreen{position:fixed;inset:0;z-index:8999;background:#fff;overflow-y:auto;overflow-x:hidden;}
-
-/* Hero: full-screen white section with centered eye SVG */
-#homeHeroSection{
-  position:relative;
-  width:100%;
-  height:100vh;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-}
-
-/* Eye SVG container - centered in hero */
-#eyeContainer{
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:40px;
-  z-index:2;
-}
-
-/* The scroll-driven eye ball overlay - fixed position, transitions from eye to full-width bar */
-#eyeBall{
-  position:fixed;
-  /* Start: centered on the eye SVG pupil */
-  border-radius:50%;
-  background:#F10F12;
-  pointer-events:none;
-  z-index:8998;
-  transition:none;
-  transform-origin:center center;
-  /* Hidden by default; JS controls visibility and size */
-  opacity:0;
-}
-
-#homeHero{
-  position:absolute;
-  inset:0;
-  z-index:3;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
-}
+#homeHeroSection{position:relative;width:100%;height:100vh;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
+#eyeContainer{position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:40px;z-index:2;}
+#eyeBall{position:fixed;border-radius:50%;background:#F10F12;pointer-events:none;z-index:8998;transition:none;transform-origin:center center;opacity:0;}
+#homeHero{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
 .home-content{text-align:center;pointer-events:all;display:flex;flex-direction:column;align-items:center;}
 .home-eyebrow{font-size:9px;font-weight:700;letter-spacing:0.5em;color:#aaa;margin-bottom:28px;text-transform:uppercase;}
 .home-heading{font-size:52px;font-weight:700;color:#111;line-height:1.1;margin-bottom:24px;text-transform:uppercase;white-space:nowrap;}
@@ -76,8 +30,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .home-badge{font-size:10px;color:#555;border:1px solid #ddd;padding:5px 14px;border-radius:100px;letter-spacing:0.05em;}
 .home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:#F10F12;display:flex;flex-direction:column;align-items:center;gap:6px;position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:4;pointer-events:none;transition:opacity 0.3s;}
 .home-scroll-hint-arrow{font-size:14px;color:#F10F12;}
-
-/* INFO sections on white background */
 #homeInfo{position:relative;z-index:4;background:#fff;pointer-events:all;}
 .hi-section{padding:72px 64px;}
 .hi-section+.hi-section{border-top:1px solid #eee;}
@@ -261,31 +213,150 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #dataToolbarCollapseBtn{width:22px;height:22px;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:100px;color:rgba(255,255,255,0.7);flex-shrink:0;transition:color 0.15s,background 0.15s;}
 #dataToolbarCollapseBtn:hover{color:#fff;background:rgba(255,255,255,0.18);}
 #dataToolbarCollapseBtn .tcb-arrow{font-size:10px;font-weight:900;line-height:1;}
+#heroEyeSvg{display:block;width:240px;height:144px;margin-bottom:36px;}
+#scrollEye{position:fixed;background:#F10F12;pointer-events:none;z-index:8997;will-change:transform,width,height,border-radius,top,left;opacity:0;border-radius:50%;}
+/* ═══════════════════════════════════════════════════════════════════
+   CLINICAL THEME OVERRIDE
+   Load this AFTER the original inline <style> block so these rules win.
+   Restyles the marketing/product look into a research-instrument look:
+   dark slate panels, a precision-blue accent, monospace data readouts.
+   Does not touch app logic — only visual rules.
+   ═══════════════════════════════════════════════════════════════════ */
 
-/* ═══════════════════════════════════════
-   EYE SCROLL ANIMATION
-   ═══════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 
-/* The static SVG eye in the hero */
-#heroEyeSvg{
-  display:block;
-  width:240px;
-  height:144px;
-  margin-bottom:36px;
+:root{
+  --bg-deep:#0D0F12;
+  --bg-panel:#15181D;
+  --bg-elevated:#1D2127;
+  --line:#262B33;
+  --ink:#E4E7EB;
+  --ink-dim:#8B92A0;
+  --accent:#4FA8FF;
+  --accent-dim:rgba(79,168,255,0.14);
+  --data-hot:#E91C1C;
 }
 
-/* The morphing red shape driven by scroll */
-#scrollEye{
-  position:fixed;
-  background:#F10F12;
-  pointer-events:none;
-  z-index:8997;
-  will-change:transform,width,height,border-radius,top,left;
-  /* Start invisible */
-  opacity:0;
-  /* Initially: a circle the size of the pupil */
-  border-radius:50%;
+/* ---- Base ---- */
+body{
+  background:var(--bg-deep) !important;
+  font-family:'IBM Plex Sans',sans-serif !important;
 }
+
+/* ---- Top nav: quiet instrument bar ---- */
+#mainNav{
+  background:var(--bg-panel) !important;
+  border-bottom:1px solid var(--line) !important;
+}
+.nav-va{
+  color:var(--ink) !important;
+  font-family:'IBM Plex Mono',monospace !important;
+  letter-spacing:0.02em !important;
+}
+.nav-link{
+  color:var(--ink-dim) !important;
+  letter-spacing:0.08em !important;
+}
+.nav-link:hover,.nav-link.active{ color:var(--accent) !important; }
+
+/* ---- Home screen: hide the marketing sections entirely ----
+   The compact launcher (injected by home-launcher.js) replaces this. */
+#homeHeroSection,#homeInfo{ display:none !important; }
+#homeScreen{ background:var(--bg-deep) !important; }
+#scrollEye,#eyeBall{ display:none !important; }
+
+/* ---- Buttons: precision blue instead of marketing red ---- */
+.va-btn-primary,#homeStartBtn,#homeStartBtn2{
+  background:var(--accent) !important;
+  border-color:var(--accent) !important;
+  color:#06121F !important;
+  font-family:'IBM Plex Mono',monospace !important;
+  letter-spacing:0.04em !important;
+  font-weight:600 !important;
+}
+.va-btn-primary:hover,#homeStartBtn:hover,#homeStartBtn2:hover{
+  background:#7CC0FF !important;
+  border-color:#7CC0FF !important;
+}
+.va-btn-secondary{
+  color:var(--accent) !important;
+  border-color:var(--accent) !important;
+  background:transparent !important;
+}
+
+/* ---- Calibration screen ---- */
+#calOverlay{ background:var(--bg-deep) !important; }
+
+/* ---- Library / screen shells ---- */
+.screen{ background:var(--bg-deep) !important; }
+.screen-title{ color:var(--ink-dim) !important; font-family:'IBM Plex Mono',monospace !important; }
+.lib-card{ border-color:var(--line) !important; }
+.lib-card.selected{ border-color:var(--accent) !important; }
+.lib-add{ border-color:var(--line) !important; }
+
+/* ---- Data screen toolbar / badges: already dark, tune the accent ---- */
+.layer-btn.active,.toggle-btn.active,.view-tab.active{
+  border-color:var(--accent) !important;
+  background:var(--accent-dim) !important;
+  color:var(--accent) !important;
+}
+#playBtn{ background:var(--accent) !important; color:#06121F !important; border-color:var(--accent) !important; }
+#playBtn:hover{ background:#7CC0FF !important; }
+
+/* Numeric readouts everywhere become monospace — the single biggest
+   "real instrument" signal in the whole interface. */
+.dsb-val,.dab-val,.dash-kpi-val,.dash-user-stat-val,.gallery-item-stats,
+.cp-stats,.cf-select,#dsb-samples,#dsb-duration{
+  font-family:'IBM Plex Mono',monospace !important;
+}
+
+/* ---- Gallery / Compare / Dashboard screens: dark workspace ---- */
+#galleryScreen,#compareGrid-wrap,#dashboardScreen,#dataScreen{
+  background:var(--bg-deep) !important;
+}
+#galleryHeader,#dashboardHeader,#compareFilters{
+  background:var(--bg-panel) !important;
+  border-color:var(--line) !important;
+}
+.gallery-user-name,#galleryHeader .gallery-title,#dashboardHeader .dash-title{
+  color:var(--ink) !important;
+}
+.gallery-user-meta,.cf-label{ color:var(--ink-dim) !important; }
+.gallery-item,.compare-panel,.dash-kpi,.dash-chart-area,.dash-user-card{
+  background:var(--bg-panel) !important;
+  border-color:var(--line) !important;
+}
+.gallery-item-name,.cp-user,.dash-user-card-name{ color:var(--ink) !important; }
+.gallery-item-stats,.cp-meta,.cp-time,.dash-kpi-sub,.dash-user-card-meta{ color:var(--ink-dim) !important; }
+.dash-section-title{ color:var(--ink-dim) !important; border-color:var(--line) !important; }
+.dash-kpi-label,.dash-user-stat-label{ color:var(--ink-dim) !important; }
+.dash-kpi-val{ color:var(--ink) !important; }
+.dash-kpi.accent .dash-kpi-val{ color:var(--accent) !important; }
+.dash-user-stat{ background:var(--bg-elevated) !important; }
+.dash-user-stat-val{ color:var(--accent) !important; }
+.cf-select{
+  background:var(--bg-elevated) !important;
+  color:var(--ink) !important;
+  border-color:var(--line) !important;
+}
+
+/* ---- Name / setup screen ---- */
+#nameScreen{ background:var(--bg-deep) !important; }
+.ns-title{ color:var(--ink-dim) !important; font-family:'IBM Plex Mono',monospace !important; }
+.ns-field label{ color:var(--ink) !important; }
+.ns-field input,.ns-field select{
+  color:var(--ink) !important;
+  border-bottom-color:var(--line) !important;
+}
+.ns-field input:focus,.ns-field select:focus{ border-bottom-color:var(--accent) !important; }
+
+/* Reduce the maximalist letter-spacing used throughout the original
+   marketing-style type system, closer to a technical UI's restraint. */
+.nav-link,.va-btn,.screen-title,.dsb-header-label,.dab-header-label,
+.dash-section-title,.dash-kpi-label{
+  letter-spacing:0.08em !important;
+}
+
 </style>
 </head>
 <body>
@@ -302,22 +373,16 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   </div>
 </nav>
 
-<!-- The scroll-driven morphing eye element (fixed, above content) -->
 <div id="scrollEye"></div>
 
 <div id="homeScreen">
-
-  <!-- HERO SECTION: black background, static eye SVG + text -->
   <div id="homeHeroSection">
-
-    <!-- Static SVG eye — pupil does NOT move -->
     <svg id="heroEyeSvg" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
       <path d="M15,60 Q60,20 100,20 Q140,20 185,60 Q140,100 100,100 Q60,100 15,60 Z"
         fill="none" stroke="#F10F12" stroke-width="5"
         stroke-linecap="round" stroke-linejoin="round"/>
       <circle id="heroPupil" cx="100" cy="60" r="18" fill="#F10F12"/>
     </svg>
-
     <div class="home-content">
       <div class="home-eyebrow">VISUAL ANALYSIS SYSTEM</div>
       <h1 class="home-heading">SEE WHERE ATTENTION GOES.</h1>
@@ -330,7 +395,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <span class="home-badge">Multi-user Compare</span>
       </div>
     </div>
-
     <div class="home-scroll-hint" id="scrollHint">
       SCROLL TO LEARN MORE
       <span class="home-scroll-hint-arrow">&#8595;</span>
@@ -348,14 +412,12 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <div class="step-item"><div class="step-num">03</div><div class="step-icon">&#9672;</div><div class="step-title">GAZE ANALYSIS</div><div class="step-desc">Gaze samples are classified in real-time into fixations, saccades, scan paths, and heatmaps using I-DT and I-VT algorithms.</div></div>
       </div>
     </div>
-
     <div class="hi-section" style="background:#f7f7f7;">
       <div class="hi-label">ANALYSIS MODES</div>
       <h2 class="hi-title">Six ways to read visual attention.</h2>
       <p class="hi-sub">Switch between modes in real-time to explore different dimensions of how a viewer scans an image.</p>
       <div class="modes-grid" id="modesGrid"></div>
     </div>
-
     <div class="hi-section">
       <div class="hi-label">QUICK START</div>
       <h2 class="hi-title" style="margin-bottom:36px;">Up and running in under a minute.</h2>
@@ -368,7 +430,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <li><span class="howto-n">06</span><span class="howto-text"><strong>Explore your data</strong> and compare with others.</span></li>
       </ol>
     </div>
-
     <div class="hi-section hi-section-dark" style="text-align:center;padding:80px 48px;">
       <div class="hi-label hi-label-light">READY?</div>
       <h2 class="hi-title hi-title-light" style="margin-bottom:32px;">Start your session now.</h2>
@@ -407,7 +468,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
       <div id="dataImgArea">
         <img id="dataImg" src="" alt=""/>
         <canvas id="dataCanvas"></canvas>
-
         <div id="dataToolbar">
             <button class="view-tab active" id="sessionViewBtn">DATA</button>
             <button class="view-tab" id="compareViewBtn">COMPARE</button>
@@ -431,7 +491,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
             <span class="toolbar-sep"></span>
             <button id="dataToolbarCollapseBtn" title="Hide toolbar"><span class="tcb-arrow">&#9660;</span></button>
           </div>
-
         <div id="dataSessionBadge">
           <div class="dsb-header" id="dsbHeader">
             <span class="dsb-header-label">SESSION INFO</span>
@@ -446,7 +505,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
             <div class="dsb-item"><span class="dsb-label">SAMPLES</span><span class="dsb-val" id="dsb-samples">&#8212;</span></div>
           </div>
         </div>
-
         <div id="dataAnalysisBadge">
           <div class="dab-header" id="dabHeader">
             <span class="dab-header-label" id="dabHeaderLabel">ANALYSIS</span>
@@ -454,11 +512,9 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
           </div>
           <div class="dab-content" id="dabContent"></div>
         </div>
-
       </div>
     </div>
   </div>
-
   <div id="compareView">
     <div id="compareFilters">
       <span class="cf-label">FILTER</span>
@@ -531,7 +587,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   </div>
 </div>
 
-<!-- DASHBOARD SCREEN -->
 <div id="dashboardScreen">
   <div id="dashboardHeader" style="display:none;"></div>
   <div id="dashboardBody">
@@ -543,106 +598,31 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 'use strict';
 import { FaceLandmarker, FilesetResolver } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
 
-/* ══════════════════════════════════════════════════════════════════════
-   SCROLL-DRIVEN EYE ANIMATION
-   The pupil exits the bottom of the static SVG eye, then morphs into
-   a full-width horizontal bar as the user scrolls through #homeInfo.
-   Fully reversible on scroll up.
-   ══════════════════════════════════════════════════════════════════════ */
-// Eye scroll animation — initialized after DOM ready
 function initScrollEye(){
-  const hs   = document.getElementById('homeScreen');
-  const eye  = document.getElementById('scrollEye');
-  const svg  = document.getElementById('heroEyeSvg');
-  const hint = document.getElementById('scrollHint');
-  if(!hs || !eye || !svg) return;
-
-  const R   = 22;   // pupil radius px
-  const BAR = 5;    // bar height px
-
+  const hs=document.getElementById('homeScreen');
+  const eye=document.getElementById('scrollEye');
+  const svg=document.getElementById('heroEyeSvg');
+  const hint=document.getElementById('scrollHint');
+  if(!hs||!eye||!svg) return;
+  const R=22,BAR=5;
   function run(){
-    // Hide when not on home
-    if(hs.style.display === 'none'){ eye.style.opacity='0'; return; }
-
-    const st  = hs.scrollTop;
-    const VW  = window.innerWidth;
-    const VH  = window.innerHeight;
-
-    // Hint fades as soon as user scrolls
-    if(hint) hint.style.opacity = st < 40 ? '1' : '0';
-
-    // Total scrollable height inside #homeScreen
-    const maxST = hs.scrollHeight - hs.clientHeight;
-
-    // Debug: log values when scrolling
-    // console.log('st:', st, 'maxST:', maxST, 'scrollHeight:', hs.scrollHeight, 'clientHeight:', hs.clientHeight);
-
-    if(maxST <= 0 || st <= 0){ eye.style.opacity='0'; return; }
-
-    // t = 0 → 1 over the entire scrollable range
-    const t = Math.max(0, Math.min(1, st / maxST));
-
-    // Three phases:
-    // 0.00–0.10 → circle emerges (pupil exits eye bottom)
-    // 0.10–0.90 → expands to full-width bar (travels through all sections)
-    // 0.90–1.00 → shrinks back to circle, fades
-    const P1=0.10, P2=0.90;
-    const cx = VW/2;
-
-    let w, h, left, top, br, op=1;
-
-    if(t < P1){
-      const p = t/P1;
-      const e = 1-(1-p)*(1-p); // ease-out
-      // Emerge: circle fades in, anchored at screen center
-      w = R*2; h = R*2;
-      left = cx - R;
-      top  = VH*0.5 - R;
-      br   = '50%';
-      op   = e;
-
-    } else if(t < P2){
-      const p = (t-P1)/(P2-P1);
-      const e = p<0.5 ? 2*p*p : -1+(4-2*p)*p; // ease-in-out
-      // Expand: circle → full-width bar
-      w    = R*2 + (VW - R*2)*e;
-      h    = Math.max(BAR, R*2*(1-e) + BAR*e);
-      left = cx - w/2;
-      top  = VH*0.5 - h/2;
-      br   = Math.max(BAR/2, R*(1-e)) + 'px';
-      op   = 1;
-
-    } else {
-      const p = (t-P2)/(1-P2);
-      const e = p<0.5 ? 2*p*p : -1+(4-2*p)*p;
-      // Shrink back to circle, fade out
-      w    = VW*(1-e) + R*2*e;
-      h    = Math.max(BAR, BAR*(1-e) + R*2*e);
-      left = cx - w/2;
-      top  = VH*0.5 - h/2;
-      br   = Math.max(BAR/2, R*e) + 'px';
-      op   = 1 - e;
-    }
-
-    eye.style.opacity      = op;
-    eye.style.width        = w+'px';
-    eye.style.height       = h+'px';
-    eye.style.left         = left+'px';
-    eye.style.top          = top+'px';
-    eye.style.borderRadius = br;
+    if(hs.style.display==='none'){eye.style.opacity='0';return;}
+    const st=hs.scrollTop,VW=window.innerWidth,VH=window.innerHeight;
+    if(hint) hint.style.opacity=st<40?'1':'0';
+    const maxST=hs.scrollHeight-hs.clientHeight;
+    if(maxST<=0||st<=0){eye.style.opacity='0';return;}
+    const t=Math.max(0,Math.min(1,st/maxST));
+    const P1=0.10,P2=0.90,cx=VW/2;
+    let w,h,left,top,br,op=1;
+    if(t<P1){const p=t/P1;const e=1-(1-p)*(1-p);w=R*2;h=R*2;left=cx-R;top=VH*0.5-R;br='50%';op=e;}
+    else if(t<P2){const p=(t-P1)/(P2-P1);const e=p<0.5?2*p*p:-1+(4-2*p)*p;w=R*2+(VW-R*2)*e;h=Math.max(BAR,R*2*(1-e)+BAR*e);left=cx-w/2;top=VH*0.5-h/2;br=Math.max(BAR/2,R*(1-e))+'px';op=1;}
+    else{const p=(t-P2)/(1-P2);const e=p<0.5?2*p*p:-1+(4-2*p)*p;w=VW*(1-e)+R*2*e;h=Math.max(BAR,BAR*(1-e)+R*2*e);left=cx-w/2;top=VH*0.5-h/2;br=Math.max(BAR/2,R*e)+'px';op=1-e;}
+    eye.style.opacity=op;eye.style.width=w+'px';eye.style.height=h+'px';eye.style.left=left+'px';eye.style.top=top+'px';eye.style.borderRadius=br;
   }
-
-  hs.addEventListener('scroll', run, {passive:true});
-  window.addEventListener('resize', run, {passive:true});
-
-  // Wait for full layout paint before first run
+  hs.addEventListener('scroll',run,{passive:true});
+  window.addEventListener('resize',run,{passive:true});
   requestAnimationFrame(()=>requestAnimationFrame(run));
 }
-
-
-/* ══════════════════════════════════════════════════════════════════════
-   REST OF APP (unchanged from original)
-   ══════════════════════════════════════════════════════════════════════ */
 
 const homeScreen=document.getElementById('homeScreen');
 const navHomeLink=document.getElementById('navHomeLink');
@@ -650,52 +630,19 @@ const navSessionLink=document.getElementById('navSessionLink');
 const navGalleryLink=document.getElementById('navGalleryLink');
 let appStarted=false;
 
-function showHome(){
-  homeScreen.style.display='block';
-  document.getElementById('dataScreen').style.display='none';
-  document.getElementById('galleryScreen').style.display='none';
-  document.getElementById('dashboardScreen').style.display='none';
-  navHomeLink.classList.add('active');
-  navSessionLink.classList.remove('active');
-  navGalleryLink.classList.remove('active');
-  navDashboardLink.classList.remove('active');
-}
+function showHome(){homeScreen.style.display='block';document.getElementById('dataScreen').style.display='none';document.getElementById('galleryScreen').style.display='none';document.getElementById('dashboardScreen').style.display='none';navHomeLink.classList.add('active');navSessionLink.classList.remove('active');navGalleryLink.classList.remove('active');navDashboardLink.classList.remove('active');}
 function hideHome(){homeScreen.style.display='none';navHomeLink.classList.remove('active');}
 function goToSession(){hideHome();if(!appStarted){appStarted=true;startApp();}}
 
 document.getElementById('homeStartBtn').addEventListener('click',goToSession);
 document.getElementById('homeStartBtn2').addEventListener('click',goToSession);
-navSessionLink.addEventListener('click',()=>{
-  if(appStarted){
-    homeScreen.style.display='none';
-    document.getElementById('galleryScreen').style.display='none';
-    document.getElementById('dashboardScreen').style.display='none';
-    if(allSessions.length>0||document.getElementById('imgWrapper').style.display==='block'){
-      navSessionLink.classList.add('active');
-      navHomeLink.classList.remove('active');
-      navGalleryLink.classList.remove('active');
-      navDashboardLink.classList.remove('active');
-      if(allSessions.length>0){
-        document.getElementById('dataScreen').style.display='flex';
-      }
-    } else {
-      goToSession();
-    }
-  } else {
-    goToSession();
-  }
-});
+navSessionLink.addEventListener('click',()=>{if(appStarted){homeScreen.style.display='none';document.getElementById('galleryScreen').style.display='none';document.getElementById('dashboardScreen').style.display='none';if(allSessions.length>0||document.getElementById('imgWrapper').style.display==='block'){navSessionLink.classList.add('active');navHomeLink.classList.remove('active');navGalleryLink.classList.remove('active');navDashboardLink.classList.remove('active');if(allSessions.length>0){document.getElementById('dataScreen').style.display='flex';}}else{goToSession();}}else{goToSession();}});
 navHomeLink.addEventListener('click',()=>showHome());
 navGalleryLink.addEventListener('click',()=>openGallery());
 
-const dsbHeader=document.getElementById('dsbHeader');
-const dsbContent=document.getElementById('dsbContent');
-const dsbToggle=document.getElementById('dsbToggle');
+const dsbHeader=document.getElementById('dsbHeader');const dsbContent=document.getElementById('dsbContent');const dsbToggle=document.getElementById('dsbToggle');
 dsbHeader.addEventListener('click',()=>{const c=dsbContent.classList.toggle('collapsed');dsbToggle.classList.toggle('collapsed',c);});
-
-const dabHeader=document.getElementById('dabHeader');
-const dabContent=document.getElementById('dabContent');
-const dabToggle=document.getElementById('dabToggle');
+const dabHeader=document.getElementById('dabHeader');const dabContent=document.getElementById('dabContent');const dabToggle=document.getElementById('dabToggle');
 dabHeader.addEventListener('click',()=>{const c=dabContent.classList.toggle('collapsed');dabToggle.classList.toggle('collapsed',c);});
 
 let userLocation='';
@@ -728,11 +675,8 @@ let currentAnimation=null,dataActiveLayer='GAZE',playMode='ANIMATED',showImg=tru
 const allSessions=[];
 
 function eyeStab(){const N=Math.min(eyeOffXBuf.length,20);if(N<8)return 0;const xs=eyeOffXBuf.slice(-N),ys=eyeOffYBuf.slice(-N);const mx=xs.reduce((a,b)=>a+b,0)/N,my=ys.reduce((a,b)=>a+b,0)/N;const vx=xs.reduce((a,b)=>a+(b-mx)**2,0)/N,vy=ys.reduce((a,b)=>a+(b-my)**2,0)/N;return Math.max(0,Math.min(1,1-(vx+vy)/CAL_VAR_THRESH));}
-
 function updateFixations(ts){const gh=window._gazeHistory;if(gh.length<2)return;const win=gh.filter(p=>p.ts>ts-600);if(win.length<2)return;const xs=win.map(p=>p.x),ys=win.map(p=>p.y);const disp=(Math.max(...xs)-Math.min(...xs))+(Math.max(...ys)-Math.min(...ys));if(disp<FIX_DISPERSION){const cx=xs.reduce((a,b)=>a+b,0)/xs.length,cy=ys.reduce((a,b)=>a+b,0)/ys.length;if(!currentFixation){currentFixation={startTs:ts,cx,cy};}else{currentFixation.cx=cx;currentFixation.cy=cy;currentFixation.duration=ts-currentFixation.startTs;}}else{if(currentFixation){const dur=ts-currentFixation.startTs;if(dur>=FIX_MIN_DURATION){const fe={x:currentFixation.cx,y:currentFixation.cy,startTs:currentFixation.startTs,endTs:ts,duration:dur};fixationHistory.push(fe);if(fixationHistory.length>100)fixationHistory.shift();scanPathHistory.push(fe);if(scanPathHistory.length>50)scanPathHistory.shift();}currentFixation=null;}}}
-
 function updateSaccades(ts){const gh=window._gazeHistory;if(gh.length<2)return;const last=gh[gh.length-1],prev=gh[gh.length-2],dt=(last.ts-prev.ts)/1000;if(dt<=0)return;const vel=Math.hypot(last.x-prev.x,last.y-prev.y)/dt;if(vel>=SAC_VELOCITY){if(!saccadeActive){saccadeActive=true;saccadeStart={x:prev.x,y:prev.y,ts:prev.ts};}}else{if(saccadeActive&&saccadeStart){const amp=Math.hypot(last.x-saccadeStart.x,last.y-saccadeStart.y);if(amp>=SAC_MIN_AMP){saccadeHistory.push({fromX:saccadeStart.x,fromY:saccadeStart.y,toX:last.x,toY:last.y,startTs:saccadeStart.ts,endTs:ts,duration:ts-saccadeStart.ts});if(saccadeHistory.length>100)saccadeHistory.shift();}saccadeActive=false;saccadeStart=null;}}}
-
 function updateHeatmap(){for(let i=0;i<heatmap.length;i++)heatmap[i]*=HEAT_DECAY;const gx=sGX*W_HEAT,gy=sGY*H_HEAT,sigma=HEAT_SIGMA*Math.max(W_HEAT,H_HEAT),r=Math.ceil(3*sigma);const x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(W_HEAT-1,Math.ceil(gx+r));const y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(H_HEAT-1,Math.ceil(gy+r));const inv2s2=1/(2*sigma*sigma);for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)heatmap[y*W_HEAT+x]+=HEAT_WEIGHT*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}
 function updateFirstFix(){if(firstFixDone)return;const recent=fixationHistory.filter(f=>f.startTs>=firstFixModeTs);if(recent.length>0){firstFix=recent[0];firstFixDone=true;}}
 function drawFrame(){dotCtx.clearRect(0,0,dotCanvas.width,dotCanvas.height);}
@@ -747,7 +691,6 @@ function resizeCal(){calCanvas.width=window.innerWidth;calCanvas.height=window.i
 function drawCalIntro(){const W=calCanvas.width,H=calCanvas.height;calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';calCtx.fillStyle='#111';calCtx.font='bold 22px Heebo';calCtx.fillText('EYE TRACKING CALIBRATION',W/2,H/2-52);calCtx.strokeStyle='#ddd';calCtx.lineWidth=1;calCtx.beginPath();calCtx.moveTo(W/2-220,H/2-36);calCtx.lineTo(W/2+220,H/2-36);calCtx.stroke();calCtx.fillStyle='#666';calCtx.font='14px Heebo';calCtx.fillText('Keep your HEAD STILL - move only your EYES to each dot',W/2,H/2-14);calCtx.fillText('Hold your gaze until the ring fills completely',W/2,H/2+8);calCtx.fillStyle='#aaa';calCtx.font='12px Heebo';calCtx.fillText('Head steady - only eyes should move',W/2,H/2+34);}
 function drawCalDone(){const W=calCanvas.width,H=calCanvas.height;calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';calCtx.fillStyle='#111';calCtx.font='bold 24px Heebo';calCtx.fillText('SYNCHRONIZED',W/2,H/2-8);calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('Calibration complete',W/2,H/2+18);}
 function awaitDot(px,py,index){return new Promise(resolve=>{let progress=0,prevTs=null;const samples=[];function frame(ts){const dt=prevTs?Math.min((ts-prevTs)/1000,0.05):0;prevTs=ts;const s=eyeStab();progress+=s*CAL_FILL_RATE*dt;progress-=(1-s)*CAL_DRAIN_RATE*dt;progress=Math.max(0,Math.min(1,progress));if(s>0.45&&eyeValid)samples.push({ox:curEyeOffX,oy:curEyeOffY});const W=calCanvas.width,H=calCanvas.height;calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='right';calCtx.fillStyle='#aaa';calCtx.font='14px Heebo';calCtx.fillText((index+1)+'  /  '+CAL_PTS.length,W-28,36);calCtx.textAlign='center';calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('LOOK AT DOT - HEAD STILL - EYES ONLY',W/2,H-26);calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='#ddd';calCtx.lineWidth=1.5;calCtx.stroke();if(progress>0){calCtx.beginPath();calCtx.arc(px,py,22,-Math.PI/2,-Math.PI/2+progress*Math.PI*2);calCtx.strokeStyle='rgba(233,28,28,'+(0.35+s*0.65)+')';calCtx.lineWidth=2;calCtx.stroke();}const r=3.5+s*2.5;calCtx.beginPath();calCtx.arc(px,py,r,0,Math.PI*2);calCtx.fillStyle='rgba(233,28,28,'+(0.2+s*0.8)+')';calCtx.fill();if(progress>=1){calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='rgba(233,28,28,0.9)';calCtx.lineWidth=2;calCtx.stroke();const n=samples.length||1;setTimeout(()=>resolve({ox:samples.reduce((a,v)=>a+v.ox,0)/n,oy:samples.reduce((a,v)=>a+v.oy,0)/n}),280);}else requestAnimationFrame(frame);}requestAnimationFrame(frame);});}
-
 async function runCalibration(){document.getElementById('mainNav').style.display='none';resizeCal();window.addEventListener('resize',resizeCal);drawCalIntro();calStartBtn.style.display='block';await new Promise(r=>calStartBtn.addEventListener('click',r,{once:true}));calStartBtn.style.display='none';const calData=[];for(let i=0;i<CAL_PTS.length;i++){const[nx,ny]=CAL_PTS[i],px=nx*window.innerWidth,py=ny*window.innerHeight;if(i>0)await new Promise(r=>setTimeout(r,320));const{ox,oy}=await awaitDot(px,py,i);calData.push({sx:nx,sy:ny,ox,oy});}if(calData.length>=4)eyeCalMap=fitAffine(calData);drawCalDone();await new Promise(r=>setTimeout(r,900));calOverlay.style.display='none';document.getElementById('mainNav').style.display='flex';}
 
 async function startEyeTracking(){let fl;try{const fs=await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');fl=await FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:'GPU'},outputFaceBlendshapes:false,runningMode:'VIDEO',numFaces:1});}catch(e){console.warn('[eye]',e);return false;}try{const webcamEl=document.createElement('video');webcamEl.style.cssText='position:fixed;bottom:8px;right:8px;width:1px;height:1px;opacity:0;';webcamEl.autoplay=true;webcamEl.muted=true;webcamEl.playsInline=true;document.body.appendChild(webcamEl);const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:320},height:{ideal:240}}});webcamEl.srcObject=stream;await new Promise(r=>{webcamEl.onloadeddata=r;});let lastCamT=-1;function track(){if(webcamEl.readyState>=2&&webcamEl.currentTime!==lastCamT){lastCamT=webcamEl.currentTime;try{const res=fl.detectForVideo(webcamEl,performance.now());if(res.faceLandmarks?.length>0){const lm=res.faceLandmarks[0];const nose=lm[1],brow=lm[168],chin=lm[152],lChk=lm[234],rChk=lm[454];const hxR=(nose.x*4+brow.x+chin.x+lChk.x+rChk.x)/8,hyR=(nose.y*4+brow.y+chin.y+lChk.y+rChk.y)/8;curOffX=1-hxR;curOffY=hyR;offXBuf.push(curOffX);if(offXBuf.length>BUF_MAX)offXBuf.shift();offYBuf.push(curOffY);if(offYBuf.length>BUF_MAX)offYBuf.shift();const lI=lm[468],rI=lm[473],lIn=lm[33],lO=lm[133],rIn=lm[362],rO=lm[263];if(lI&&rI&&lIn&&lO&&rIn&&rO){const lEW=Math.hypot(lO.x-lIn.x,lO.y-lIn.y),rEW=Math.hypot(rO.x-rIn.x,rO.y-rIn.y);if(lEW>0.01&&rEW>0.01){let eX=((lI.x-lIn.x)/lEW+(rI.x-rIn.x)/rEW)/2,eY=((lI.y-lIn.y)/lEW+(rI.y-rIn.y)/rEW)/2;eX=(eX-0.5)*2.5+0.5;eY=(eY-0.5)*2.5+0.5;eX=1-eX;curEyeOffX=eX;curEyeOffY=eY;eyeOffXBuf.push(eX);if(eyeOffXBuf.length>BUF_MAX)eyeOffXBuf.shift();eyeOffYBuf.push(eY);if(eyeOffYBuf.length>BUF_MAX)eyeOffYBuf.shift();eyeValid=true;if(eyeCalMap){rawGX=eyeCalMap.ax*eX+eyeCalMap.bx*eY+eyeCalMap.cx;rawGY=eyeCalMap.ay*eX+eyeCalMap.by*eY+eyeCalMap.cy;}else{rawGX=eX;rawGY=eY;}rawGX=Math.max(0,Math.min(1,rawGX));rawGY=Math.max(0,Math.min(1,rawGY));if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}}else eyeValid=false;}else eyeValid=false;}}catch(_){}}requestAnimationFrame(track);}requestAnimationFrame(track);}catch(e){console.warn('[eye] webcam',e);return false;}return true;}
@@ -768,21 +711,7 @@ function stopSessionInfoOverlay(){}
 function renderDataSessionBadge(sess){const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'--';document.getElementById('dsb-samples').textContent=sess.gazeLog?.length||'--';document.getElementById('dsb-duration').textContent=dur;document.getElementById('dsb-location').textContent=sess.location||'--';document.getElementById('dsb-name').textContent=sess.user||'--';document.getElementById('dsb-age').textContent=sess.age||'--';document.getElementById('dsb-gender').textContent=sess.gender||'--';document.getElementById('dsbContent').classList.remove('collapsed');document.getElementById('dsbToggle').classList.remove('collapsed');}
 
 const ANALYSIS_LAYERS=['FIXATION','SACCADE','SCANPATH','HEATMAP','FIRSTFIX'];
-function renderAnalysisBadge(layer,sess){
-  const badge=document.getElementById('dataAnalysisBadge');
-  const content=document.getElementById('dabContent');
-  const headerLabel=document.getElementById('dabHeaderLabel');
-  if(!ANALYSIS_LAYERS.includes(layer)){badge.style.display='none';return;}
-  badge.style.display='flex';content.innerHTML='';
-  const fh=sess.fixationHistory||[],sh=sess.saccadeHistory||[],sp=sess.scanPathHistory||[],ff=sess.firstFix,ft=sess.firstFixModeTs||0;
-  function row(label,val,unit){const d=document.createElement('div');d.className='dab-row';d.innerHTML='<span class="dab-name">'+label+'</span><span><span class="dab-val">'+val+'</span>'+(unit?'<span class="dab-unit">'+unit+'</span>':'')+'</span>';return d;}
-  if(layer==='FIXATION'){headerLabel.textContent='FIXATION';const fixC=fh.length,fixAvg=fixC?Math.round(fh.reduce((s,f)=>s+f.duration,0)/fixC):0,fixTotal=fh.reduce((s,f)=>s+f.duration,0);content.appendChild(row('Count',fixC||'--'));content.appendChild(row('Avg dur',fixAvg||'--','ms'));content.appendChild(row('Total dwell',fixTotal||'--','ms'));}
-  else if(layer==='SACCADE'){headerLabel.textContent='SACCADE';const sacC=sh.length,sacAmp=sacC?+(sh.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1):0;content.appendChild(row('Count',sacC||'--'));content.appendChild(row('Avg amp',sacAmp||'--','%'));}
-  else if(layer==='SCANPATH'){headerLabel.textContent='SCAN PATH';content.appendChild(row('Steps',sp.length||'--'));}
-  else if(layer==='HEATMAP'){headerLabel.textContent='HEATMAP';content.appendChild(row('Samples',sess.gazeLog?.length||'--'));}
-  else if(layer==='FIRSTFIX'){headerLabel.textContent='FIRST FIXATION';const ttff=ff?((ff.startTs-ft)/1000):null;content.appendChild(row('TTFF',ttff!==null?ttff.toFixed(2)+'s':'--'));content.appendChild(row('X',ff?(ff.x*100).toFixed(1)+'%':'--'));content.appendChild(row('Y',ff?(ff.y*100).toFixed(1)+'%':'--'));}
-  content.classList.remove('collapsed');document.getElementById('dabToggle').classList.remove('collapsed');
-}
+function renderAnalysisBadge(layer,sess){const badge=document.getElementById('dataAnalysisBadge');const content=document.getElementById('dabContent');const headerLabel=document.getElementById('dabHeaderLabel');if(!ANALYSIS_LAYERS.includes(layer)){badge.style.display='none';return;}badge.style.display='flex';content.innerHTML='';const fh=sess.fixationHistory||[],sh=sess.saccadeHistory||[],sp=sess.scanPathHistory||[],ff=sess.firstFix,ft=sess.firstFixModeTs||0;function row(label,val,unit){const d=document.createElement('div');d.className='dab-row';d.innerHTML='<span class="dab-name">'+label+'</span><span><span class="dab-val">'+val+'</span>'+(unit?'<span class="dab-unit">'+unit+'</span>':'')+'</span>';return d;}if(layer==='FIXATION'){headerLabel.textContent='FIXATION';const fixC=fh.length,fixAvg=fixC?Math.round(fh.reduce((s,f)=>s+f.duration,0)/fixC):0,fixTotal=fh.reduce((s,f)=>s+f.duration,0);content.appendChild(row('Count',fixC||'--'));content.appendChild(row('Avg dur',fixAvg||'--','ms'));content.appendChild(row('Total dwell',fixTotal||'--','ms'));}else if(layer==='SACCADE'){headerLabel.textContent='SACCADE';const sacC=sh.length,sacAmp=sacC?+(sh.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1):0;content.appendChild(row('Count',sacC||'--'));content.appendChild(row('Avg amp',sacAmp||'--','%'));}else if(layer==='SCANPATH'){headerLabel.textContent='SCAN PATH';content.appendChild(row('Steps',sp.length||'--'));}else if(layer==='HEATMAP'){headerLabel.textContent='HEATMAP';content.appendChild(row('Samples',sess.gazeLog?.length||'--'));}else if(layer==='FIRSTFIX'){headerLabel.textContent='FIRST FIXATION';const ttff=ff?((ff.startTs-ft)/1000):null;content.appendChild(row('TTFF',ttff!==null?ttff.toFixed(2)+'s':'--'));content.appendChild(row('X',ff?(ff.x*100).toFixed(1)+'%':'--'));content.appendChild(row('Y',ff?(ff.y*100).toFixed(1)+'%':'--'));}content.classList.remove('collapsed');document.getElementById('dabToggle').classList.remove('collapsed');}
 
 function buildHeatmapFromLog(log,hmW,hmH){const hm=new Float32Array(hmW*hmH),sigma=0.07*Math.max(hmW,hmH),r=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);for(const p of log){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(hmW-1,Math.ceil(gx+r)),y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(hmH-1,Math.ceil(gy+r));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}return hm;}
 function getMSSegs(idx,T,R,B,L){switch(idx){case 1:return[[L,B]];case 2:return[[R,B]];case 3:return[[L,R]];case 4:return[[T,R]];case 5:return[[T,R],[L,B]];case 6:return[[T,B]];case 7:return[[T,L]];case 8:return[[T,L]];case 9:return[[T,B]];case 10:return[[L,T],[R,B]];case 11:return[[T,R]];case 12:return[[L,R]];case 13:return[[R,B]];case 14:return[[L,B]];default:return[];}}
@@ -795,41 +724,7 @@ function staticScanPath(ctx,W,H,history,col='233,28,28'){ctx.clearRect(0,0,W,H);
 function staticHeatmap(ctx,W,H,log,col='233,28,28'){ctx.clearRect(0,0,W,H);const hmW=200,hmH=112;drawMarchingSquares(ctx,W,H,buildHeatmapFromLog(log,hmW,hmH),hmW,hmH,col);}
 function staticFirstFix(ctx,W,H,fix,modeTs,col='233,28,28'){ctx.clearRect(0,0,W,H);if(!fix){ctx.fillStyle='rgba(150,150,150,0.7)';ctx.font='300 11px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2);return;}const cx=fix.x*W,cy=fix.y*H,offset=modeTs?((fix.startTs-modeTs)/1000):0;ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba('+col+',1)';ctx.fill();ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba('+col+',1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);}
 
-function buildModePreviews(){
-  const modes=[{key:'GAZE',name:'GAZE',desc:'Sample-by-sample gaze positions.'},{key:'FIXATION',name:'FIXATION',desc:'Circles proportional to dwell time.'},{key:'SACCADE',name:'SACCADE',desc:'Rapid eye jumps between regions.'},{key:'SCANPATH',name:'SCAN PATH',desc:'Ordered sequence of fixated areas.'},{key:'HEATMAP',name:'HEATMAP',desc:'Contour density map of attention.'},{key:'FIRSTFIX',name:'FIRST FIXATION',desc:'First area captured after onset.'},];
-  const gazeLog=[{x:0.22,y:0.32},{x:0.24,y:0.34},{x:0.52,y:0.25},{x:0.54,y:0.27},{x:0.70,y:0.50},{x:0.72,y:0.52},{x:0.36,y:0.65},{x:0.38,y:0.63},{x:0.50,y:0.42},{x:0.26,y:0.48},{x:0.66,y:0.22},{x:0.56,y:0.70}];
-  const fixHist=[{x:0.22,y:0.32,duration:280},{x:0.52,y:0.25,duration:420},{x:0.70,y:0.50,duration:200},{x:0.36,y:0.65,duration:380}];
-  const sacHist=[{fromX:0.22,fromY:0.32,toX:0.52,toY:0.25},{fromX:0.52,fromY:0.25,toX:0.70,toY:0.50},{fromX:0.70,fromY:0.50,toX:0.36,toY:0.65}];
-  const firstFixPrev={x:0.22,y:0.32,startTs:80};
-  const grid=document.getElementById('modesGrid');grid.innerHTML='';
-  for(const m of modes){
-    const card=document.createElement('div');card.className='mode-card';
-    const wrap=document.createElement('div');wrap.className='mode-preview-wrap';
-    const canvas=document.createElement('canvas');canvas.className='mode-preview';
-    const dpr=window.devicePixelRatio||1;
-    const CW=300,CH=120;
-    canvas.width=CW*dpr;canvas.height=CH*dpr;
-    canvas.style.width=CW+'px';canvas.style.height=CH+'px';
-    wrap.appendChild(canvas);card.innerHTML='<div class="mode-card-name">'+m.name+'</div>';card.appendChild(wrap);
-    const desc=document.createElement('div');desc.className='mode-card-desc';desc.textContent=m.desc;card.appendChild(desc);
-    grid.appendChild(card);
-    const ctx=canvas.getContext('2d');
-    ctx.scale(dpr,dpr);
-    const W=CW,H=CH;ctx.clearRect(0,0,W,H);
-    const M=10;
-    const safeX=x=>Math.max(M,Math.min(W-M,x));
-    const safeY=y=>Math.max(M,Math.min(H-M,y));
-    const R='rgba(233,28,28,1)',LW=1;
-    switch(m.key){
-      case 'GAZE':for(const p of gazeLog){ctx.beginPath();ctx.arc(safeX(p.x*W),safeY(p.y*H),2,0,Math.PI*2);ctx.fillStyle=R;ctx.fill();}break;
-      case 'FIXATION':for(const fix of fixHist){const cx=safeX(fix.x*W),cy=safeY(fix.y*H);const r=Math.min(6+fix.duration/130,H*0.3-M);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,2,0,Math.PI*2);ctx.fillStyle=R;ctx.fill();}break;
-      case 'SACCADE':for(const sac of sacHist){const fx=safeX(sac.fromX*W),fy=safeY(sac.fromY*H),tx=safeX(sac.toX*W),ty=safeY(sac.toY*H);ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();const a=Math.atan2(ty-fy,tx-fx),l=7;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle=R;ctx.fill();}break;
-      case 'SCANPATH':if(fixHist.length>=2){ctx.save();ctx.setLineDash([3,6]);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.beginPath();fixHist.forEach((p,j)=>j===0?ctx.moveTo(safeX(p.x*W),safeY(p.y*H)):ctx.lineTo(safeX(p.x*W),safeY(p.y*H)));ctx.stroke();ctx.setLineDash([]);ctx.restore();}for(let j=0;j<fixHist.length;j++){const cx=safeX(fixHist[j].x*W),cy=safeY(fixHist[j].y*H);ctx.beginPath();ctx.arc(cx,cy,9,0,Math.PI*2);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();ctx.fillStyle=R;ctx.font='bold 8px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);}break;
-      case 'HEATMAP':{const hmW=50,hmH=20,hm=new Float32Array(hmW*hmH);const sigma=0.13*Math.max(hmW,hmH),hr=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);for(const p of gazeLog){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-hr)),x1=Math.min(hmW-1,Math.ceil(gx+hr)),y0=Math.max(0,Math.floor(gy-hr)),y1=Math.min(hmH-1,Math.ceil(gy+hr));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.22*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}let maxVal=0;for(let i=0;i<hm.length;i++)if(hm[i]>maxVal)maxVal=hm[i];if(maxVal>0.01){const levels=[0.2,0.4,0.6,0.8];const getMSS=(idx,T,R,B,L)=>{switch(idx){case 1:return[[L,B]];case 2:return[[R,B]];case 3:return[[L,R]];case 4:return[[T,R]];case 5:return[[T,R],[L,B]];case 6:return[[T,B]];case 7:return[[T,L]];case 8:return[[T,L]];case 9:return[[T,B]];case 10:return[[L,T],[R,B]];case 11:return[[T,R]];case 12:return[[L,R]];case 13:return[[R,B]];case 14:return[[L,B]];default:return[];}};for(const level of levels){ctx.strokeStyle='rgba(233,28,28,'+Math.min(1,(0.35+level*0.65)).toFixed(2)+')';ctx.lineWidth=LW;ctx.beginPath();for(let cy=0;cy<hmH-1;cy++)for(let cx2=0;cx2<hmW-1;cx2++){const vTL=hm[cy*hmW+cx2]/maxVal,vTR=hm[cy*hmW+(cx2+1)]/maxVal,vBR=hm[(cy+1)*hmW+(cx2+1)]/maxVal,vBL=hm[(cy+1)*hmW+cx2]/maxVal;const idx=(vTL>=level?8:0)+(vTR>=level?4:0)+(vBR>=level?2:0)+(vBL>=level?1:0);if(idx===0||idx===15)continue;const sx0=M+cx2*(W-2*M)/hmW,sx1=M+(cx2+1)*(W-2*M)/hmW,sy0=M+cy*(H-2*M)/hmH,sy1=M+(cy+1)*(H-2*M)/hmH;const lp=(v0,v1)=>Math.abs(v1-v0)<1e-10?0.5:Math.max(0,Math.min(1,(level-v0)/(v1-v0)));const T2=[sx0+lp(vTL,vTR)*(sx1-sx0),sy0],R2=[sx1,sy0+lp(vTR,vBR)*(sy1-sy0)],B2=[sx0+lp(vBL,vBR)*(sx1-sx0),sy1],L2=[sx0,sy0+lp(vTL,vBL)*(sy1-sy0)];for(const[p1,p2]of getMSS(idx,T2,R2,B2,L2)){ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);}}ctx.stroke();}}}break;
-      case 'FIRSTFIX':{const cx=safeX(firstFixPrev.x*W),cy=safeY(firstFixPrev.y*H);[22,14].forEach(r=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();});ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle=R;ctx.fill();}break;
-    }
-  }
-}
+function buildModePreviews(){const modes=[{key:'GAZE',name:'GAZE',desc:'Sample-by-sample gaze positions.'},{key:'FIXATION',name:'FIXATION',desc:'Circles proportional to dwell time.'},{key:'SACCADE',name:'SACCADE',desc:'Rapid eye jumps between regions.'},{key:'SCANPATH',name:'SCAN PATH',desc:'Ordered sequence of fixated areas.'},{key:'HEATMAP',name:'HEATMAP',desc:'Contour density map of attention.'},{key:'FIRSTFIX',name:'FIRST FIXATION',desc:'First area captured after onset.'},];const gazeLog=[{x:0.22,y:0.32},{x:0.24,y:0.34},{x:0.52,y:0.25},{x:0.54,y:0.27},{x:0.70,y:0.50},{x:0.72,y:0.52},{x:0.36,y:0.65},{x:0.38,y:0.63},{x:0.50,y:0.42},{x:0.26,y:0.48},{x:0.66,y:0.22},{x:0.56,y:0.70}];const fixHist=[{x:0.22,y:0.32,duration:280},{x:0.52,y:0.25,duration:420},{x:0.70,y:0.50,duration:200},{x:0.36,y:0.65,duration:380}];const sacHist=[{fromX:0.22,fromY:0.32,toX:0.52,toY:0.25},{fromX:0.52,fromY:0.25,toX:0.70,toY:0.50},{fromX:0.70,fromY:0.50,toX:0.36,toY:0.65}];const firstFixPrev={x:0.22,y:0.32,startTs:80};const grid=document.getElementById('modesGrid');grid.innerHTML='';for(const m of modes){const card=document.createElement('div');card.className='mode-card';const wrap=document.createElement('div');wrap.className='mode-preview-wrap';const canvas=document.createElement('canvas');canvas.className='mode-preview';const dpr=window.devicePixelRatio||1;const CW=300,CH=120;canvas.width=CW*dpr;canvas.height=CH*dpr;canvas.style.width=CW+'px';canvas.style.height=CH+'px';wrap.appendChild(canvas);card.innerHTML='<div class="mode-card-name">'+m.name+'</div>';card.appendChild(wrap);const desc=document.createElement('div');desc.className='mode-card-desc';desc.textContent=m.desc;card.appendChild(desc);grid.appendChild(card);const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const W=CW,H=CH;ctx.clearRect(0,0,W,H);const M=10;const safeX=x=>Math.max(M,Math.min(W-M,x));const safeY=y=>Math.max(M,Math.min(H-M,y));const R='rgba(233,28,28,1)',LW=1;switch(m.key){case 'GAZE':for(const p of gazeLog){ctx.beginPath();ctx.arc(safeX(p.x*W),safeY(p.y*H),2,0,Math.PI*2);ctx.fillStyle=R;ctx.fill();}break;case 'FIXATION':for(const fix of fixHist){const cx=safeX(fix.x*W),cy=safeY(fix.y*H);const r=Math.min(6+fix.duration/130,H*0.3-M);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,2,0,Math.PI*2);ctx.fillStyle=R;ctx.fill();}break;case 'SACCADE':for(const sac of sacHist){const fx=safeX(sac.fromX*W),fy=safeY(sac.fromY*H),tx=safeX(sac.toX*W),ty=safeY(sac.toY*H);ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();const a=Math.atan2(ty-fy,tx-fx),l=7;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle=R;ctx.fill();}break;case 'SCANPATH':if(fixHist.length>=2){ctx.save();ctx.setLineDash([3,6]);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.beginPath();fixHist.forEach((p,j)=>j===0?ctx.moveTo(safeX(p.x*W),safeY(p.y*H)):ctx.lineTo(safeX(p.x*W),safeY(p.y*H)));ctx.stroke();ctx.setLineDash([]);ctx.restore();}for(let j=0;j<fixHist.length;j++){const cx=safeX(fixHist[j].x*W),cy=safeY(fixHist[j].y*H);ctx.beginPath();ctx.arc(cx,cy,9,0,Math.PI*2);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();ctx.fillStyle=R;ctx.font='bold 8px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);}break;case 'HEATMAP':{const hmW=50,hmH=20,hm=new Float32Array(hmW*hmH);const sigma=0.13*Math.max(hmW,hmH),hr=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);for(const p of gazeLog){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-hr)),x1=Math.min(hmW-1,Math.ceil(gx+hr)),y0=Math.max(0,Math.floor(gy-hr)),y1=Math.min(hmH-1,Math.ceil(gy+hr));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.22*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}let maxVal=0;for(let i=0;i<hm.length;i++)if(hm[i]>maxVal)maxVal=hm[i];if(maxVal>0.01){const levels=[0.2,0.4,0.6,0.8];const getMSS=(idx,T,R,B,L)=>{switch(idx){case 1:return[[L,B]];case 2:return[[R,B]];case 3:return[[L,R]];case 4:return[[T,R]];case 5:return[[T,R],[L,B]];case 6:return[[T,B]];case 7:return[[T,L]];case 8:return[[T,L]];case 9:return[[T,B]];case 10:return[[L,T],[R,B]];case 11:return[[T,R]];case 12:return[[L,R]];case 13:return[[R,B]];case 14:return[[L,B]];default:return[];}};for(const level of levels){ctx.strokeStyle='rgba(233,28,28,'+Math.min(1,(0.35+level*0.65)).toFixed(2)+')';ctx.lineWidth=LW;ctx.beginPath();for(let cy=0;cy<hmH-1;cy++)for(let cx2=0;cx2<hmW-1;cx2++){const vTL=hm[cy*hmW+cx2]/maxVal,vTR=hm[cy*hmW+(cx2+1)]/maxVal,vBR=hm[(cy+1)*hmW+(cx2+1)]/maxVal,vBL=hm[(cy+1)*hmW+cx2]/maxVal;const idx=(vTL>=level?8:0)+(vTR>=level?4:0)+(vBR>=level?2:0)+(vBL>=level?1:0);if(idx===0||idx===15)continue;const sx0=M+cx2*(W-2*M)/hmW,sx1=M+(cx2+1)*(W-2*M)/hmW,sy0=M+cy*(H-2*M)/hmH,sy1=M+(cy+1)*(H-2*M)/hmH;const lp=(v0,v1)=>Math.abs(v1-v0)<1e-10?0.5:Math.max(0,Math.min(1,(level-v0)/(v1-v0)));const T2=[sx0+lp(vTL,vTR)*(sx1-sx0),sy0],R2=[sx1,sy0+lp(vTR,vBR)*(sy1-sy0)],B2=[sx0+lp(vBL,vBR)*(sx1-sx0),sy1],L2=[sx0,sy0+lp(vTL,vBL)*(sy1-sy0)];for(const[p1,p2]of getMSS(idx,T2,R2,B2,L2)){ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);}}ctx.stroke();}}}break;case 'FIRSTFIX':{const cx=safeX(firstFixPrev.x*W),cy=safeY(firstFixPrev.y*H);[22,14].forEach(r=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();});ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle=R;ctx.fill();}break;}}}
 
 function cancelAnimation(){if(currentAnimation){currentAnimation.cancel();currentAnimation=null;}}
 function getDataCanvas(){const dc=document.getElementById('dataCanvas'),area=document.getElementById('dataImgArea');dc.width=area.offsetWidth;dc.height=area.offsetHeight;return dc;}
@@ -850,14 +745,7 @@ function renderCompareView(){populateCompareFilters();const grid=document.getEle
 document.getElementById('cf-apply').addEventListener('click',renderCompareView);
 document.getElementById('cf-layer').addEventListener('change',renderCompareView);
 
-function openGallery(){
-  homeScreen.style.display='none';
-  document.getElementById('dataScreen').style.display='none';
-  document.getElementById('dashboardScreen').style.display='none';
-  const screen=document.getElementById('galleryScreen');screen.style.display='flex';
-  navGalleryLink.classList.add('active');navHomeLink.classList.remove('active');navSessionLink.classList.remove('active');navDashboardLink.classList.remove('active');
-  renderGalleryScreen();
-}
+function openGallery(){homeScreen.style.display='none';document.getElementById('dataScreen').style.display='none';document.getElementById('dashboardScreen').style.display='none';const screen=document.getElementById('galleryScreen');screen.style.display='flex';navGalleryLink.classList.add('active');navHomeLink.classList.remove('active');navSessionLink.classList.remove('active');navDashboardLink.classList.remove('active');renderGalleryScreen();}
 function closeGallery(){document.getElementById('galleryScreen').style.display='none';navGalleryLink.classList.remove('active');}
 function renderGalleryScreen(){const body=document.getElementById('galleryBody');body.innerHTML='';const byUser=new Map();for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}if(byUser.size===0){body.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;margin-top:60px;">NO SESSIONS YET</div>';return;}for(const[userName,sessions]of byUser){const block=document.createElement('div');block.className='gallery-user-block';const meta=sessions[0];const metaStr=[meta.age?meta.age+'y':'',meta.gender||'',meta.location||''].filter(Boolean).join(' . ');block.innerHTML='<div class="gallery-user-name">'+userName+'</div><div class="gallery-user-meta">'+metaStr+'</div><div class="gallery-images-row" id="gallery-row-'+userName.replace(/\s/g,'_')+'"></div>';body.appendChild(block);const row=block.querySelector('.gallery-images-row');for(const sess of sessions){const item=document.createElement('div');item.className='gallery-item'+(sess===viewSession?' active-view':'');const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'--';item.innerHTML='<img class="gallery-item-img" src="'+sess.imageSrc+'" alt="'+sess.imageName+'"/><div class="gallery-item-info"><span class="gallery-item-name">'+sess.imageName+'</span><span class="gallery-item-stats">'+sess.fixationHistory.length+'F . '+sess.gazeLog.length+'S . '+dur+'</span></div>';item.onclick=()=>{viewSession=sess;document.querySelectorAll('.gallery-item').forEach(el=>el.classList.remove('active-view'));item.classList.add('active-view');openData(false);};row.appendChild(item);}}}
 
@@ -867,24 +755,8 @@ function openData(pushNew=true){if(pushNew){const snap=captureSession();allSessi
 async function boot(){dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;window.addEventListener('resize',()=>{dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;});heatCanvas=document.createElement('canvas');heatCanvas.width=W_HEAT;heatCanvas.height=H_HEAT;heatCtx2=heatCanvas.getContext('2d');const ok=await startEyeTracking();if(ok)await runCalibration();else{calOverlay.style.display='none';enablePointerFallback();}showLib();await new Promise(resolve=>{document.getElementById('libBeginBtn').addEventListener('click',()=>{if(!imageLibrary.length)return;if(isImageViewed(currentImageIdx)){const unviewed=imageLibrary.findIndex((_,i)=>!isImageViewed(i));if(unviewed===-1)return;currentImageIdx=unviewed;}markImageViewed(currentImageIdx);document.getElementById('libraryScreen').style.display='none';imgWrapper.style.display='block';mainImg.src=imageLibrary[currentImageIdx].src;resolve();});});sessionStartTs=Date.now();firstFixModeTs=performance.now();document.getElementById('finishBtn').style.display='block';annLayer.style.opacity='0';startSessionInfoOverlay();setInterval(()=>{if(!gazeOn)return;gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});if(gazeLog.length>10000)gazeLog.shift();},100);requestAnimationFrame(mainLoop);}
 
 document.getElementById('finishBtn').addEventListener('click',()=>{stopSessionInfoOverlay();openData(true);});
-document.getElementById('sessionViewBtn').addEventListener('click',()=>{
-  document.getElementById('sessionViewBtn').classList.add('active');
-  document.getElementById('compareViewBtn').classList.remove('active');
-  document.getElementById('dataBody').style.display='flex';
-  document.getElementById('compareView').style.display='none';
-  setTimeout(()=>{
-    const dc=document.getElementById('dataCanvas'),area=document.getElementById('dataImgArea');
-    dc.width=area.offsetWidth;dc.height=area.offsetHeight;
-    playLayer(dataActiveLayer);
-  },50);
-});
-document.getElementById('compareViewBtn').addEventListener('click',()=>{
-  document.getElementById('compareViewBtn').classList.add('active');
-  document.getElementById('sessionViewBtn').classList.remove('active');
-  document.getElementById('dataBody').style.display='none';
-  document.getElementById('compareView').style.display='flex';
-  renderCompareView();
-});
+document.getElementById('sessionViewBtn').addEventListener('click',()=>{document.getElementById('sessionViewBtn').classList.add('active');document.getElementById('compareViewBtn').classList.remove('active');document.getElementById('dataBody').style.display='flex';document.getElementById('compareView').style.display='none';setTimeout(()=>{const dc=document.getElementById('dataCanvas'),area=document.getElementById('dataImgArea');dc.width=area.offsetWidth;dc.height=area.offsetHeight;playLayer(dataActiveLayer);},50);});
+document.getElementById('compareViewBtn').addEventListener('click',()=>{document.getElementById('compareViewBtn').classList.add('active');document.getElementById('sessionViewBtn').classList.remove('active');document.getElementById('dataBody').style.display='none';document.getElementById('compareView').style.display='flex';renderCompareView();});
 document.getElementById('animatedBtn').addEventListener('click',()=>{playMode='ANIMATED';document.getElementById('animatedBtn').classList.add('active');document.getElementById('staticBtn').classList.remove('active');playLayer(dataActiveLayer);});
 document.getElementById('staticBtn').addEventListener('click',()=>{playMode='STATIC';document.getElementById('staticBtn').classList.add('active');document.getElementById('animatedBtn').classList.remove('active');playLayer(dataActiveLayer);});
 document.getElementById('withImgBtn').addEventListener('click',()=>{showImg=true;document.getElementById('withImgBtn').classList.add('active');document.getElementById('withoutImgBtn').classList.remove('active');document.getElementById('dataImg').style.opacity='1';});
@@ -895,74 +767,171 @@ document.getElementById('playBtn').addEventListener('click',()=>{playLayer(dataA
 async function startApp(){await showNameScreen();await boot();}
 bootHome();
 setTimeout(buildModePreviews,200);
+function bootHome(){initScrollEye();}
 
-function bootHome(){
-  initScrollEye();
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   TOOLBAR COLLAPSE
-   ══════════════════════════════════════════════════════════════════════ */
 const dataToolbarCollapseBtn=document.getElementById('dataToolbarCollapseBtn');
 const dataToolbar=document.getElementById('dataToolbar');
 let toolbarCollapsed=false;
 const toolbarInnerEls=()=>Array.from(dataToolbar.children).filter(el=>el!==dataToolbarCollapseBtn);
-dataToolbarCollapseBtn.addEventListener('click',()=>{
-  toolbarCollapsed=!toolbarCollapsed;
-  toolbarInnerEls().forEach(el=>{el.style.display=toolbarCollapsed?'none':'';});
-  const arrow=dataToolbarCollapseBtn.querySelector('.tcb-arrow');
-  arrow.innerHTML=toolbarCollapsed?'&#9654;':'&#9660;';
-  dataToolbarCollapseBtn.title=toolbarCollapsed?'Show toolbar':'Hide toolbar';
-  dataToolbar.style.padding=toolbarCollapsed?'5px':'5px 10px';
-});
+dataToolbarCollapseBtn.addEventListener('click',()=>{toolbarCollapsed=!toolbarCollapsed;toolbarInnerEls().forEach(el=>{el.style.display=toolbarCollapsed?'none':'';});const arrow=dataToolbarCollapseBtn.querySelector('.tcb-arrow');arrow.innerHTML=toolbarCollapsed?'&#9654;':'&#9660;';dataToolbarCollapseBtn.title=toolbarCollapsed?'Show toolbar':'Hide toolbar';dataToolbar.style.padding=toolbarCollapsed?'5px':'5px 10px';});
 
-/* ══════════════════════════════════════════════════════════════════════
-   DASHBOARD
-   ══════════════════════════════════════════════════════════════════════ */
 const navDashboardLink=document.getElementById('navDashboardLink');
 navDashboardLink.addEventListener('click',()=>openDashboard());
+function openDashboard(){homeScreen.style.display='none';document.getElementById('dataScreen').style.display='none';document.getElementById('galleryScreen').style.display='none';const scr=document.getElementById('dashboardScreen');scr.style.display='flex';navDashboardLink.classList.add('active');navHomeLink.classList.remove('active');navSessionLink.classList.remove('active');navGalleryLink.classList.remove('active');renderDashboard();}
 
-function openDashboard(){
-  homeScreen.style.display='none';
-  document.getElementById('dataScreen').style.display='none';
-  document.getElementById('galleryScreen').style.display='none';
-  const scr=document.getElementById('dashboardScreen');
-  scr.style.display='flex';
-  navDashboardLink.classList.add('active');
-  navHomeLink.classList.remove('active');
-  navSessionLink.classList.remove('active');
-  navGalleryLink.classList.remove('active');
-  renderDashboard();
-}
-
-function renderDashboard(){
-  const container=document.getElementById('dashboardContent');
-  container.innerHTML='';
-  if(allSessions.length===0){container.innerHTML='<div style="padding:60px 0;text-align:center;font-size:11px;letter-spacing:0.25em;color:#ccc;font-family:Heebo,sans-serif;">NO SESSIONS YET</div>';return;}
-  const latest=allSessions[allSessions.length-1];
-  const totalFix=latest.fixationHistory.length;
-  const totalSac=latest.saccadeHistory.length;
-  const avgFixDur=totalFix?Math.round(latest.fixationHistory.reduce((s,f)=>s+f.duration,0)/totalFix):0;
-  const sacAmp=totalSac?+(latest.saccadeHistory.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/totalSac*100).toFixed(1):0;
-  const dur=latest.sessionDuration?(latest.sessionDuration/1000).toFixed(1):0;
-  const ttff=latest.firstFix?((latest.firstFix.startTs-latest.firstFixModeTs)/1000).toFixed(2):null;
-  const kpiSection=document.createElement('div');kpiSection.className='dash-section';
-  kpiSection.innerHTML='<div class="dash-section-title">MY LAST SESSION — '+latest.user+'</div>';
-  const kpiRow=document.createElement('div');kpiRow.className='dash-kpi-row';
-  kpiRow.innerHTML=`<div class="dash-kpi accent"><div class="dash-kpi-label">FIXATIONS</div><div class="dash-kpi-val">${totalFix||'—'}</div><div class="dash-kpi-sub">gaze holds</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">AVG FIXATION</div><div class="dash-kpi-val">${avgFixDur||'—'}<span class="dash-kpi-unit">ms</span></div><div class="dash-kpi-sub">dwell time</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">SACCADES</div><div class="dash-kpi-val">${totalSac||'—'}</div><div class="dash-kpi-sub">eye jumps</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">SAC AMPLITUDE</div><div class="dash-kpi-val">${sacAmp||'—'}<span class="dash-kpi-unit">%</span></div><div class="dash-kpi-sub">avg distance</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">DURATION</div><div class="dash-kpi-val">${dur}<span class="dash-kpi-unit">s</span></div><div class="dash-kpi-sub">viewing time</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">TTFF</div><div class="dash-kpi-val">${ttff||'—'}<span class="dash-kpi-unit">${ttff?'s':''}</span></div><div class="dash-kpi-sub">time to first fix</div></div><div class="dash-kpi"><div class="dash-kpi-label">SAMPLES</div><div class="dash-kpi-val">${latest.gazeLog.length}</div><div class="dash-kpi-sub">gaze points</div></div><div class="dash-kpi"><div class="dash-kpi-label">IMAGE</div><div class="dash-kpi-val" style="font-size:13px">${latest.imageName}</div></div>`;
-  kpiSection.appendChild(kpiRow);container.appendChild(kpiSection);
-  const sparkSection=document.createElement('div');sparkSection.className='dash-section';
-  sparkSection.innerHTML='<div class="dash-section-title">MY SESSION OVERVIEW</div>';
-  sparkSection.appendChild(makeRingChart([{label:'Fixations',val:totalFix,max:Math.max(totalFix,50)},{label:'Saccades',val:totalSac,max:Math.max(totalSac,40)},{label:'Samples',val:latest.gazeLog.length,max:Math.max(latest.gazeLog.length,200)},]));
-  container.appendChild(sparkSection);
-  if(allSessions.length>1){const compSection=document.createElement('div');compSection.className='dash-section';compSection.innerHTML='<div class="dash-section-title">SESSIONS COMPARISON</div>';compSection.appendChild(makeBarChart('FIXATION COUNT',allSessions.map(s=>({label:s.user,val:s.fixationHistory.length}))));compSection.appendChild(makeBarChart('SACCADE COUNT',allSessions.map(s=>({label:s.user,val:s.saccadeHistory.length}))));compSection.appendChild(makeBarChart('SESSION DURATION (s)',allSessions.map(s=>({label:s.user,val:+(s.sessionDuration/1000).toFixed(1)}))));compSection.appendChild(makeBarChart('AVG FIXATION DURATION (ms)',allSessions.map(s=>{const f=s.fixationHistory;return{label:s.user,val:f.length?Math.round(f.reduce((a,x)=>a+x.duration,0)/f.length):0};})));container.appendChild(compSection);}
-  const byUser=new Map();for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}
-  if(byUser.size>1){const userSection=document.createElement('div');userSection.className='dash-section';userSection.innerHTML='<div class="dash-section-title">USER COMPARISON</div>';const grid=document.createElement('div');grid.className='dash-compare-grid';for(const[user,sessions]of byUser){const card=document.createElement('div');card.className='dash-user-card';const allFix=sessions.flatMap(ss=>ss.fixationHistory);const totFix=allFix.length;const totSac=sessions.reduce((s,ss)=>s+ss.saccadeHistory.length,0);const totDur=sessions.reduce((s,ss)=>s+ss.sessionDuration,0);const avgF=totFix?Math.round(allFix.reduce((s,f)=>s+f.duration,0)/totFix):0;const meta=sessions[0];card.innerHTML=`<div class="dash-user-card-name">${user}</div><div class="dash-user-card-meta">${meta.age?meta.age+'y · ':''}${meta.gender||''} · ${sessions.length} session${sessions.length>1?'s':''}</div><div class="dash-user-stats"><div class="dash-user-stat"><div class="dash-user-stat-label">FIXATIONS</div><div class="dash-user-stat-val">${totFix}</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">AVG DUR</div><div class="dash-user-stat-val">${avgF}ms</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">SACCADES</div><div class="dash-user-stat-val">${totSac}</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">TOTAL TIME</div><div class="dash-user-stat-val">${(totDur/1000).toFixed(1)}s</div></div></div>`;grid.appendChild(card);}userSection.appendChild(grid);container.appendChild(userSection);}
-}
+function renderDashboard(){const container=document.getElementById('dashboardContent');container.innerHTML='';if(allSessions.length===0){container.innerHTML='<div style="padding:60px 0;text-align:center;font-size:11px;letter-spacing:0.25em;color:#ccc;font-family:Heebo,sans-serif;">NO SESSIONS YET</div>';return;}const latest=allSessions[allSessions.length-1];const totalFix=latest.fixationHistory.length;const totalSac=latest.saccadeHistory.length;const avgFixDur=totalFix?Math.round(latest.fixationHistory.reduce((s,f)=>s+f.duration,0)/totalFix):0;const sacAmp=totalSac?+(latest.saccadeHistory.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/totalSac*100).toFixed(1):0;const dur=latest.sessionDuration?(latest.sessionDuration/1000).toFixed(1):0;const ttff=latest.firstFix?((latest.firstFix.startTs-latest.firstFixModeTs)/1000).toFixed(2):null;const kpiSection=document.createElement('div');kpiSection.className='dash-section';kpiSection.innerHTML='<div class="dash-section-title">MY LAST SESSION — '+latest.user+'</div>';const kpiRow=document.createElement('div');kpiRow.className='dash-kpi-row';kpiRow.innerHTML=`<div class="dash-kpi accent"><div class="dash-kpi-label">FIXATIONS</div><div class="dash-kpi-val">${totalFix||'—'}</div><div class="dash-kpi-sub">gaze holds</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">AVG FIXATION</div><div class="dash-kpi-val">${avgFixDur||'—'}<span class="dash-kpi-unit">ms</span></div><div class="dash-kpi-sub">dwell time</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">SACCADES</div><div class="dash-kpi-val">${totalSac||'—'}</div><div class="dash-kpi-sub">eye jumps</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">SAC AMPLITUDE</div><div class="dash-kpi-val">${sacAmp||'—'}<span class="dash-kpi-unit">%</span></div><div class="dash-kpi-sub">avg distance</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">DURATION</div><div class="dash-kpi-val">${dur}<span class="dash-kpi-unit">s</span></div><div class="dash-kpi-sub">viewing time</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">TTFF</div><div class="dash-kpi-val">${ttff||'—'}<span class="dash-kpi-unit">${ttff?'s':''}</span></div><div class="dash-kpi-sub">time to first fix</div></div><div class="dash-kpi"><div class="dash-kpi-label">SAMPLES</div><div class="dash-kpi-val">${latest.gazeLog.length}</div><div class="dash-kpi-sub">gaze points</div></div><div class="dash-kpi"><div class="dash-kpi-label">IMAGE</div><div class="dash-kpi-val" style="font-size:13px">${latest.imageName}</div></div>`;kpiSection.appendChild(kpiRow);container.appendChild(kpiSection);const sparkSection=document.createElement('div');sparkSection.className='dash-section';sparkSection.innerHTML='<div class="dash-section-title">MY SESSION OVERVIEW</div>';sparkSection.appendChild(makeRingChart([{label:'Fixations',val:totalFix,max:Math.max(totalFix,50)},{label:'Saccades',val:totalSac,max:Math.max(totalSac,40)},{label:'Samples',val:latest.gazeLog.length,max:Math.max(latest.gazeLog.length,200)},]));container.appendChild(sparkSection);if(allSessions.length>1){const compSection=document.createElement('div');compSection.className='dash-section';compSection.innerHTML='<div class="dash-section-title">SESSIONS COMPARISON</div>';compSection.appendChild(makeBarChart('FIXATION COUNT',allSessions.map(s=>({label:s.user,val:s.fixationHistory.length}))));compSection.appendChild(makeBarChart('SACCADE COUNT',allSessions.map(s=>({label:s.user,val:s.saccadeHistory.length}))));compSection.appendChild(makeBarChart('SESSION DURATION (s)',allSessions.map(s=>({label:s.user,val:+(s.sessionDuration/1000).toFixed(1)}))));compSection.appendChild(makeBarChart('AVG FIXATION DURATION (ms)',allSessions.map(s=>{const f=s.fixationHistory;return{label:s.user,val:f.length?Math.round(f.reduce((a,x)=>a+x.duration,0)/f.length):0};})));container.appendChild(compSection);}const byUser=new Map();for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}if(byUser.size>1){const userSection=document.createElement('div');userSection.className='dash-section';userSection.innerHTML='<div class="dash-section-title">USER COMPARISON</div>';const grid=document.createElement('div');grid.className='dash-compare-grid';for(const[user,sessions]of byUser){const card=document.createElement('div');card.className='dash-user-card';const allFix=sessions.flatMap(ss=>ss.fixationHistory);const totFix=allFix.length;const totSac=sessions.reduce((s,ss)=>s+ss.saccadeHistory.length,0);const totDur=sessions.reduce((s,ss)=>s+ss.sessionDuration,0);const avgF=totFix?Math.round(allFix.reduce((s,f)=>s+f.duration,0)/totFix):0;const meta=sessions[0];card.innerHTML=`<div class="dash-user-card-name">${user}</div><div class="dash-user-card-meta">${meta.age?meta.age+'y · ':''}${meta.gender||''} · ${sessions.length} session${sessions.length>1?'s':''}</div><div class="dash-user-stats"><div class="dash-user-stat"><div class="dash-user-stat-label">FIXATIONS</div><div class="dash-user-stat-val">${totFix}</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">AVG DUR</div><div class="dash-user-stat-val">${avgF}ms</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">SACCADES</div><div class="dash-user-stat-val">${totSac}</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">TOTAL TIME</div><div class="dash-user-stat-val">${(totDur/1000).toFixed(1)}s</div></div></div>`;grid.appendChild(card);}userSection.appendChild(grid);container.appendChild(userSection);}}
 
 function makeRingChart(metrics){const wrap=document.createElement('div');wrap.style.cssText='display:flex;gap:16px;flex-wrap:wrap;';const dpr=window.devicePixelRatio||1;const SIZE=120;metrics.forEach(m=>{const cell=document.createElement('div');cell.style.cssText='display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:1px solid #eee;border-radius:8px;padding:14px 18px;box-shadow:0 1px 4px rgba(0,0,0,0.04);';const canvas=document.createElement('canvas');canvas.width=SIZE*dpr;canvas.height=SIZE*dpr;canvas.style.width=SIZE+'px';canvas.style.height=SIZE+'px';const label=document.createElement('div');label.style.cssText='font-size:8px;font-weight:700;letter-spacing:0.3em;color:#bbb;font-family:Heebo,sans-serif;text-transform:uppercase;';label.textContent=m.label;cell.appendChild(canvas);cell.appendChild(label);wrap.appendChild(cell);setTimeout(()=>{const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const cx=SIZE/2,cy=SIZE/2,outerR=SIZE/2-8;const pct=Math.min(1,m.val/m.max);const startA=-Math.PI/2;ctx.beginPath();ctx.arc(cx,cy,outerR,0,Math.PI*2);ctx.strokeStyle='#f0f0f0';ctx.lineWidth=14;ctx.stroke();if(pct>0){ctx.beginPath();ctx.arc(cx,cy,outerR,startA,startA+pct*Math.PI*2);ctx.strokeStyle='#E91C1C';ctx.lineWidth=14;ctx.lineCap='round';ctx.stroke();}ctx.fillStyle='#111';ctx.font='700 22px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(m.val,cx,cy-6);ctx.fillStyle='#ccc';ctx.font='300 9px Heebo';ctx.fillText('/ '+m.max,cx,cy+12);},60);});return wrap;}
 
 function makeBarChart(title,data,unit=''){const wrap=document.createElement('div');wrap.className='dash-chart-area';const dpr=window.devicePixelRatio||1;const PAD_L=100,PAD_R=60,PAD_T=28,PAD_B=8;const rowH=28,barH=12;const H_canvas=PAD_T+data.length*rowH+PAD_B;const canvas=document.createElement('canvas');canvas.style.width='100%';canvas.style.height=H_canvas+'px';canvas.style.display='block';wrap.appendChild(canvas);setTimeout(()=>{const W2=canvas.offsetWidth||600;canvas.width=W2*dpr;canvas.height=H_canvas*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const maxVal=Math.max(...data.map(d=>d.val),1);const barZone=W2-PAD_L-PAD_R;ctx.font='700 8px Heebo';ctx.fillStyle='rgba(0,0,0,0.25)';ctx.textAlign='left';ctx.fillText(title.toUpperCase(),PAD_L,14);for(let g=0;g<=4;g++){const x=PAD_L+barZone*g/4;ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,PAD_T);ctx.lineTo(x,H_canvas-PAD_B);ctx.stroke();}data.forEach((d,i)=>{const y=PAD_T+i*rowH;const barW=barZone*d.val/maxVal;ctx.font='300 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.45)';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(d.label,PAD_L-10,y+barH/2);ctx.fillStyle='#f0f0f0';ctx.beginPath();const r=barH/2;ctx.roundRect(PAD_L,y,barZone,barH,r);ctx.fill();if(barW>0){ctx.fillStyle='#E91C1C';ctx.beginPath();ctx.roundRect(PAD_L,y,barW,barH,r);ctx.fill();}ctx.font='700 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.4)';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(d.val+(unit?' '+unit:''),PAD_L+barW+8,y+barH/2);});},60);return wrap;}
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   CLINICAL LAUNCHER
+   Replaces the marketing hero/scroll page with a compact, static
+   "instrument boot screen" — a single panel with a live status
+   checklist (camera / calibration / stimulus). Loads after the
+   original app script; does not modify any of its functions, only
+   reads/writes DOM it already exposes (button clicks, screen toggles).
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+
+  function injectLauncher(){
+    const heroSection = document.getElementById('homeHeroSection');
+    if(!heroSection) return; // original markup not present yet
+
+    const launcher = document.createElement('div');
+    launcher.id = 'clinicalLauncher';
+    launcher.innerHTML = `
+      <style>
+        #clinicalLauncher{
+          position:fixed; inset:0; z-index:9;
+          display:flex; align-items:center; justify-content:center;
+          background:#0D0F12;
+          font-family:'IBM Plex Sans',sans-serif;
+        }
+        #clinicalLauncher .cl-panel{
+          width:380px; max-width:88vw;
+          background:#15181D;
+          border:1px solid #262B33;
+          border-radius:10px;
+          padding:28px 26px;
+        }
+        #clinicalLauncher .cl-kicker{
+          font-family:'IBM Plex Mono',monospace;
+          font-size:10px; letter-spacing:0.12em;
+          color:#8B92A0; text-transform:uppercase;
+          margin-bottom:6px;
+        }
+        #clinicalLauncher .cl-title{
+          font-size:18px; font-weight:600; color:#E4E7EB;
+          margin-bottom:22px;
+        }
+        #clinicalLauncher .cl-check-row{
+          display:flex; align-items:center; justify-content:space-between;
+          padding:9px 0; border-top:1px solid #262B33;
+          font-family:'IBM Plex Mono',monospace; font-size:12px;
+        }
+        #clinicalLauncher .cl-check-row:last-of-type{ border-bottom:1px solid #262B33; }
+        #clinicalLauncher .cl-check-label{ color:#E4E7EB; }
+        #clinicalLauncher .cl-check-status{
+          display:flex; align-items:center; gap:6px;
+          color:#8B92A0; font-size:10px; letter-spacing:0.06em;
+        }
+        #clinicalLauncher .cl-dot{
+          width:6px; height:6px; border-radius:50%;
+          background:#8B92A0; flex-shrink:0;
+        }
+        #clinicalLauncher .cl-dot.ready{ background:#4FA8FF; }
+        #clinicalLauncher .cl-check-status.ready{ color:#4FA8FF; }
+        #clinicalLauncher .cl-start{
+          width:100%; margin-top:22px;
+          background:#4FA8FF; border:1px solid #4FA8FF; color:#06121F;
+          font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600;
+          letter-spacing:0.06em; text-transform:uppercase;
+          padding:12px; border-radius:6px; cursor:pointer;
+        }
+        #clinicalLauncher .cl-start:hover{ background:#7CC0FF; border-color:#7CC0FF; }
+        #clinicalLauncher .cl-modes{
+          margin-top:18px; padding-top:16px; border-top:1px solid #262B33;
+          font-size:9px; letter-spacing:0.06em; color:#8B92A0;
+          font-family:'IBM Plex Mono',monospace; line-height:1.9;
+        }
+        #clinicalLauncher .cl-modes b{ color:#E4E7EB; font-weight:500; }
+      </style>
+      <div class="cl-panel">
+        <div class="cl-kicker">Gaze Lab &middot; Session Setup</div>
+        <div class="cl-title">Visual attention capture</div>
+
+        <div class="cl-check-row">
+          <span class="cl-check-label">Camera</span>
+          <span class="cl-check-status" id="clCamStatus"><span class="cl-dot"></span>pending</span>
+        </div>
+        <div class="cl-check-row">
+          <span class="cl-check-label">Calibration</span>
+          <span class="cl-check-status" id="clCalStatus"><span class="cl-dot"></span>pending</span>
+        </div>
+        <div class="cl-check-row">
+          <span class="cl-check-label">Stimulus</span>
+          <span class="cl-check-status" id="clStimStatus"><span class="cl-dot"></span>pending</span>
+        </div>
+
+        <button class="cl-start" id="clStartBtn">Start session</button>
+
+        <div class="cl-modes">
+          <b>Modes</b> &nbsp;gaze &middot; fixation &middot; saccade &middot; scan path &middot; heatmap &middot; first fixation
+        </div>
+      </div>
+    `;
+    document.body.appendChild(launcher);
+
+    // Wire the launcher's start button to the app's existing start button,
+    // so all original logic (name screen -> camera -> calibration -> library)
+    // runs completely unchanged.
+    const originalStartBtn = document.getElementById('homeStartBtn');
+    document.getElementById('clStartBtn').addEventListener('click', () => {
+      launcher.style.display = 'none';
+      if(originalStartBtn) originalStartBtn.click();
+    });
+
+    // Lightweight status polling — reflects the app's real state without
+    // modifying any of its functions. Purely additive/cosmetic.
+    setInterval(() => {
+      const camEl = document.getElementById('clCamStatus');
+      const calEl = document.getElementById('clCalStatus');
+      const stimEl = document.getElementById('clStimStatus');
+      if(!camEl) return;
+
+      const calOverlayVisible = document.getElementById('calOverlay')?.style.display !== 'none';
+      const imgWrapperVisible = document.getElementById('imgWrapper')?.style.display === 'block';
+
+      // Camera: consider "ready" once the calibration overlay has appeared
+      // (the app only reaches that step after getUserMedia succeeds).
+      if(calOverlayVisible || imgWrapperVisible){
+        setReady(camEl, 'ready');
+      }
+      if(imgWrapperVisible){
+        setReady(calEl, 'ready');
+        setReady(stimEl, 'ready');
+      }
+    }, 400);
+
+    function setReady(el, text){
+      if(el.classList.contains('ready')) return;
+      el.classList.add('ready');
+      el.innerHTML = '<span class="cl-dot ready"></span>' + text;
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', injectLauncher);
+  } else {
+    injectLauncher();
+  }
+})();
+
 </script>
 </body>
 </html>
