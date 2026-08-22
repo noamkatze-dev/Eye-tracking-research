@@ -82,11 +82,11 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .lib-add-plus{font-size:28px;color:#ccc;line-height:1;}
 .lib-add-label{font-size:9px;font-weight:300;letter-spacing:0.2em;color:#ccc;}
 #libFileInput{display:none;}
-#imgWrapper{position:fixed;top:0;left:0;right:0;bottom:74px;overflow:hidden;}
+#imgWrapper{position:fixed;inset:0;overflow:hidden;}
 #mainImg{display:block;width:100%;height:100%;object-fit:cover;}
 #dotCanvas{position:absolute;inset:0;pointer-events:none;z-index:5;}
 #annLayer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6;opacity:0;}
-#gazeDot{position:fixed;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,0.85);background:rgba(255,255,255,0.12);transform:translate(-50%,-50%);pointer-events:none;z-index:50;}
+#gazeDot{display:none;position:fixed;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,0.85);background:rgba(255,255,255,0.12);transform:translate(-50%,-50%);pointer-events:none;z-index:50;}
 #info{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;color:rgba(255,255,255,0.6);pointer-events:none;transition:opacity 2s ease;white-space:nowrap;z-index:50;}
 #sessionInfoOverlay{display:none !important;}
 #stimControlBar{display:none;position:fixed;left:0;right:0;bottom:0;height:74px;background:#fff;border-top:1px solid #eee;align-items:center;justify-content:center;gap:16px;z-index:60;}
@@ -673,8 +673,7 @@ async function boot(){
 
   for(let i=0;i<imageLibrary.length;i++){
     currentImageIdx=i;
-    const timeLimitMs = i===0 ? 60000 : null; // first image: 60s auto-advance, rest: unlimited (manual FINISH)
-    await runStimulusView(imageLibrary[i], timeLimitMs);
+    await runStimulusView(imageLibrary[i], 60000);
   }
 
   openGallery();
@@ -690,19 +689,8 @@ function runStimulusView(img, timeLimitMs){
 
     mainImg.src=img.src;
     imgWrapper.style.display='block';
-    document.getElementById('stimControlBar').style.display='flex';
-
-    const timerEl=document.getElementById('stimTimer');
-    let countdownInterval=null,autoTimeout=null;
-    if(timeLimitMs){
-      let remaining=Math.ceil(timeLimitMs/1000);
-      timerEl.style.display='block';
-      timerEl.textContent=remaining+'s';
-      countdownInterval=setInterval(()=>{
-        remaining--;
-        timerEl.textContent=Math.max(0,remaining)+'s';
-      },1000);
-    }
+    // Only the stimulus image itself is shown — no nav, no timer, no buttons.
+    document.getElementById('mainNav').style.display='none';
 
     const gazeInterval=setInterval(()=>{
       if(!gazeOn)return;
@@ -714,22 +702,15 @@ function runStimulusView(img, timeLimitMs){
     function finishStimulus(){
       if(finished)return;
       finished=true;
-      document.getElementById('finishBtn').removeEventListener('click', finishStimulus);
-      if(countdownInterval)clearInterval(countdownInterval);
-      if(autoTimeout)clearTimeout(autoTimeout);
-      timerEl.style.display='none';
-      document.getElementById('stimControlBar').style.display='none';
       clearInterval(gazeInterval);
+      document.getElementById('mainNav').style.display='flex';
       const snap=captureSession();
       allSessions.push(snap);
       imgWrapper.style.display='none';
       resolve();
     }
 
-    document.getElementById('finishBtn').addEventListener('click', finishStimulus);
-    if(timeLimitMs){
-      autoTimeout=setTimeout(finishStimulus, timeLimitMs);
-    }
+    setTimeout(finishStimulus, timeLimitMs||60000);
   });
 }
 
