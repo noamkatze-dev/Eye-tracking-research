@@ -708,11 +708,18 @@ function paintHeatmapGradient(ctx,W,H,hm,hmW,hmH){
   off.width=hmW; off.height=hmH;
   const octx=off.getContext('2d');
   const imgData=octx.createImageData(hmW,hmH);
+  // Raw linear normalization (tRaw) makes the single densest spot dominate the whole
+  // color scale, so any real-but-shorter dwell elsewhere gets crushed near-invisible.
+  // A gamma curve lifts the mid/low range so genuinely-visited regions stay visibly
+  // colored instead of the map reading as one dominant blob (tRaw is still used for
+  // the cutoff so true zero/decay-noise cells stay fully transparent).
+  const GAMMA=0.55;
   for(let i=0;i<hm.length;i++){
-    const t=hm[i]/maxVal;
-    const a=Math.round(Math.min(1,t*1.3)*185);
+    const tRaw=hm[i]/maxVal;
+    const t=Math.pow(tRaw,GAMMA);
+    const a=Math.round(Math.min(1,t*1.15)*205);
     const [r,g,b]=jetColor(t);
-    imgData.data[i*4]=r; imgData.data[i*4+1]=g; imgData.data[i*4+2]=b; imgData.data[i*4+3]=t<0.04?0:a;
+    imgData.data[i*4]=r; imgData.data[i*4+1]=g; imgData.data[i*4+2]=b; imgData.data[i*4+3]=tRaw<0.008?0:a;
   }
   octx.putImageData(imgData,0,0);
   ctx.save();
