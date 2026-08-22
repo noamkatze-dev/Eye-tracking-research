@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +11,9 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 #mainNav{position:fixed;top:0;left:0;right:0;height:52px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 32px;z-index:9000;cursor:default;}
 #navBrand{display:flex;align-items:center;gap:10px;}
 .nav-va{font-size:14px;font-weight:700;color:#111;letter-spacing:0.06em;}
-.nav-title{font-size:10px;font-weight:700;letter-spacing:0.28em;color:#111;font-variant:small-caps;}
+.nav-title{font-size:10px;font-weight:700;letter-spacing:0.112em;color:#111;font-variant:small-caps;}
 #navLinks{display:flex;gap:28px;align-items:center;}
-.nav-link{font-size:10px;font-weight:700;letter-spacing:0.22em;color:#999;cursor:pointer;user-select:none;transition:color 0.15s;}
+.nav-link{font-size:10px;font-weight:700;letter-spacing:0.088em;color:#999;cursor:pointer;user-select:none;transition:color 0.15s;}
 .nav-link:hover,.nav-link.active{color:#111;}
 #homeScreen{position:fixed;inset:0;z-index:8999;background:#fff;overflow-y:auto;overflow-x:hidden;}
 #homeHeroSection{position:relative;width:100%;height:100vh;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
@@ -21,20 +21,20 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 #eyeBall{position:fixed;border-radius:50%;background:#F10F12;pointer-events:none;z-index:8998;transition:none;transform-origin:center center;opacity:0;}
 #homeHero{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
 .home-content{text-align:center;pointer-events:all;display:flex;flex-direction:column;align-items:center;}
-.home-eyebrow{font-size:9px;font-weight:700;letter-spacing:0.5em;color:#aaa;margin-bottom:28px;text-transform:uppercase;}
+.home-eyebrow{font-size:9px;font-weight:700;letter-spacing:0.2em;color:#aaa;margin-bottom:28px;text-transform:uppercase;}
 .home-heading{font-size:52px;font-weight:700;color:#111;line-height:1.1;margin-bottom:24px;text-transform:uppercase;white-space:nowrap;}
 .home-subtitle{font-size:14px;font-weight:400;color:#888;white-space:nowrap;line-height:1.6;margin:0 auto 44px;}
-#homeStartBtn{background:#F10F12;color:#fff;border:2px solid #F10F12;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:14px 48px;cursor:pointer;transition:background 0.18s,border-color 0.18s;margin-bottom:36px;border-radius:100px;}
+#homeStartBtn{background:#F10F12;color:#fff;border:2px solid #F10F12;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.088em;padding:14px 48px;cursor:pointer;transition:background 0.18s,border-color 0.18s;margin-bottom:36px;border-radius:100px;}
 #homeStartBtn:hover{background:#c00;border-color:#c00;}
 .home-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:40px;}
 .home-badge{font-size:10px;color:#555;border:1px solid #ddd;padding:5px 14px;border-radius:100px;letter-spacing:0.05em;}
-.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:#F10F12;display:flex;flex-direction:column;align-items:center;gap:6px;position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:4;pointer-events:none;transition:opacity 0.3s;}
+.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.16em;color:#F10F12;display:flex;flex-direction:column;align-items:center;gap:6px;position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:4;pointer-events:none;transition:opacity 0.3s;}
 .home-scroll-hint-arrow{font-size:14px;color:#F10F12;}
 #homeInfo{position:relative;z-index:4;background:#fff;pointer-events:all;}
 .hi-section{padding:72px 64px;}
 .hi-section+.hi-section{border-top:1px solid #eee;}
 .hi-section-dark{background:#0a0a0a;}
-.hi-label{font-size:8px;font-weight:700;letter-spacing:0.5em;color:#111;margin-bottom:20px;text-transform:uppercase;}
+.hi-label{font-size:8px;font-weight:700;letter-spacing:0.2em;color:#111;margin-bottom:20px;text-transform:uppercase;}
 .hi-label-light{color:rgba(255,255,255,0.5);}
 .hi-title{font-size:28px;font-weight:700;color:#111;margin-bottom:8px;line-height:1.2;white-space:nowrap;}
 .hi-title-light{color:#fff;}
@@ -42,7 +42,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 .steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;}
 .step-item{padding:32px 36px;border-left:1px solid #eee;}
 .step-item:first-child{border-left:none;padding-left:0;}
-.step-num{font-size:9px;font-weight:700;letter-spacing:0.3em;color:#bbb;margin-bottom:10px;}
+.step-num{font-size:9px;font-weight:700;letter-spacing:0.12em;color:#bbb;margin-bottom:10px;}
 .step-icon{font-size:28px;margin-bottom:12px;line-height:1;}
 .step-title{font-size:12px;font-weight:700;letter-spacing:0.18em;color:#111;margin-bottom:8px;text-transform:uppercase;}
 .step-desc{font-size:12px;font-weight:300;color:#888;line-height:1.7;}
@@ -55,7 +55,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 .howto-text strong{font-weight:700;color:#111;}
 .modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#f0f0f0;width:100%;}
 .mode-card{background:#fff;padding:20px 20px 16px;border-bottom:1px solid #f0f0f0;}
-.mode-card-name{font-size:8px;font-weight:700;letter-spacing:0.4em;color:#bbb;margin-bottom:10px;text-transform:uppercase;}
+.mode-card-name{font-size:8px;font-weight:700;letter-spacing:0.16em;color:#bbb;margin-bottom:10px;text-transform:uppercase;}
 .mode-card-desc{font-size:10px;font-weight:300;color:#ccc;line-height:1.5;margin-top:10px;}
 .mode-preview-wrap{width:100%;aspect-ratio:5/2;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:2px;}
 .mode-preview{display:block;width:100%;height:100%;}
@@ -66,22 +66,22 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 .va-btn-secondary:hover{background:#111;color:#fff;}
 #taskInstructionScreen{display:none;position:fixed;inset:0;z-index:1050;background:#fff;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;}
 .ti-content{max-width:560px;}
-.ti-label{font-size:9px;font-weight:700;letter-spacing:0.5em;color:#bbb;text-transform:uppercase;margin-bottom:24px;}
+.ti-label{font-size:9px;font-weight:700;letter-spacing:0.2em;color:#bbb;text-transform:uppercase;margin-bottom:24px;}
 .ti-question{font-size:24px;font-weight:700;color:#111;line-height:1.5;margin-bottom:20px;}
 .ti-hint{font-size:13px;font-weight:300;color:#888;margin-bottom:36px;line-height:1.7;}
 #calOverlay{position:fixed;inset:0;z-index:1000;background:#fff;}
 #calCanvas{position:absolute;inset:0;width:100%;height:100%;}
 #calStartBtn{position:absolute;top:58%;left:50%;transform:translateX(-50%);display:none;z-index:1001;}
 .screen{display:none;position:fixed;inset:0;z-index:1100;background:#fff;flex-direction:column;align-items:center;justify-content:center;}
-.screen-title{font-size:9px;font-weight:300;letter-spacing:0.6em;color:#bbb;margin-bottom:36px;}
+.screen-title{font-size:9px;font-weight:300;letter-spacing:0.24em;color:#bbb;margin-bottom:36px;}
 .lib-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:720px;width:90vw;margin-bottom:36px;max-height:52vh;overflow-y:auto;}
 .lib-card{aspect-ratio:4/3;border:1.5px solid #e0e0e0;cursor:pointer;overflow:hidden;position:relative;transition:border-color 0.15s;}
 .lib-card:hover{border-color:#999;}
 .lib-card.selected{border-color:#111;}
 .lib-card.viewed-once{opacity:0.55;}
-.lib-card.viewed-once::after{content:'נצפה';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);color:#fff;font-size:9px;font-weight:700;letter-spacing:0.3em;}
+.lib-card.viewed-once::after{content:'נצפה';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);color:#fff;font-size:9px;font-weight:700;letter-spacing:0.12em;}
 .lib-card img{width:100%;height:100%;object-fit:cover;display:block;}
-.lib-num{position:absolute;top:6px;left:8px;font-size:9px;font-weight:700;color:#fff;text-shadow:0 0 4px rgba(0,0,0,0.8);letter-spacing:0.1em;}
+.lib-num{position:absolute;top:6px;right:8px;font-size:9px;font-weight:700;color:#fff;text-shadow:0 0 4px rgba(0,0,0,0.8);letter-spacing:0.1em;}
 .lib-add{aspect-ratio:4/3;border:1.5px dashed #ddd;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;transition:border-color 0.15s;}
 .lib-add:hover{border-color:#999;}
 .lib-add-plus{font-size:28px;color:#ccc;line-height:1;}
@@ -92,7 +92,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 #dotCanvas{position:absolute;inset:0;pointer-events:none;z-index:5;}
 #annLayer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6;opacity:0;}
 #gazeDot{display:none;position:fixed;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,0.85);background:rgba(255,255,255,0.12);transform:translate(-50%,-50%);pointer-events:none;z-index:50;}
-#info{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;color:rgba(255,255,255,0.6);pointer-events:none;transition:opacity 2s ease;white-space:nowrap;z-index:50;}
+#info{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.088em;color:rgba(255,255,255,0.6);pointer-events:none;transition:opacity 2s ease;white-space:nowrap;z-index:50;}
 #sessionInfoOverlay{display:none !important;}
 #stimControlBar{display:none;position:fixed;left:0;right:0;bottom:0;height:74px;background:#fff;border-top:1px solid #eee;align-items:center;justify-content:center;gap:16px;z-index:60;}
 #finishBtn{position:static;font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.2em;color:#fff;background:#111;border:1.5px solid #111;padding:13px 36px;cursor:pointer;border-radius:100px;transition:background 0.15s,border-color 0.15s;}
@@ -111,18 +111,18 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 #dataCanvas{position:absolute;inset:0;pointer-events:none;z-index:2;}
 #dataSessionBadge{position:relative;display:flex;flex-direction:column;align-items:stretch;background:rgba(0,0,0,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;min-width:340px;}
 .dsb-header{display:flex;align-items:center;justify-content:space-between;padding:7px 14px;cursor:pointer;user-select:none;}
-.dsb-header-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.35);text-transform:uppercase;}
+.dsb-header-label{font-size:7px;font-weight:700;letter-spacing:0.14em;color:rgba(255,255,255,0.35);text-transform:uppercase;}
 .dsb-toggle{font-size:13px;color:rgba(255,255,255,0.75);transition:transform 0.2s;line-height:1;font-weight:900;}
 .dsb-toggle.collapsed{transform:rotate(180deg);}
 .dsb-content{display:flex;flex-direction:row;align-items:stretch;border-top:1px solid rgba(255,255,255,0.06);overflow:hidden;max-height:60px;transition:max-height 0.25s ease,border-top 0.25s;}
 .dsb-content.collapsed{max-height:0;border-top-width:0;}
-.dsb-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 14px;border-right:1px solid rgba(255,255,255,0.05);}
-.dsb-item:last-child{border-right:none;}
-.dsb-label{font-size:7px;font-weight:700;letter-spacing:0.3em;color:rgba(255,255,255,0.25);text-transform:uppercase;}
+.dsb-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 14px;border-left:1px solid rgba(255,255,255,0.05);}
+.dsb-item:last-child{border-left:none;}
+.dsb-label{font-size:7px;font-weight:700;letter-spacing:0.12em;color:rgba(255,255,255,0.25);text-transform:uppercase;}
 .dsb-val{font-size:11px;font-weight:700;color:#fff;}
 #dataAnalysisBadge{position:relative;display:none;flex-direction:column;background:rgba(0,0,0,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;min-width:170px;overflow:hidden;}
 .dab-header{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;cursor:pointer;user-select:none;border-bottom:1px solid rgba(255,255,255,0.06);}
-.dab-header-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
+.dab-header-label{font-size:7px;font-weight:700;letter-spacing:0.14em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
 .dab-toggle{font-size:13px;color:rgba(255,255,255,0.75);transition:transform 0.2s;line-height:1;font-weight:900;}
 .dab-toggle.collapsed{transform:rotate(180deg);}
 .dab-content{overflow:hidden;max-height:200px;transition:max-height 0.25s ease;padding:8px 12px;}
@@ -150,23 +150,23 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 .view-tab:hover{color:#fff;border-color:rgba(255,255,255,0.2);}
 #galleryScreen{display:none;position:fixed;inset:0;z-index:1500;background:#f5f5f5;flex-direction:column;overflow:hidden;padding-top:52px;}
 #galleryHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #eee;flex-shrink:0;background:#fff;}
-#galleryHeader .gallery-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#111;}
+#galleryHeader .gallery-title{font-size:11px;font-weight:700;letter-spacing:0.18em;color:#111;}
 .gallery-header-right{display:flex;align-items:center;gap:8px;}
 #galleryBody{flex:1;overflow-y:auto;padding:24px;background:#f5f5f5;padding-top:16px;}
 .gallery-user-block{margin-bottom:40px;}
-.gallery-user-name{font-size:11px;font-weight:700;letter-spacing:0.3em;color:#111;text-transform:uppercase;margin-bottom:6px;}
+.gallery-user-name{font-size:11px;font-weight:700;letter-spacing:0.12em;color:#111;text-transform:uppercase;margin-bottom:6px;}
 .gallery-user-meta{font-size:9px;font-weight:300;color:#555;letter-spacing:0.06em;margin-bottom:16px;}
 .gallery-images-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
 .gallery-item{background:#fff;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color 0.15s;}
 .gallery-item:hover{border-color:#999;}
-.gallery-item.active-view{border-color:#E91C1C;}
+.gallery-item.active-view{border-color:#1D4ED8;}
 .gallery-item-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
 .gallery-item-info{padding:5px 8px;display:flex;justify-content:space-between;align-items:center;}
 .gallery-item-name{font-size:8px;font-weight:700;letter-spacing:0.1em;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .gallery-item-stats{font-size:7px;font-weight:300;color:#999;white-space:nowrap;}
 #compareView{display:none;flex:1;overflow:hidden;flex-direction:column;}
 #compareFilters{background:#fff;border-bottom:1px solid #eee;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex-shrink:0;}
-.cf-label{font-size:8px;font-weight:700;letter-spacing:0.3em;color:#999;text-transform:uppercase;}
+.cf-label{font-size:8px;font-weight:700;letter-spacing:0.12em;color:#999;text-transform:uppercase;}
 .cf-note{font-size:11px;font-weight:300;color:#888;letter-spacing:0.03em;}
 .cf-select{font-family:'Heebo',sans-serif;font-size:10px;background:#fff;color:#333;border:1.5px solid #ddd;padding:5px 10px;cursor:pointer;border-radius:100px;outline:none;-webkit-appearance:none;}
 .cf-select:focus{border-color:#555;}
@@ -183,10 +183,10 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 .cp-canvas{position:absolute;inset:0;pointer-events:none;}
 .cp-stats{font-size:8px;font-weight:300;color:#999;padding:5px 10px;letter-spacing:0.05em;border-top:1px solid #eee;}
 #nameScreen{display:none;position:fixed;inset:0;z-index:2000;background:#fff;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:40px 20px;}
-.ns-title{font-size:9px;font-weight:300;letter-spacing:0.55em;color:#bbb;margin-bottom:52px;}
+.ns-title{font-size:9px;font-weight:300;letter-spacing:0.22em;color:#bbb;margin-bottom:52px;}
 .ns-form{display:flex;flex-direction:column;align-items:center;width:100%;max-width:320px;}
 .ns-field{width:100%;margin-bottom:30px;}
-.ns-field label{display:block;font-size:9px;font-weight:700;letter-spacing:0.3em;color:#111;margin-bottom:12px;text-transform:uppercase;}
+.ns-field label{display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#111;margin-bottom:12px;text-transform:uppercase;}
 .ns-field input,.ns-field select{background:transparent;border:none;border-bottom:1.5px solid #ddd;color:#111;font-family:'Heebo',sans-serif;font-size:16px;letter-spacing:0.08em;padding:10px 4px;width:100%;caret-color:#111;transition:border-color 0.15s;-webkit-appearance:none;border-radius:0;}
 .ns-field input:focus,.ns-field select:focus{border-bottom-color:#111;outline:none;}
 .ns-field input::placeholder{color:#ccc;font-size:14px;}
@@ -194,43 +194,43 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 .ns-row .ns-field{flex:1;}
 #dashboardScreen{display:none;position:fixed;inset:0;z-index:1600;background:#f5f5f5;flex-direction:column;overflow:hidden;padding-top:52px;}
 #dashboardHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #eee;flex-shrink:0;background:#fff;}
-#dashboardHeader .dash-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#111;}
+#dashboardHeader .dash-title{font-size:11px;font-weight:700;letter-spacing:0.18em;color:#111;}
 #dashboardBody{flex:1;overflow-y:auto;padding:24px 28px;padding-top:16px;}
 .dash-section{margin-bottom:28px;}
-.dash-section-title{font-size:8px;font-weight:700;letter-spacing:0.45em;color:#999;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;}
+.dash-section-title{font-size:8px;font-weight:700;letter-spacing:0.18em;color:#999;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;}
 .dash-kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:20px;}
 .dash-kpi{background:#fff;border:1px solid #eee;border-radius:6px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
-.dash-kpi-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:#bbb;text-transform:uppercase;margin-bottom:6px;}
+.dash-kpi-label{font-size:7px;font-weight:700;letter-spacing:0.14em;color:#bbb;text-transform:uppercase;margin-bottom:6px;}
 .dash-kpi-val{font-size:22px;font-weight:700;color:#111;line-height:1;}
 .dash-kpi-unit{font-size:9px;font-weight:300;color:#555;margin-left:3px;}
 .dash-kpi-sub{font-size:8px;font-weight:300;color:#bbb;margin-top:3px;}
 .dash-kpi.accent{border-color:rgba(255,255,255,0.15);}
-.dash-kpi.accent .dash-kpi-val{color:#E91C1C;}
+.dash-kpi.accent .dash-kpi-val{color:#1D4ED8;}
 .dash-chart-area{background:#fff;border:1px solid #eee;border-radius:6px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
-.dash-chart-title{font-size:8px;font-weight:700;letter-spacing:0.3em;color:#bbb;text-transform:uppercase;margin-bottom:12px;}
+.dash-chart-title{font-size:8px;font-weight:700;letter-spacing:0.12em;color:#bbb;text-transform:uppercase;margin-bottom:12px;}
 .dash-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .dash-bar-label{font-size:9px;font-weight:300;color:#999;width:80px;flex-shrink:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
 .dash-bar-wrap{flex:1;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden;}
-.dash-bar-fill{height:100%;background:#E91C1C;border-radius:3px;transition:width 0.6s ease;}
-.dash-bar-val{font-size:8px;font-weight:700;color:#E91C1C;width:40px;text-align:right;flex-shrink:0;}
+.dash-bar-fill{height:100%;background:#1D4ED8;border-radius:3px;transition:width 0.6s ease;}
+.dash-bar-val{font-size:8px;font-weight:700;color:#1D4ED8;width:40px;text-align:right;flex-shrink:0;}
 .dash-compare-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
 .dash-user-card{background:#fff;border:1px solid #eee;border-radius:6px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
 .dash-user-card-name{font-size:11px;font-weight:700;color:#111;margin-bottom:2px;}
 .dash-user-card-meta{font-size:8px;font-weight:300;color:#bbb;margin-bottom:10px;}
 .dash-user-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
 .dash-user-stat{background:#f8f8f8;border-radius:4px;padding:8px 10px;}
-.dash-user-stat-label{font-size:7px;font-weight:700;letter-spacing:0.25em;color:#bbb;text-transform:uppercase;margin-bottom:3px;}
-.dash-user-stat-val{font-size:13px;font-weight:700;color:#E91C1C;}
+.dash-user-stat-label{font-size:7px;font-weight:700;letter-spacing:0.1em;color:#bbb;text-transform:uppercase;margin-bottom:3px;}
+.dash-user-stat-val{font-size:13px;font-weight:700;color:#1D4ED8;}
 .dash-empty{color:#ccc;font-size:11px;letter-spacing:0.2em;text-align:center;padding:60px 0;}
 #dataToolbarCollapseBtn{width:22px;height:22px;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:100px;color:rgba(255,255,255,0.7);flex-shrink:0;transition:color 0.15s,background 0.15s;}
 #dataToolbarCollapseBtn:hover{color:#fff;background:rgba(255,255,255,0.18);}
 #dataToolbarCollapseBtn .tcb-arrow{font-size:10px;font-weight:900;line-height:1;}
 #heroEyeSvg{display:block;width:240px;height:144px;margin-bottom:36px;}
-#aoiGearBtn{position:fixed;top:8px;left:8px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,0.06);color:#999;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9999;opacity:0.4;transition:opacity 0.15s,background 0.15s;user-select:none;}
+#aoiGearBtn{position:fixed;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,0.06);color:#999;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9999;opacity:0.4;transition:opacity 0.15s,background 0.15s;user-select:none;}
 #aoiGearBtn:hover{opacity:1;background:rgba(0,0,0,0.1);}
 #aoiEditorScreen{display:none;position:fixed;inset:0;z-index:9998;background:#fff;flex-direction:column;}
 #aoiEditorHeader{position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#fff;border-bottom:1px solid #eee;gap:16px;flex-wrap:wrap;}
-.aoi-editor-title{font-size:10px;font-weight:700;letter-spacing:0.3em;color:#111;text-transform:uppercase;white-space:nowrap;}
+.aoi-editor-title{font-size:10px;font-weight:700;letter-spacing:0.12em;color:#111;text-transform:uppercase;white-space:nowrap;}
 .aoi-editor-tabs{display:flex;gap:6px;flex-wrap:wrap;}
 .aoi-tab{font-family:'Heebo',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:7px 16px;border:1.5px solid #ddd;background:#fff;color:#666;cursor:pointer;border-radius:100px;transition:all 0.15s;}
 .aoi-tab.active{background:#111;color:#fff;border-color:#111;}
@@ -241,9 +241,9 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 #aoiEditImg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;}
 #aoiCanvas{position:absolute;inset:0;cursor:crosshair;}
 #aoiListFooter{flex-shrink:0;display:flex;align-items:center;gap:14px;padding:12px 20px;background:#fff;border-top:1px solid #eee;flex-wrap:wrap;}
-.aoi-list-title{font-size:9px;font-weight:700;letter-spacing:0.25em;color:#999;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+.aoi-list-title{font-size:9px;font-weight:700;letter-spacing:0.1em;color:#999;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
 #aoiList{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex:1;min-width:0;}
-.aoi-item{display:inline-flex;align-items:center;gap:6px;padding:5px 6px 5px 10px;background:#f7f7f7;border-radius:100px;font-size:11px;max-width:200px;}
+.aoi-item{display:inline-flex;align-items:center;gap:6px;padding:5px 10px 5px 6px;background:#f7f7f7;border-radius:100px;font-size:11px;max-width:200px;}
 .aoi-item-color{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
 .aoi-item-name{font-weight:600;color:#111;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .aoi-item-del{cursor:pointer;color:#bbb;font-size:15px;line-height:1;padding:0 4px;flex-shrink:0;}
@@ -273,7 +273,12 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
   <div id="aoiEditorHeader">
     <span class="aoi-editor-title">אזורי עניין</span>
     <div class="aoi-editor-tabs" id="aoiImageTabs"></div>
-    <button id="aoiEditorClose">סגירה</button>
+    <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
+      <button id="aoiExportBtn" class="va-btn va-btn-secondary" style="font-size:10px;padding:8px 16px;">ייצוא</button>
+      <button id="aoiImportBtn" class="va-btn va-btn-secondary" style="font-size:10px;padding:8px 16px;">ייבוא</button>
+      <input type="file" id="aoiImportFile" accept="application/json" style="display:none;">
+      <button id="aoiEditorClose">סגירה</button>
+    </div>
   </div>
   <div id="aoiCanvasArea">
     <div id="aoiCanvasFit">
@@ -346,7 +351,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
     <div class="hi-section hi-section-dark" style="text-align:center;padding:80px 48px;">
       <div class="hi-label hi-label-light">READY?</div>
       <h2 class="hi-title hi-title-light" style="margin-bottom:32px;">Start your session now.</h2>
-      <button id="homeStartBtn2" style="background:#fff;color:#111;border:2px solid #fff;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:14px 48px;cursor:pointer;border-radius:100px;">START SESSION</button>
+      <button id="homeStartBtn2" style="background:#fff;color:#111;border:2px solid #fff;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.088em;padding:14px 48px;cursor:pointer;border-radius:100px;">START SESSION</button>
     </div>
   </div>
 </div>
@@ -649,7 +654,7 @@ function renderLib(){const grid=document.getElementById('libGrid');grid.innerHTM
 function updateBeginBtn(){const btn=document.getElementById('libBeginBtn');const ok=imageLibrary.length>0&&!isImageViewed(currentImageIdx);btn.disabled=!ok;btn.style.opacity=ok?'1':'0.4';}
 document.getElementById('libFileInput').addEventListener('change',e=>{Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});e.target.value='';});
 
-async function showNameScreen(){return new Promise(resolve=>{const scr=document.getElementById('nameScreen'),inp=document.getElementById('nameInput');const ageInp=document.getElementById('ageInput'),genderInp=document.getElementById('genderInput');const btn=document.getElementById('nameContinue');scr.style.display='flex';inp.focus();function proceed(){const v=inp.value.trim();if(!v){inp.focus();return;}currentUser=v;currentAge=ageInp.value.trim();currentGender=genderInp.value;scr.style.display='none';resolve();}btn.addEventListener('click',proceed);inp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});});}
+async function showNameScreen(){return new Promise(resolve=>{const scr=document.getElementById('nameScreen'),inp=document.getElementById('nameInput');const ageInp=document.getElementById('ageInput'),genderInp=document.getElementById('genderInput');const btn=document.getElementById('nameContinue');scr.style.display='flex';inp.focus();function proceed(){const v=inp.value.trim(),a=ageInp.value.trim(),g=genderInp.value;if(!v){inp.focus();return;}if(!a){ageInp.focus();return;}if(!g){genderInp.focus();return;}currentUser=v;currentAge=a;currentGender=g;scr.style.display='none';resolve();}btn.addEventListener('click',proceed);inp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});ageInp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});});}
 function startSessionInfoOverlay(){}
 function stopSessionInfoOverlay(){}
 
@@ -866,10 +871,9 @@ function downloadDataPNG(){
 }
 
 async function startApp(){
-  // No marketing page, no name/age/gender form — go straight to image upload.
-  currentUser='Viewer';
-  currentAge='';
-  currentGender='';
+  // No marketing page — but name/age/gender ARE required for the research,
+  // so collect them, then go straight into calibration + the dashboards.
+  await showNameScreen();
   await boot();
 }
 
@@ -877,7 +881,6 @@ async function startApp(){
 document.getElementById('mainNav').style.display='flex';
 homeScreen.style.display='none';
 navHomeLink.style.display='none';
-document.getElementById('nameScreen').style.display='none';
 appStarted=true;
 startApp();
 
@@ -885,17 +888,17 @@ const dataToolbarCollapseBtn=document.getElementById('dataToolbarCollapseBtn');
 const dataToolbar=document.getElementById('dataToolbar');
 let toolbarCollapsed=false;
 const toolbarInnerEls=()=>Array.from(dataToolbar.children).filter(el=>el!==dataToolbarCollapseBtn);
-dataToolbarCollapseBtn.addEventListener('click',()=>{toolbarCollapsed=!toolbarCollapsed;toolbarInnerEls().forEach(el=>{el.style.display=toolbarCollapsed?'none':'';});const arrow=dataToolbarCollapseBtn.querySelector('.tcb-arrow');arrow.innerHTML=toolbarCollapsed?'&#9654;':'&#9660;';dataToolbarCollapseBtn.title=toolbarCollapsed?'הצגת סרגל כלים':'הסתרת סרגל כלים';dataToolbar.style.padding=toolbarCollapsed?'5px':'5px 10px';});
+dataToolbarCollapseBtn.addEventListener('click',()=>{toolbarCollapsed=!toolbarCollapsed;toolbarInnerEls().forEach(el=>{el.style.display=toolbarCollapsed?'none':'';});const arrow=dataToolbarCollapseBtn.querySelector('.tcb-arrow');arrow.innerHTML=toolbarCollapsed?'&#9664;':'&#9660;';dataToolbarCollapseBtn.title=toolbarCollapsed?'הצגת סרגל כלים':'הסתרת סרגל כלים';dataToolbar.style.padding=toolbarCollapsed?'5px':'5px 10px';});
 
 const navDashboardLink=document.getElementById('navDashboardLink');
 navDashboardLink.addEventListener('click',()=>openDashboard());
 function openDashboard(){homeScreen.style.display='none';document.getElementById('dataScreen').style.display='none';document.getElementById('galleryScreen').style.display='none';const scr=document.getElementById('dashboardScreen');scr.style.display='flex';navDashboardLink.classList.add('active');navHomeLink.classList.remove('active');navSessionLink.classList.remove('active');navGalleryLink.classList.remove('active');renderDashboard();}
 
-function renderDashboard(){const container=document.getElementById('dashboardContent');container.innerHTML='';if(allSessions.length===0){container.innerHTML='<div style="padding:60px 0;text-align:center;font-size:11px;letter-spacing:0.25em;color:#ccc;font-family:Heebo,sans-serif;">אין עדיין מפגשים</div>';return;}const latest=allSessions[allSessions.length-1];const totalFix=latest.fixationHistory.length;const totalSac=latest.saccadeHistory.length;const avgFixDur=totalFix?Math.round(latest.fixationHistory.reduce((s,f)=>s+f.duration,0)/totalFix):0;const sacAmp=totalSac?+(latest.saccadeHistory.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/totalSac*100).toFixed(1):0;const dur=latest.sessionDuration?(latest.sessionDuration/1000).toFixed(1):0;const ttff=latest.firstFix?((latest.firstFix.startTs-latest.firstFixModeTs)/1000).toFixed(2):null;const kpiSection=document.createElement('div');kpiSection.className='dash-section';kpiSection.innerHTML='<div class="dash-section-title">המפגש האחרון שלי — '+latest.user+'</div>';const kpiRow=document.createElement('div');kpiRow.className='dash-kpi-row';kpiRow.innerHTML=`<div class="dash-kpi accent"><div class="dash-kpi-label">פיקסציות</div><div class="dash-kpi-val">${totalFix||'—'}</div><div class="dash-kpi-sub">החזקות מבט</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">פיקסציה ממוצעת</div><div class="dash-kpi-val">${avgFixDur||'—'}<span class="dash-kpi-unit">מ״ש</span></div><div class="dash-kpi-sub">זמן שהייה</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">סקאדות</div><div class="dash-kpi-val">${totalSac||'—'}</div><div class="dash-kpi-sub">קפיצות עיניים</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">משרעת סקאדה</div><div class="dash-kpi-val">${sacAmp||'—'}<span class="dash-kpi-unit">%</span></div><div class="dash-kpi-sub">מרחק ממוצע</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">משך</div><div class="dash-kpi-val">${dur}<span class="dash-kpi-unit">שנ׳</span></div><div class="dash-kpi-sub">זמן צפייה</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">זמן לפיקסציה ראשונה</div><div class="dash-kpi-val">${ttff||'—'}<span class="dash-kpi-unit">${ttff?'שנ׳':''}</span></div><div class="dash-kpi-sub">TTFF</div></div><div class="dash-kpi"><div class="dash-kpi-label">דגימות</div><div class="dash-kpi-val">${latest.gazeLog.length}</div><div class="dash-kpi-sub">נקודות מבט</div></div><div class="dash-kpi"><div class="dash-kpi-label">תמונה</div><div class="dash-kpi-val" style="font-size:13px">${latest.imageName}</div></div>`;kpiSection.appendChild(kpiRow);container.appendChild(kpiSection);const sparkSection=document.createElement('div');sparkSection.className='dash-section';sparkSection.innerHTML='<div class="dash-section-title">סקירת המפגש שלי</div>';sparkSection.appendChild(makeRingChart([{label:'פיקסציות',val:totalFix,max:Math.max(totalFix,50)},{label:'סקאדות',val:totalSac,max:Math.max(totalSac,40)},{label:'דגימות',val:latest.gazeLog.length,max:Math.max(latest.gazeLog.length,200)},]));container.appendChild(sparkSection);if(allSessions.length>1){const compSection=document.createElement('div');compSection.className='dash-section';compSection.innerHTML='<div class="dash-section-title">השוואת מפגשים</div>';compSection.appendChild(makeBarChart('כמות פיקסציות',allSessions.map(s=>({label:s.user,val:s.fixationHistory.length}))));compSection.appendChild(makeBarChart('כמות סקאדות',allSessions.map(s=>({label:s.user,val:s.saccadeHistory.length}))));compSection.appendChild(makeBarChart('משך מפגש (שנ׳)',allSessions.map(s=>({label:s.user,val:+(s.sessionDuration/1000).toFixed(1)}))));compSection.appendChild(makeBarChart('משך פיקסציה ממוצע (מ״ש)',allSessions.map(s=>{const f=s.fixationHistory;return{label:s.user,val:f.length?Math.round(f.reduce((a,x)=>a+x.duration,0)/f.length):0};})));container.appendChild(compSection);}const byUser=new Map();for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}if(byUser.size>1){const userSection=document.createElement('div');userSection.className='dash-section';userSection.innerHTML='<div class="dash-section-title">השוואת משתמשים</div>';const grid=document.createElement('div');grid.className='dash-compare-grid';for(const[user,sessions]of byUser){const card=document.createElement('div');card.className='dash-user-card';const allFix=sessions.flatMap(ss=>ss.fixationHistory);const totFix=allFix.length;const totSac=sessions.reduce((s,ss)=>s+ss.saccadeHistory.length,0);const totDur=sessions.reduce((s,ss)=>s+ss.sessionDuration,0);const avgF=totFix?Math.round(allFix.reduce((s,f)=>s+f.duration,0)/totFix):0;const meta=sessions[0];card.innerHTML=`<div class="dash-user-card-name">${user}</div><div class="dash-user-card-meta">${meta.age?meta.age+' שנים · ':''}${meta.gender||''} · ${sessions.length} מפגש${sessions.length>1?'ים':''}</div><div class="dash-user-stats"><div class="dash-user-stat"><div class="dash-user-stat-label">פיקסציות</div><div class="dash-user-stat-val">${totFix}</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">משך ממוצע</div><div class="dash-user-stat-val">${avgF} מ״ש</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">סקאדות</div><div class="dash-user-stat-val">${totSac}</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">זמן כולל</div><div class="dash-user-stat-val">${(totDur/1000).toFixed(1)} שנ׳</div></div></div>`;grid.appendChild(card);}userSection.appendChild(grid);container.appendChild(userSection);}}
+function renderDashboard(){const container=document.getElementById('dashboardContent');container.innerHTML='';if(allSessions.length===0){container.innerHTML='<div style="padding:60px 0;text-align:center;font-size:11px;letter-spacing:0.1em;color:#ccc;font-family:Heebo,sans-serif;">אין עדיין מפגשים</div>';return;}const latest=allSessions[allSessions.length-1];const totalFix=latest.fixationHistory.length;const totalSac=latest.saccadeHistory.length;const avgFixDur=totalFix?Math.round(latest.fixationHistory.reduce((s,f)=>s+f.duration,0)/totalFix):0;const sacAmp=totalSac?+(latest.saccadeHistory.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/totalSac*100).toFixed(1):0;const dur=latest.sessionDuration?(latest.sessionDuration/1000).toFixed(1):0;const ttff=latest.firstFix?((latest.firstFix.startTs-latest.firstFixModeTs)/1000).toFixed(2):null;const kpiSection=document.createElement('div');kpiSection.className='dash-section';kpiSection.innerHTML='<div class="dash-section-title">המפגש האחרון שלי — '+latest.user+'</div>';const kpiRow=document.createElement('div');kpiRow.className='dash-kpi-row';kpiRow.innerHTML=`<div class="dash-kpi accent"><div class="dash-kpi-label">פיקסציות</div><div class="dash-kpi-val">${totalFix||'—'}</div><div class="dash-kpi-sub">החזקות מבט</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">פיקסציה ממוצעת</div><div class="dash-kpi-val">${avgFixDur||'—'}<span class="dash-kpi-unit">מ״ש</span></div><div class="dash-kpi-sub">זמן שהייה</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">סקאדות</div><div class="dash-kpi-val">${totalSac||'—'}</div><div class="dash-kpi-sub">קפיצות עיניים</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">משרעת סקאדה</div><div class="dash-kpi-val">${sacAmp||'—'}<span class="dash-kpi-unit">%</span></div><div class="dash-kpi-sub">מרחק ממוצע</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">משך</div><div class="dash-kpi-val">${dur}<span class="dash-kpi-unit">שנ׳</span></div><div class="dash-kpi-sub">זמן צפייה</div></div><div class="dash-kpi accent"><div class="dash-kpi-label">זמן לפיקסציה ראשונה</div><div class="dash-kpi-val">${ttff||'—'}<span class="dash-kpi-unit">${ttff?'שנ׳':''}</span></div><div class="dash-kpi-sub">TTFF</div></div><div class="dash-kpi"><div class="dash-kpi-label">דגימות</div><div class="dash-kpi-val">${latest.gazeLog.length}</div><div class="dash-kpi-sub">נקודות מבט</div></div><div class="dash-kpi"><div class="dash-kpi-label">תמונה</div><div class="dash-kpi-val" style="font-size:13px">${latest.imageName}</div></div>`;kpiSection.appendChild(kpiRow);container.appendChild(kpiSection);const sparkSection=document.createElement('div');sparkSection.className='dash-section';sparkSection.innerHTML='<div class="dash-section-title">סקירת המפגש שלי</div>';sparkSection.appendChild(makeRingChart([{label:'פיקסציות',val:totalFix,max:Math.max(totalFix,50)},{label:'סקאדות',val:totalSac,max:Math.max(totalSac,40)},{label:'דגימות',val:latest.gazeLog.length,max:Math.max(latest.gazeLog.length,200)},]));container.appendChild(sparkSection);if(allSessions.length>1){const compSection=document.createElement('div');compSection.className='dash-section';compSection.innerHTML='<div class="dash-section-title">השוואת מפגשים</div>';compSection.appendChild(makeBarChart('כמות פיקסציות',allSessions.map(s=>({label:s.user,val:s.fixationHistory.length}))));compSection.appendChild(makeBarChart('כמות סקאדות',allSessions.map(s=>({label:s.user,val:s.saccadeHistory.length}))));compSection.appendChild(makeBarChart('משך מפגש (שנ׳)',allSessions.map(s=>({label:s.user,val:+(s.sessionDuration/1000).toFixed(1)}))));compSection.appendChild(makeBarChart('משך פיקסציה ממוצע (מ״ש)',allSessions.map(s=>{const f=s.fixationHistory;return{label:s.user,val:f.length?Math.round(f.reduce((a,x)=>a+x.duration,0)/f.length):0};})));container.appendChild(compSection);}const byUser=new Map();for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}if(byUser.size>1){const userSection=document.createElement('div');userSection.className='dash-section';userSection.innerHTML='<div class="dash-section-title">השוואת משתמשים</div>';const grid=document.createElement('div');grid.className='dash-compare-grid';for(const[user,sessions]of byUser){const card=document.createElement('div');card.className='dash-user-card';const allFix=sessions.flatMap(ss=>ss.fixationHistory);const totFix=allFix.length;const totSac=sessions.reduce((s,ss)=>s+ss.saccadeHistory.length,0);const totDur=sessions.reduce((s,ss)=>s+ss.sessionDuration,0);const avgF=totFix?Math.round(allFix.reduce((s,f)=>s+f.duration,0)/totFix):0;const meta=sessions[0];card.innerHTML=`<div class="dash-user-card-name">${user}</div><div class="dash-user-card-meta">${meta.age?meta.age+' שנים · ':''}${meta.gender||''} · ${sessions.length} מפגש${sessions.length>1?'ים':''}</div><div class="dash-user-stats"><div class="dash-user-stat"><div class="dash-user-stat-label">פיקסציות</div><div class="dash-user-stat-val">${totFix}</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">משך ממוצע</div><div class="dash-user-stat-val">${avgF} מ״ש</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">סקאדות</div><div class="dash-user-stat-val">${totSac}</div></div><div class="dash-user-stat"><div class="dash-user-stat-label">זמן כולל</div><div class="dash-user-stat-val">${(totDur/1000).toFixed(1)} שנ׳</div></div></div>`;grid.appendChild(card);}userSection.appendChild(grid);container.appendChild(userSection);}}
 
-function makeRingChart(metrics){const wrap=document.createElement('div');wrap.style.cssText='display:flex;gap:16px;flex-wrap:wrap;';const dpr=window.devicePixelRatio||1;const SIZE=120;metrics.forEach(m=>{const cell=document.createElement('div');cell.style.cssText='display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:1px solid #eee;border-radius:8px;padding:14px 18px;box-shadow:0 1px 4px rgba(0,0,0,0.04);';const canvas=document.createElement('canvas');canvas.width=SIZE*dpr;canvas.height=SIZE*dpr;canvas.style.width=SIZE+'px';canvas.style.height=SIZE+'px';const label=document.createElement('div');label.style.cssText='font-size:8px;font-weight:700;letter-spacing:0.3em;color:#bbb;font-family:Heebo,sans-serif;text-transform:uppercase;';label.textContent=m.label;cell.appendChild(canvas);cell.appendChild(label);wrap.appendChild(cell);setTimeout(()=>{const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const cx=SIZE/2,cy=SIZE/2,outerR=SIZE/2-8;const pct=Math.min(1,m.val/m.max);const startA=-Math.PI/2;ctx.beginPath();ctx.arc(cx,cy,outerR,0,Math.PI*2);ctx.strokeStyle='#f0f0f0';ctx.lineWidth=14;ctx.stroke();if(pct>0){ctx.beginPath();ctx.arc(cx,cy,outerR,startA,startA+pct*Math.PI*2);ctx.strokeStyle='#E91C1C';ctx.lineWidth=14;ctx.lineCap='round';ctx.stroke();}ctx.fillStyle='#111';ctx.font='700 22px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(m.val,cx,cy-6);ctx.fillStyle='#ccc';ctx.font='300 9px Heebo';ctx.fillText('/ '+m.max,cx,cy+12);},60);});return wrap;}
+function makeRingChart(metrics){const wrap=document.createElement('div');wrap.style.cssText='display:flex;gap:16px;flex-wrap:wrap;';const dpr=window.devicePixelRatio||1;const SIZE=120;metrics.forEach(m=>{const cell=document.createElement('div');cell.style.cssText='display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:1px solid #eee;border-radius:8px;padding:14px 18px;box-shadow:0 1px 4px rgba(0,0,0,0.04);';const canvas=document.createElement('canvas');canvas.width=SIZE*dpr;canvas.height=SIZE*dpr;canvas.style.width=SIZE+'px';canvas.style.height=SIZE+'px';const label=document.createElement('div');label.style.cssText='font-size:8px;font-weight:700;letter-spacing:0.12em;color:#bbb;font-family:Heebo,sans-serif;text-transform:uppercase;';label.textContent=m.label;cell.appendChild(canvas);cell.appendChild(label);wrap.appendChild(cell);setTimeout(()=>{const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const cx=SIZE/2,cy=SIZE/2,outerR=SIZE/2-8;const pct=Math.min(1,m.val/m.max);const startA=-Math.PI/2;ctx.beginPath();ctx.arc(cx,cy,outerR,0,Math.PI*2);ctx.strokeStyle='#f0f0f0';ctx.lineWidth=14;ctx.stroke();if(pct>0){ctx.beginPath();ctx.arc(cx,cy,outerR,startA,startA+pct*Math.PI*2);ctx.strokeStyle='#1D4ED8';ctx.lineWidth=14;ctx.lineCap='round';ctx.stroke();}ctx.fillStyle='#111';ctx.font='700 22px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(m.val,cx,cy-6);ctx.fillStyle='#ccc';ctx.font='300 9px Heebo';ctx.fillText('/ '+m.max,cx,cy+12);},60);});return wrap;}
 
-function makeBarChart(title,data,unit=''){const wrap=document.createElement('div');wrap.className='dash-chart-area';const dpr=window.devicePixelRatio||1;const PAD_L=100,PAD_R=60,PAD_T=28,PAD_B=8;const rowH=28,barH=12;const H_canvas=PAD_T+data.length*rowH+PAD_B;const canvas=document.createElement('canvas');canvas.style.width='100%';canvas.style.height=H_canvas+'px';canvas.style.display='block';wrap.appendChild(canvas);setTimeout(()=>{const W2=canvas.offsetWidth||600;canvas.width=W2*dpr;canvas.height=H_canvas*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const maxVal=Math.max(...data.map(d=>d.val),1);const barZone=W2-PAD_L-PAD_R;ctx.font='700 8px Heebo';ctx.fillStyle='rgba(0,0,0,0.25)';ctx.textAlign='left';ctx.fillText(title.toUpperCase(),PAD_L,14);for(let g=0;g<=4;g++){const x=PAD_L+barZone*g/4;ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,PAD_T);ctx.lineTo(x,H_canvas-PAD_B);ctx.stroke();}data.forEach((d,i)=>{const y=PAD_T+i*rowH;const barW=barZone*d.val/maxVal;ctx.font='300 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.45)';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(d.label,PAD_L-10,y+barH/2);ctx.fillStyle='#f0f0f0';ctx.beginPath();const r=barH/2;ctx.roundRect(PAD_L,y,barZone,barH,r);ctx.fill();if(barW>0){ctx.fillStyle='#E91C1C';ctx.beginPath();ctx.roundRect(PAD_L,y,barW,barH,r);ctx.fill();}ctx.font='700 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.4)';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(d.val+(unit?' '+unit:''),PAD_L+barW+8,y+barH/2);});},60);return wrap;}
+function makeBarChart(title,data,unit=''){const wrap=document.createElement('div');wrap.className='dash-chart-area';const dpr=window.devicePixelRatio||1;const PAD_L=100,PAD_R=60,PAD_T=28,PAD_B=8;const rowH=28,barH=12;const H_canvas=PAD_T+data.length*rowH+PAD_B;const canvas=document.createElement('canvas');canvas.style.width='100%';canvas.style.height=H_canvas+'px';canvas.style.display='block';wrap.appendChild(canvas);setTimeout(()=>{const W2=canvas.offsetWidth||600;canvas.width=W2*dpr;canvas.height=H_canvas*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const maxVal=Math.max(...data.map(d=>d.val),1);const barZone=W2-PAD_L-PAD_R;ctx.font='700 8px Heebo';ctx.fillStyle='rgba(0,0,0,0.25)';ctx.textAlign='left';ctx.fillText(title.toUpperCase(),PAD_L,14);for(let g=0;g<=4;g++){const x=PAD_L+barZone*g/4;ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,PAD_T);ctx.lineTo(x,H_canvas-PAD_B);ctx.stroke();}data.forEach((d,i)=>{const y=PAD_T+i*rowH;const barW=barZone*d.val/maxVal;ctx.font='300 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.45)';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(d.label,PAD_L-10,y+barH/2);ctx.fillStyle='#f0f0f0';ctx.beginPath();const r=barH/2;ctx.roundRect(PAD_L,y,barZone,barH,r);ctx.fill();if(barW>0){ctx.fillStyle='#1D4ED8';ctx.beginPath();ctx.roundRect(PAD_L,y,barW,barH,r);ctx.fill();}ctx.font='700 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.4)';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(d.val+(unit?' '+unit:''),PAD_L+barW+8,y+barH/2);});},60);return wrap;}
 
 /* ============================================================
    AOI (Areas of Interest) — researcher-only setup tool.
@@ -907,17 +910,50 @@ function makeBarChart(title,data,unit=''){const wrap=document.createElement('div
    shown to participants during a session.
    ============================================================ */
 const AOI_STORAGE_KEY='vaAoiDefs_v1';
-const AOI_COLORS=['#E91C1C','#4FA8FF','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#34495e'];
+const AOI_COLORS=['#1D4ED8','#4FA8FF','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#34495e'];
+
+/* Baked-in default AOIs — these travel with the FILE ITSELF (unlike
+   localStorage, which is per-browser/per-computer and never reaches a
+   participant's machine). Once you're happy with the regions you drew,
+   export them (button in the editor) and send me the JSON — I'll paste
+   them in here so every copy of the file already has them, on any
+   computer, with no setup needed. Empty by default. */
+const DEFAULT_AOI_DEFS={};
 
 function loadAOIDefs(){
-  try{const raw=localStorage.getItem(AOI_STORAGE_KEY);return raw?JSON.parse(raw):{};}
-  catch(_){return {};}
+  try{
+    const raw=localStorage.getItem(AOI_STORAGE_KEY);
+    const local=raw?JSON.parse(raw):{};
+    return Object.assign({},DEFAULT_AOI_DEFS,local);
+  }catch(_){return Object.assign({},DEFAULT_AOI_DEFS);}
 }
 function saveAOIDefs(defs){
   try{localStorage.setItem(AOI_STORAGE_KEY, JSON.stringify(defs));}catch(_){}
 }
 let aoiDefs=loadAOIDefs();
 let aoiCurrentImageName=null;
+
+function exportAOIDefs(){
+  const blob=new Blob([JSON.stringify(aoiDefs,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='aoi_definitions.json';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+function importAOIDefsFromFile(file){
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const parsed=JSON.parse(reader.result);
+      aoiDefs=parsed;
+      saveAOIDefs(aoiDefs);
+      renderAOIImageTabs();
+      selectAOIImage(aoiCurrentImageName||aoiAllImageNames()[0]);
+    }catch(e){alert('קובץ לא תקין — נדרש JSON שיוצא מהעורך הזה.');}
+  };
+  reader.readAsText(file);
+}
 
 function findImageSrcByName(name){
   const found=[...DEFAULT_IMAGES,...imageLibrary].find(i=>i.name===name);
@@ -1048,6 +1084,9 @@ function closeAOIEditor(){
 })();
 document.getElementById('aoiGearBtn').addEventListener('click',openAOIEditor);
 document.getElementById('aoiEditorClose').addEventListener('click',closeAOIEditor);
+document.getElementById('aoiExportBtn').addEventListener('click',exportAOIDefs);
+document.getElementById('aoiImportBtn').addEventListener('click',()=>document.getElementById('aoiImportFile').click());
+document.getElementById('aoiImportFile').addEventListener('change',e=>{const f=e.target.files[0];if(f)importAOIDefsFromFile(f);e.target.value='';});
 window.addEventListener('resize',()=>{if(document.getElementById('aoiEditorScreen').style.display==='flex'){const areaEl=document.getElementById('aoiCanvasArea');fitWrapperToImage(document.getElementById('aoiCanvasFit'),document.getElementById('aoiEditImg'),areaEl.offsetWidth,areaEl.offsetHeight);redrawAOICanvas();}});
 
 /* ---- per-AOI metrics + full JSON export ---- */
