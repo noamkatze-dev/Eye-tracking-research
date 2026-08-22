@@ -442,7 +442,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
         </div>
         <div class="dab-content" id="dabContent"></div>
       </div>
-      <button id="downloadPngBtn">&#11015; הורדת PNG</button>
+      <button id="downloadPngBtn">&#11015; ייצוא הכל (נתונים + תמונות)</button>
     </div>
   </div>
   <div id="compareView">
@@ -459,7 +459,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
   <div id="galleryHeader">
   <span class="gallery-title">גלריה</span>
   <div class="gallery-header-right">
-    <button id="exportJsonBtn" class="va-btn va-btn-secondary" style="font-size:10px;padding:8px 20px;">ייצוא JSON</button>
+    <button id="exportJsonBtn" class="va-btn va-btn-secondary" style="font-size:10px;padding:8px 20px;">ייצוא הכל (נתונים + תמונות)</button>
   </div>
 </div>
   <div id="galleryBody"></div>
@@ -495,7 +495,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
   <div id="dashboardHeader">
   <span class="dash-title">לוח בקרה</span>
   <div class="gallery-header-right">
-    <button id="exportJsonBtnDash" class="va-btn va-btn-secondary" style="font-size:10px;padding:8px 20px;">ייצוא JSON</button>
+    <button id="exportJsonBtnDash" class="va-btn va-btn-secondary" style="font-size:10px;padding:8px 20px;">ייצוא הכל (נתונים + תמונות)</button>
   </div>
 </div>
   <div id="dashboardBody">
@@ -864,7 +864,6 @@ function downloadDataPNG(){
   link.click();
   link.remove();
 }
-document.getElementById('downloadPngBtn').addEventListener('click',downloadDataPNG);
 
 async function startApp(){
   // No marketing page, no name/age/gender form — go straight to image upload.
@@ -1082,7 +1081,7 @@ function computeAOIMetrics(sess,aoiList){
     };
   });
 }
-function exportSessionsJSON(){
+function buildExportPayload(){
   const defs=loadAOIDefs();
   const data=allSessions.map(s=>({
     user:s.user,age:s.age,gender:s.gender,location:s.location,
@@ -1102,19 +1101,136 @@ function exportSessionsJSON(){
       scanPathHistory:s.scanPathHistory
     }
   }));
-  const payload={exportedAt:new Date().toISOString(),aoiDefinitions:defs,sessions:data};
-  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  a.download='eye_tracking_export_'+Date.now()+'.json';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),2000);
+  return {exportedAt:new Date().toISOString(),aoiDefinitions:defs,sessions:data};
 }
-document.getElementById('exportJsonBtn').addEventListener('click',exportSessionsJSON);
-document.getElementById('exportJsonBtnDash').addEventListener('click',exportSessionsJSON);
+
+/* ---- minimal dependency-free ZIP writer (store/no-compression) ---- */
+function crc32(buf){
+  if(!crc32.table){
+    const t=[];
+    for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}
+    crc32.table=t;
+  }
+  let crc=-1;
+  for(let i=0;i<buf.length;i++)crc=(crc>>>8)^crc32.table[(crc^buf[i])&0xFF];
+  return (crc^-1)>>>0;
+}
+function makeZip(files){ // files: [{name, data:Uint8Array}]
+  const enc=new TextEncoder();
+  const localParts=[],centralParts=[];
+  let offset=0;
+  const now=new Date();
+  const dosTime=((now.getHours()&0x1F)<<11)|((now.getMinutes()&0x3F)<<5)|(Math.floor(now.getSeconds()/2)&0x1F);
+  const dosDate=(((now.getFullYear()-1980)&0x7F)<<9)|(((now.getMonth()+1)&0xF)<<5)|(now.getDate()&0x1F);
+  for(const f of files){
+    const nameBytes=enc.encode(f.name);
+    const data=f.data;
+    const crc=crc32(data);
+    const size=data.length;
+    const local=new Uint8Array(30+nameBytes.length);
+    const lv=new DataView(local.buffer);
+    lv.setUint32(0,0x04034b50,true);
+    lv.setUint16(4,20,true);lv.setUint16(6,0,true);lv.setUint16(8,0,true);
+    lv.setUint16(10,dosTime,true);lv.setUint16(12,dosDate,true);
+    lv.setUint32(14,crc,true);lv.setUint32(18,size,true);lv.setUint32(22,size,true);
+    lv.setUint16(26,nameBytes.length,true);lv.setUint16(28,0,true);
+    local.set(nameBytes,30);
+    localParts.push(local,data);
+    const central=new Uint8Array(46+nameBytes.length);
+    const cv=new DataView(central.buffer);
+    cv.setUint32(0,0x02014b50,true);
+    cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint16(8,0,true);cv.setUint16(10,0,true);
+    cv.setUint16(12,dosTime,true);cv.setUint16(14,dosDate,true);
+    cv.setUint32(16,crc,true);cv.setUint32(20,size,true);cv.setUint32(24,size,true);
+    cv.setUint16(28,nameBytes.length,true);cv.setUint16(30,0,true);cv.setUint16(32,0,true);
+    cv.setUint16(34,0,true);cv.setUint16(36,0,true);cv.setUint32(38,0,true);
+    cv.setUint32(42,offset,true);
+    central.set(nameBytes,46);
+    centralParts.push(central);
+    offset+=local.length+data.length;
+  }
+  const centralStart=offset;
+  let centralSize=0;
+  for(const c of centralParts)centralSize+=c.length;
+  const end=new Uint8Array(22);
+  const ev=new DataView(end.buffer);
+  ev.setUint32(0,0x06054b50,true);
+  ev.setUint16(4,0,true);ev.setUint16(6,0,true);
+  ev.setUint16(8,files.length,true);ev.setUint16(10,files.length,true);
+  ev.setUint32(12,centralSize,true);ev.setUint32(16,centralStart,true);ev.setUint16(20,0,true);
+  const parts=[...localParts,...centralParts,end];
+  let total=0;for(const p of parts)total+=p.length;
+  const out=new Uint8Array(total);
+  let pos=0;for(const p of parts){out.set(p,pos);pos+=p.length;}
+  return out;
+}
+
+const EXPORT_LAYERS=['GAZE','FIXATION','SACCADE','SCANPATH','HEATMAP','FIRSTFIX'];
+function renderSessionLayerPNG(sess,layer){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>{
+      const W=img.naturalWidth||1280,H=img.naturalHeight||720;
+      const canvas=document.createElement('canvas');
+      canvas.width=W;canvas.height=H;
+      const ctx=canvas.getContext('2d');
+      switch(layer){
+        case 'GAZE':staticGaze(ctx,W,H,sess.gazeLog);break;
+        case 'FIXATION':staticFixation(ctx,W,H,sess.fixationHistory);break;
+        case 'SACCADE':staticSaccade(ctx,W,H,sess.saccadeHistory);break;
+        case 'SCANPATH':staticScanPath(ctx,W,H,sess.scanPathHistory);break;
+        case 'HEATMAP':staticHeatmap(ctx,W,H,sess.gazeLog);break;
+        case 'FIRSTFIX':staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;
+      }
+      ctx.globalCompositeOperation='destination-over';
+      ctx.drawImage(img,0,0,W,H);
+      ctx.globalCompositeOperation='source-over';
+      canvas.toBlob(blob=>{
+        if(!blob){reject(new Error('toBlob failed'));return;}
+        blob.arrayBuffer().then(buf=>resolve(new Uint8Array(buf))).catch(reject);
+      },'image/png');
+    };
+    img.onerror=reject;
+    img.src=sess.imageSrc;
+  });
+}
+
+async function exportAllDataZip(){
+  const btns=[document.getElementById('downloadPngBtn'),document.getElementById('exportJsonBtn'),document.getElementById('exportJsonBtnDash')].filter(Boolean);
+  const originalLabels=btns.map(b=>b.textContent);
+  btns.forEach(b=>{b.disabled=true;b.textContent='מייצא...';});
+  try{
+    const payload=buildExportPayload();
+    const jsonBytes=new TextEncoder().encode(JSON.stringify(payload,null,2));
+    const files=[{name:'data.json',data:jsonBytes}];
+    for(let i=0;i<allSessions.length;i++){
+      const sess=allSessions[i];
+      const safeName=(sess.imageName||'session'+i).replace(/[^a-z0-9_\-]+/gi,'_');
+      for(const layer of EXPORT_LAYERS){
+        try{
+          const png=await renderSessionLayerPNG(sess,layer);
+          files.push({name:'images/'+(i+1)+'_'+safeName+'_'+layer+'.png',data:png});
+        }catch(e){console.warn('image export failed',layer,e);}
+      }
+    }
+    const zipBytes=makeZip(files);
+    const blob=new Blob([zipBytes],{type:'application/zip'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='eye_tracking_export_'+Date.now()+'.zip';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),4000);
+  }finally{
+    btns.forEach((b,i)=>{b.disabled=false;b.textContent=originalLabels[i];});
+  }
+}
+document.getElementById('downloadPngBtn').addEventListener('click',exportAllDataZip);
+document.getElementById('exportJsonBtn').addEventListener('click',exportAllDataZip);
+document.getElementById('exportJsonBtnDash').addEventListener('click',exportAllDataZip);
+
 </script>
 
 </body>
