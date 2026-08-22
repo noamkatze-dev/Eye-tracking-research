@@ -397,8 +397,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <span class="toolbar-sep"></span>
         <button id="playBtn">הפעלה מחדש</button>
         <div class="toggle-group">
-          <button class="toggle-btn active" id="animatedBtn">מונפש</button>
-          <button class="toggle-btn" id="staticBtn">סטטי</button>
+          <button class="toggle-btn" id="animatedBtn">מונפש</button>
+          <button class="toggle-btn active" id="staticBtn">סטטי</button>
         </div>
         <div class="toggle-group">
           <button class="toggle-btn active" id="withImgBtn">עם תמונה</button>
@@ -642,7 +642,7 @@ let curOffX=0.5,curOffY=0.5,curEyeOffX=0.5,curEyeOffY=0.5,eyeValid=false;
 const offXBuf=[],offYBuf=[],eyeOffXBuf=[],eyeOffYBuf=[];
 let eyeCalMap=null;
 window._gazeHistory=[];
-let currentAnimation=null,dataActiveLayer='GAZE',playMode='ANIMATED',showImg=true,viewSession=null;
+let currentAnimation=null,dataActiveLayer='GAZE',playMode='STATIC',showImg=true,viewSession=null;
 const allSessions=[];
 
 function eyeStab(){const N=Math.min(eyeOffXBuf.length,20);if(N<8)return 0;const xs=eyeOffXBuf.slice(-N),ys=eyeOffYBuf.slice(-N);const mx=xs.reduce((a,b)=>a+b,0)/N,my=ys.reduce((a,b)=>a+b,0)/N;const vx=xs.reduce((a,b)=>a+(b-mx)**2,0)/N,vy=ys.reduce((a,b)=>a+(b-my)**2,0)/N;return Math.max(0,Math.min(1,1-(vx+vy)/CAL_VAR_THRESH));}
