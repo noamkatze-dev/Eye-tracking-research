@@ -64,6 +64,11 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .va-btn-primary:hover{background:#333;border-color:#333;}
 .va-btn-secondary{background:#fff;color:#111;border:2px solid #111;font-size:12px;font-weight:700;padding:9px 24px;}
 .va-btn-secondary:hover{background:#111;color:#fff;}
+#taskInstructionScreen{display:none;position:fixed;inset:0;z-index:1050;background:#fff;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;}
+.ti-content{max-width:560px;}
+.ti-label{font-size:9px;font-weight:700;letter-spacing:0.5em;color:#bbb;text-transform:uppercase;margin-bottom:24px;}
+.ti-question{font-size:24px;font-weight:700;color:#111;line-height:1.5;margin-bottom:20px;}
+.ti-hint{font-size:13px;font-weight:300;color:#888;margin-bottom:36px;line-height:1.7;}
 #calOverlay{position:fixed;inset:0;z-index:1000;background:#fff;}
 #calCanvas{position:absolute;inset:0;width:100%;height:100%;}
 #calStartBtn{position:absolute;top:58%;left:50%;transform:translateX(-50%);display:none;z-index:1001;}
@@ -353,6 +358,15 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 <div id="stimControlBar">
   <div id="stimTimer"></div>
   <button id="finishBtn">סיום צפייה</button>
+</div>
+
+<div id="taskInstructionScreen">
+  <div class="ti-content">
+    <div class="ti-label">משימה</div>
+    <div class="ti-question" id="tiQuestionText"></div>
+    <div class="ti-hint">לחצו על מקש הרווח ברגע שמצאתם, או לחצו על הכפתור כדי להתחיל</div>
+    <button id="tiStartBtn" class="va-btn va-btn-primary">התחלה</button>
+  </div>
 </div>
 
 <div id="calOverlay">
@@ -734,7 +748,7 @@ function openGallery(){homeScreen.style.display='none';document.getElementById('
 function closeGallery(){document.getElementById('galleryScreen').style.display='none';navGalleryLink.classList.remove('active');}
 function renderGalleryScreen(){const body=document.getElementById('galleryBody');body.innerHTML='';const byUser=new Map();for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}if(byUser.size===0){body.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;margin-top:60px;">אין עדיין מפגשים</div>';return;}for(const[userName,sessions]of byUser){const block=document.createElement('div');block.className='gallery-user-block';const meta=sessions[0];const metaStr=[meta.age?meta.age+' שנים':'',meta.gender||'',meta.location||''].filter(Boolean).join(' . ');block.innerHTML='<div class="gallery-user-name">'+userName+'</div><div class="gallery-user-meta">'+metaStr+'</div><div class="gallery-images-row" id="gallery-row-'+userName.replace(/\s/g,'_')+'"></div>';body.appendChild(block);const row=block.querySelector('.gallery-images-row');for(const sess of sessions){const item=document.createElement('div');item.className='gallery-item'+(sess===viewSession?' active-view':'');const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'--';item.innerHTML='<img class="gallery-item-img" src="'+sess.imageSrc+'" alt="'+sess.imageName+'"/><div class="gallery-item-info"><span class="gallery-item-name">'+sess.imageName+'</span><span class="gallery-item-stats">'+sess.fixationHistory.length+' פיק׳ . '+sess.gazeLog.length+' דג׳ . '+dur+'</span></div>';item.onclick=()=>{viewSession=sess;document.querySelectorAll('.gallery-item').forEach(el=>el.classList.remove('active-view'));item.classList.add('active-view');openData(false);};row.appendChild(item);}}}
 
-function captureSession(){return{user:currentUser||'Unknown',age:currentAge,gender:currentGender,location:userLocation,imageSrc:mainImg.src,imageName:imageLibrary[currentImageIdx]?.name||'image',timestamp:Date.now(),sessionDuration:sessionStartTs?Date.now()-sessionStartTs:0,gazeLog:gazeLog.slice(),fixationHistory:fixationHistory.slice(),saccadeHistory:saccadeHistory.slice(),scanPathHistory:scanPathHistory.slice(),firstFix,firstFixModeTs,sessionStartTs};}
+function captureSession(extra){return Object.assign({user:currentUser||'Unknown',age:currentAge,gender:currentGender,location:userLocation,imageSrc:mainImg.src,imageName:imageLibrary[currentImageIdx]?.name||'image',timestamp:Date.now(),sessionDuration:sessionStartTs?Date.now()-sessionStartTs:0,gazeLog:gazeLog.slice(),fixationHistory:fixationHistory.slice(),saccadeHistory:saccadeHistory.slice(),scanPathHistory:scanPathHistory.slice(),firstFix,firstFixModeTs,sessionStartTs,taskType:null,taskQuestion:null,taskCompleted:null,taskCompletionMs:null},extra||{});}
 function openData(pushNew=true){if(pushNew){const snap=captureSession();allSessions.push(snap);viewSession=snap;}const dataScreen=document.getElementById('dataScreen');const dataBody=document.getElementById('dataBody');const compareView=document.getElementById('compareView');dataScreen.style.display='flex';dataBody.style.display='flex';compareView.style.display='none';document.getElementById('sessionViewBtn').classList.add('active');document.getElementById('compareViewBtn').classList.remove('active');document.getElementById('galleryScreen').style.display='none';const dataImgEl=document.getElementById('dataImg'),dataFitEl=document.getElementById('dataImgFit'),areaEl=document.getElementById('dataImgArea');dataImgEl.onload=()=>{fitWrapperToImage(dataFitEl,dataImgEl,areaEl.offsetWidth,areaEl.offsetHeight);playLayer(dataActiveLayer);};dataImgEl.src=viewSession.imageSrc;dataImgEl.style.opacity=showImg?'1':'0';renderDataSessionBadge(viewSession);const activeBtn=document.querySelector('.layer-btn.active');const layer=activeBtn?activeBtn.dataset.layer:'GAZE';dataActiveLayer=layer;fitWrapperToImage(dataFitEl,dataImgEl,areaEl.offsetWidth,areaEl.offsetHeight);playLayer(layer);}
 
 async function boot(){
@@ -755,47 +769,86 @@ async function boot(){
   startSessionInfoOverlay();
   requestAnimationFrame(mainLoop);
 
+  const STIMULUS_TASKS={
+    1:{type:'search',question:'מצאו את שיעור הנטישה (Churn Rate) בדשבורד, ולחצו על מקש הרווח ברגע שמצאתם אותו.'}
+  };
+
   for(let i=0;i<imageLibrary.length;i++){
     currentImageIdx=i;
-    await runStimulusView(imageLibrary[i], 60000);
+    await runStimulusView(imageLibrary[i], 60000, STIMULUS_TASKS[i]||null);
   }
 
   openGallery();
 }
 
-function runStimulusView(img, timeLimitMs){
+function showTaskInstruction(task, callback){
+  const scr=document.getElementById('taskInstructionScreen');
+  document.getElementById('tiQuestionText').textContent=task.question;
+  document.getElementById('mainNav').style.display='none';
+  scr.style.display='flex';
+  function proceed(){
+    scr.style.display='none';
+    document.removeEventListener('keydown',onKey);
+    document.getElementById('tiStartBtn').removeEventListener('click',proceed);
+    callback();
+  }
+  function onKey(e){
+    if(e.code==='Space'||e.key===' '){e.preventDefault();proceed();}
+  }
+  document.addEventListener('keydown',onKey);
+  document.getElementById('tiStartBtn').addEventListener('click',proceed);
+}
+
+function runStimulusView(img, timeLimitMs, task){
   return new Promise(resolve=>{
-    fixationHistory=[];currentFixation=null;scanPathHistory=[];saccadeHistory=[];saccadeActive=false;saccadeStart=null;
-    heatmap.fill(0);
-    firstFix=null;firstFixDone=false;firstFixModeTs=performance.now();
-    gazeLog=[];window._gazeHistory=[];
-    sessionStartTs=Date.now();
+    function begin(){
+      fixationHistory=[];currentFixation=null;scanPathHistory=[];saccadeHistory=[];saccadeActive=false;saccadeStart=null;
+      heatmap.fill(0);
+      firstFix=null;firstFixDone=false;firstFixModeTs=performance.now();
+      gazeLog=[];window._gazeHistory=[];
+      sessionStartTs=Date.now();
 
-    mainImg.src=img.src;
-    imgWrapper.style.display='block';
-    fitWrapperToImage(imgWrapper, mainImg);
-    // Only the stimulus image itself is shown — no nav, no timer, no buttons.
-    document.getElementById('mainNav').style.display='none';
+      mainImg.src=img.src;
+      imgWrapper.style.display='block';
+      fitWrapperToImage(imgWrapper, mainImg);
+      // Only the stimulus image itself is shown — no nav, no timer, no buttons.
+      document.getElementById('mainNav').style.display='none';
 
-    const gazeInterval=setInterval(()=>{
-      if(!gazeOn)return;
-      gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});
-      if(gazeLog.length>10000)gazeLog.shift();
-    },100);
+      const gazeInterval=setInterval(()=>{
+        if(!gazeOn)return;
+        gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});
+        if(gazeLog.length>10000)gazeLog.shift();
+      },100);
 
-    let finished=false;
-    function finishStimulus(){
-      if(finished)return;
-      finished=true;
-      clearInterval(gazeInterval);
-      document.getElementById('mainNav').style.display='flex';
-      const snap=captureSession();
-      allSessions.push(snap);
-      imgWrapper.style.display='none';
-      resolve();
+      let finished=false,taskCompletionMs=null,taskCompleted=false;
+      function onSpace(e){
+        if((e.code==='Space'||e.key===' ')&&!finished){
+          e.preventDefault();
+          taskCompletionMs=Date.now()-sessionStartTs;
+          taskCompleted=true;
+          finishStimulus();
+        }
+      }
+      if(task)document.addEventListener('keydown',onSpace);
+
+      function finishStimulus(){
+        if(finished)return;
+        finished=true;
+        if(task)document.removeEventListener('keydown',onSpace);
+        clearInterval(gazeInterval);
+        document.getElementById('mainNav').style.display='flex';
+        const extra=task?{taskType:task.type,taskQuestion:task.question,taskCompleted,taskCompletionMs}:{};
+        const snap=captureSession(extra);
+        allSessions.push(snap);
+        imgWrapper.style.display='none';
+        resolve();
+      }
+
+      setTimeout(finishStimulus, timeLimitMs||60000);
     }
 
-    setTimeout(finishStimulus, timeLimitMs||60000);
+    if(task)showTaskInstruction(task, begin);
+    else begin();
   });
 }
 
@@ -1070,6 +1123,7 @@ function exportSessionsJSON(){
     fixationCount:(s.fixationHistory||[]).length,
     saccadeCount:(s.saccadeHistory||[]).length,
     firstFixation:s.firstFix?{x:s.firstFix.x,y:s.firstFix.y,timeToFirstFixationSec:+(((s.firstFix.startTs-s.firstFixModeTs)/1000).toFixed(2))}:null,
+    task:{type:s.taskType||null,question:s.taskQuestion||null,completed:s.taskCompleted!=null?s.taskCompleted:null,completionTimeSec:s.taskCompletionMs!=null?+(s.taskCompletionMs/1000).toFixed(2):null},
     aoi:computeAOIMetrics(s,defs[s.imageName]||[]),
     raw:{
       gazeLog:s.gazeLog,
