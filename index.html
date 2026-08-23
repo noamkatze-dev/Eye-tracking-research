@@ -479,10 +479,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
     <div class="ns-title">מערכת ניתוח חזותי</div>
     <div class="ns-subtitle">לפני שמתחילים, מספר פרטים קצרים</div>
     <div class="ns-form">
-      <div class="ns-field">
-        <label for="nameInput">שם פרטי</label>
-        <input id="nameInput" type="text" autocomplete="off" spellcheck="false" placeholder="לדוגמה: דנה"/>
-      </div>
       <div class="ns-row">
         <div class="ns-field">
           <label for="ageInput">גיל</label>
@@ -683,7 +679,7 @@ function renderLib(){const grid=document.getElementById('libGrid');grid.innerHTM
 function updateBeginBtn(){const btn=document.getElementById('libBeginBtn');const ok=imageLibrary.length>0&&!isImageViewed(currentImageIdx);btn.disabled=!ok;btn.style.opacity=ok?'1':'0.4';}
 document.getElementById('libFileInput').addEventListener('change',e=>{Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});e.target.value='';});
 
-async function showNameScreen(){return new Promise(resolve=>{const scr=document.getElementById('nameScreen'),inp=document.getElementById('nameInput');const ageInp=document.getElementById('ageInput'),genderInp=document.getElementById('genderInput');const btn=document.getElementById('nameContinue');scr.style.display='flex';inp.focus();function proceed(){const v=inp.value.trim(),a=ageInp.value.trim(),g=genderInp.value;if(!v){inp.focus();return;}if(!a){ageInp.focus();return;}if(!g){genderInp.focus();return;}currentUser=v;currentAge=a;currentGender=g;scr.style.display='none';resolve();}btn.addEventListener('click',proceed);inp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});ageInp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});});}
+async function showNameScreen(){return new Promise(resolve=>{const scr=document.getElementById('nameScreen');const ageInp=document.getElementById('ageInput'),genderInp=document.getElementById('genderInput');const btn=document.getElementById('nameContinue');scr.style.display='flex';ageInp.focus();function proceed(){const a=ageInp.value.trim(),g=genderInp.value;if(!a){ageInp.focus();return;}if(!g){genderInp.focus();return;}currentAge=a;currentGender=g;scr.style.display='none';resolve();}btn.addEventListener('click',proceed);ageInp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});genderInp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});});}
 function startSessionInfoOverlay(){}
 function stopSessionInfoOverlay(){}
 
@@ -806,6 +802,7 @@ async function boot(){
   const assignment=assignParticipantGroup();
   currentParticipantIndex=assignment.participantIndex;
   currentGroup=assignment.group;
+  currentUser='נבדק '+assignment.participantIndex;
 
   const ok=await startEyeTracking();
   if(ok) await runCalibration();
