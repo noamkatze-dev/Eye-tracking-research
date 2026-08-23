@@ -788,6 +788,23 @@ function getTaskForImage(img,group){
   if(isSearch)return{type:'search',question:TASK_TEXT[dtype],expectedAnswer:TASK_ANSWER[dtype],dashboardType:dtype};
   return{type:'free',question:null,expectedAnswer:null,dashboardType:dtype};
 }
+/* Free-review always shown first, search task always second — regardless of
+   group — so the goal-directed scanning strategy from a search task can't carry
+   over and contaminate what's supposed to be natural, undirected viewing. Which
+   physical dashboard (Product/Marketing) that corresponds to still alternates by
+   group, per the counterbalancing design; only the presentation ORDER is fixed. */
+function getOrderedStimuli(group){
+  const productImg=imageLibrary.find(img=>dashboardTypeForImage(img)==='product');
+  const marketingImg=imageLibrary.find(img=>dashboardTypeForImage(img)==='marketing');
+  if(!productImg||!marketingImg){
+    return imageLibrary.map(img=>({img,task:getTaskForImage(img,group)}));
+  }
+  const productTask=getTaskForImage(productImg,group);
+  const marketingTask=getTaskForImage(marketingImg,group);
+  const free=productTask.type==='free'?{img:productImg,task:productTask}:{img:marketingImg,task:marketingTask};
+  const search=productTask.type==='free'?{img:marketingImg,task:marketingTask}:{img:productImg,task:productTask};
+  return [free,search];
+}
 
 async function boot(){
   dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;
@@ -812,10 +829,10 @@ async function boot(){
   startSessionInfoOverlay();
   requestAnimationFrame(mainLoop);
 
-  for(let i=0;i<imageLibrary.length;i++){
-    currentImageIdx=i;
-    const task=getTaskForImage(imageLibrary[i],currentGroup);
-    await runStimulusView(imageLibrary[i], 60000, task);
+  const orderedStimuli=getOrderedStimuli(currentGroup);
+  for(const {img,task} of orderedStimuli){
+    currentImageIdx=imageLibrary.indexOf(img);
+    await runStimulusView(img, 60000, task);
   }
 
   showEndScreen();
