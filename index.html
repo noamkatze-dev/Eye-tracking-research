@@ -62,6 +62,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 .va-btn{font-family:'Heebo',sans-serif;letter-spacing:0.18em;cursor:pointer;transition:background 0.18s,color 0.18s,border-color 0.18s;border-radius:100px;}
 .va-btn-primary{background:#111;color:#fff;border:2px solid #111;font-size:13px;font-weight:700;padding:14px 48px;}
 .va-btn-primary:hover{background:#333;border-color:#333;}
+.va-btn-primary:disabled,.va-btn-primary:disabled:hover{background:#ddd;border-color:#ddd;color:#999;cursor:not-allowed;}
 .va-btn-secondary{background:#fff;color:#111;border:2px solid #111;font-size:12px;font-weight:700;padding:9px 24px;}
 .va-btn-secondary:hover{background:#111;color:#fff;}
 #taskInstructionScreen{display:none;position:fixed;inset:0;z-index:1050;background:#fafafa;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;}
@@ -200,6 +201,19 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
 .end-icon{width:52px;height:52px;border-radius:50%;background:rgba(233,28,28,0.08);color:#F10F12;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 24px;}
 .end-title{font-size:20px;font-weight:700;color:#111;margin-bottom:12px;}
 .end-sub{font-size:13px;font-weight:300;color:#888;line-height:1.7;margin-bottom:32px;}
+#consentScreen{display:none;position:fixed;inset:0;z-index:2200;background:#fafafa;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:40px 20px;}
+.consent-card{width:100%;max-width:560px;background:#fff;border:1px solid #eee;border-radius:16px;padding:44px 40px;box-shadow:0 4px 24px rgba(0,0,0,0.06);text-align:right;}
+.consent-body{margin:26px 0 6px;display:flex;flex-direction:column;gap:18px;}
+.consent-item-label{font-size:9px;font-weight:700;letter-spacing:0.12em;color:#111;text-transform:uppercase;margin-bottom:6px;}
+.consent-item-text{font-size:13px;font-weight:300;color:#666;line-height:1.7;}
+.consent-item-text strong{font-weight:700;color:#111;}
+.consent-checkbox-row{display:flex;align-items:flex-start;gap:10px;margin:26px 0 24px;cursor:pointer;user-select:none;}
+.consent-checkbox-row input[type="checkbox"]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:#F10F12;cursor:pointer;}
+.consent-checkbox-row span{font-size:13px;font-weight:500;color:#111;line-height:1.6;}
+.consent-actions{display:flex;flex-direction:column;align-items:center;gap:14px;}
+.consent-decline-btn{background:none;border:none;font-family:'Heebo',sans-serif;font-size:11px;font-weight:300;color:#999;letter-spacing:0.03em;cursor:pointer;text-decoration:underline;padding:6px;}
+.consent-decline-btn:hover{color:#666;}
+#consentDeclineScreen{display:none;position:fixed;inset:0;z-index:2300;background:#fafafa;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;}
 #dashboardScreen{display:none;position:fixed;inset:0;z-index:1600;background:#f5f5f5;flex-direction:column;overflow:hidden;padding-top:52px;}
 #dashboardHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #eee;flex-shrink:0;background:#fff;}
 #dashboardHeader .dash-title{font-size:11px;font-weight:700;letter-spacing:0.18em;color:#111;}
@@ -474,6 +488,47 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;font-family:'Heebo
   <div id="galleryBody"></div>
 </div>
 
+<div id="consentScreen">
+  <div class="consent-card">
+    <div class="ti-label">הסכמה מדעת</div>
+    <div class="ti-question">לפני שממשיכים</div>
+    <div class="consent-body">
+      <div class="consent-item">
+        <div class="consent-item-label">מה נמדד</div>
+        <div class="consent-item-text">תנועות עיניים ודפוסי מבט באמצעות מצלמת המחשב, לצורך מחקר על התנהגות משתמשים בממשקי דשבורד.</div>
+      </div>
+      <div class="consent-item">
+        <div class="consent-item-label">אילו נתונים נאספים</div>
+        <div class="consent-item-text">גיל, מגדר, נתוני מבט (קואורדינטות), פיקסציות וסקאדות. <strong>אין הקלטת וידאו ואין שמירת תמונות פנים</strong> - כל עיבוד המצלמה מתבצע מקומית בדפדפן בזמן אמת, ומידע גולמי של הווידאו אינו נשמר בשום שלב.</div>
+      </div>
+      <div class="consent-item">
+        <div class="consent-item-label">למה זה משמש</div>
+        <div class="consent-item-text">לצורך מחקר אקדמי, והתוצאות עשויות להיכלל בדוח / בעבודה.</div>
+      </div>
+      <div class="consent-item">
+        <div class="consent-item-label">השתתפות וולונטרית</div>
+        <div class="consent-item-text">ההשתתפות במחקר וולונטרית לחלוטין. ניתן להפסיק בכל שלב, מבלי לספק הסבר ומבלי שתהיה לכך כל השלכה.</div>
+      </div>
+    </div>
+    <label class="consent-checkbox-row" for="consentCheckbox">
+      <input type="checkbox" id="consentCheckbox"/>
+      <span>קראתי והבנתי את המידע לעיל ואני מסכים/ה להשתתף מרצוני</span>
+    </label>
+    <div class="consent-actions">
+      <button id="consentContinueBtn" class="va-btn va-btn-primary" disabled>המשך</button>
+      <button id="consentDeclineBtn" class="consent-decline-btn" type="button">אני לא מעוניין/ת להשתתף</button>
+    </div>
+  </div>
+</div>
+
+<div id="consentDeclineScreen">
+  <div class="end-card">
+    <div class="end-icon">&#10003;</div>
+    <div class="end-title">תודה על זמנך</div>
+    <div class="end-sub">בחרת שלא להשתתף. לא נאספו ולא נשמרו שום נתונים. אפשר לסגור את החלון הזה.</div>
+  </div>
+</div>
+
 <div id="nameScreen">
   <div class="ns-card">
     <div class="ns-title">מערכת ניתוח חזותי</div>
@@ -678,6 +733,43 @@ function showLib(){document.getElementById('libraryScreen').style.display='flex'
 function renderLib(){const grid=document.getElementById('libGrid');grid.innerHTML='';imageLibrary.forEach((img,i)=>{const viewed=isImageViewed(i);const card=document.createElement('div');card.className='lib-card'+(i===currentImageIdx&&!viewed?' selected':'')+(viewed?' viewed-once':'');card.innerHTML='<img src="'+img.src+'" alt="'+img.name+'"/><span class="lib-num">'+String(i+1).padStart(2,'0')+'</span>';if(!viewed){card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');updateBeginBtn();};}else{card.style.cursor='default';}grid.appendChild(card);});const add=document.createElement('div');add.className='lib-add';add.innerHTML='<span class="lib-add-plus">+</span><span class="lib-add-label">הוספת תמונה</span>';add.onclick=()=>document.getElementById('libFileInput').click();grid.appendChild(add);updateBeginBtn();}
 function updateBeginBtn(){const btn=document.getElementById('libBeginBtn');const ok=imageLibrary.length>0&&!isImageViewed(currentImageIdx);btn.disabled=!ok;btn.style.opacity=ok?'1':'0.4';}
 document.getElementById('libFileInput').addEventListener('change',e=>{Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});e.target.value='';});
+
+/* Must be actively confirmed before anything else in the flow can run — no
+   camera access, no calibration, no data collection happens until this
+   resolves. If the participant declines, this promise is deliberately never
+   resolved: startApp()'s await simply stops here forever, so there is no code
+   path left that can reach showNameScreen(), boot(), or the camera prompt. */
+function showConsentScreen(){
+  return new Promise(resolve=>{
+    const scr=document.getElementById('consentScreen');
+    const checkbox=document.getElementById('consentCheckbox');
+    const continueBtn=document.getElementById('consentContinueBtn');
+    const declineBtn=document.getElementById('consentDeclineBtn');
+    checkbox.checked=false;
+    continueBtn.disabled=true;
+    scr.style.display='flex';
+    function onCheckboxChange(){continueBtn.disabled=!checkbox.checked;}
+    function onContinue(){
+      if(!checkbox.checked)return;
+      checkbox.removeEventListener('change',onCheckboxChange);
+      continueBtn.removeEventListener('click',onContinue);
+      declineBtn.removeEventListener('click',onDecline);
+      scr.style.display='none';
+      resolve();
+    }
+    function onDecline(){
+      checkbox.removeEventListener('change',onCheckboxChange);
+      continueBtn.removeEventListener('click',onContinue);
+      declineBtn.removeEventListener('click',onDecline);
+      scr.style.display='none';
+      document.getElementById('consentDeclineScreen').style.display='flex';
+      // No resolve() here on purpose — declining ends the flow entirely.
+    }
+    checkbox.addEventListener('change',onCheckboxChange);
+    continueBtn.addEventListener('click',onContinue);
+    declineBtn.addEventListener('click',onDecline);
+  });
+}
 
 async function showNameScreen(){return new Promise(resolve=>{const scr=document.getElementById('nameScreen');const ageInp=document.getElementById('ageInput'),genderInp=document.getElementById('genderInput');const btn=document.getElementById('nameContinue');scr.style.display='flex';ageInp.focus();function proceed(){const a=ageInp.value.trim(),g=genderInp.value;if(!a){ageInp.focus();return;}if(!g){genderInp.focus();return;}currentAge=a;currentGender=g;scr.style.display='none';resolve();}btn.addEventListener('click',proceed);ageInp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});genderInp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});});}
 function startSessionInfoOverlay(){}
@@ -964,8 +1056,10 @@ function downloadDataPNG(){
 }
 
 async function startApp(){
-  // No marketing page — but name/age/gender ARE required for the research,
+  // Informed consent must be actively confirmed before anything else happens.
+  // No marketing page — name/age/gender ARE required for the research,
   // so collect them, then go straight into calibration + the dashboards.
+  await showConsentScreen();
   await showNameScreen();
   await boot();
 }
