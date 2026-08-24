@@ -853,15 +853,21 @@ function openData(pushNew=true){if(pushNew){const snap=captureSession();allSessi
 /* ---- counterbalancing: alternating group assignment by participant arrival order ----
    Group A: Product = search task, Marketing = free review
    Group B: Product = free review, Marketing = search task
-   Assignment alternates per arrival (1st,3rd,5th... -> A | 2nd,4th,6th... -> B),
-   persisted in localStorage so it keeps alternating across sessions on this device. */
+   Normally assignment alternates per arrival (1st,3rd,5th... -> A | 2nd,4th,6th... -> B),
+   persisted in localStorage so it keeps alternating across sessions on this device.
+
+   FORCE_GROUP: set to 'A' or 'B' to send every participant into that single group
+   instead of alternating (participant numbering still increments normally either
+   way). Set to null to restore normal alternating A/B assignment. */
+const FORCE_GROUP='B';
 function assignParticipantGroup(){
   const KEY='vaParticipantCounter_v1';
   let n=0;
   try{n=parseInt(localStorage.getItem(KEY)||'0',10)||0;}catch(_){}
   n+=1;
   try{localStorage.setItem(KEY,String(n));}catch(_){}
-  return {participantIndex:n, group:(n%2===1)?'A':'B'};
+  const group=FORCE_GROUP||((n%2===1)?'A':'B');
+  return {participantIndex:n, group};
 }
 const TASK_TEXT={
   product:'באיזה חודש היה מספר המשתמשים הפעילים (Active Users) הכי נמוך?',
